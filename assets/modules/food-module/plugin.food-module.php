@@ -27,7 +27,7 @@ switch($e->name){
 					$menuparams = [
 						'render_' . $strip,
 						'main',
-						$row["icon"] . $title,
+						'<i class="' . $row["icon"]. '"></i>' . $title,
 						'index.php?a=112&id=' . $id,
 						$strip,
 						'',
