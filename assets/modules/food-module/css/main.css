@@ -1,44 +1,48 @@
 pre code {
-	display: block;
+  display: block;
 }
 a i {
-	pointer-events: none;
-}
-.fancybox-button {
-	background: rgba(30, 30, 30, .6) !important;
-	border: unset !important;
-}
-#uploader {
-	margin-bottom: 1rem;
-	display: inline-flex;
-	flex-direction: column;
-	justify-content: flex-end;
-	align-items: flex-end;
-}
-#p_uploads {
-	width: 100%;
-}
-#p_uploads:empty {
-	display: none;
-}
-#p_uploads:empty ~ a.btn {
-	display: none;
-}
-#ManageFiles .btn:not(:disabled) {
-	cursor: pointer;
+  pointer-events: none;
 }
 label.btn [type=file] {
-	display: none;
-}
-#ManageFiles > .alert:empty {
-	display: none;
-}
-.alert > *:first-child {
-	margin-top: unset;
-}
-.alert > *:last-child {
-	margin-bottom: unset;
+  display: none;
 }
 table.table.data > thead > tr > th {
-	font-weight: 700;
+  font-weight: 700;
+}
+.alert > *:first-child {
+  margin-top: unset;
+}
+.alert > *:last-child {
+  margin-bottom: unset;
+}
+.fancybox-button {
+  background: rgba(30, 30, 30, 0.6) !important;
+  border: unset !important;
+}
+#uploader {
+  margin-bottom: 1rem;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: end;
+      justify-content: flex-end;
+  -ms-flex-align: end;
+      align-items: flex-end;
+}
+#p_uploads {
+  width: 100%;
+}
+#p_uploads:empty {
+  display: none;
+}
+#p_uploads:empty ~ a.btn {
+  display: none;
+}
+#ManageFiles .btn:not(:disabled) {
+  cursor: pointer;
+}
+#ManageFiles > .alert:empty {
+  display: none;
 }

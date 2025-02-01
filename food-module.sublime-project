@@ -2,7 +2,7 @@
 	"folders":
 	[
 		{
-			"name": "Модуль загрузки файлов ежедневного питания для школы",
+			"name": "Модуль загрузки файлов меню ежедневного питания",
 			"path": "."
 		}
 	],
@@ -14,15 +14,9 @@
 	},
 	"build_systems": [
 		{
-			"name": "Запуск полной сборки проекта",
+			"name": "Запуск сборки проекта",
 			"working_dir": "${project_path}",
-			"cmd": ["start", "/wait", "grunt", "-v", "default"],
-			"shell": true
-		},
-		{
-			"name": "Запуск скоростной сборки проекта",
-			"working_dir": "${project_path}",
-			"cmd": ["start", "/wait", "grunt", "-v", "speed"],
+			"cmd": ["start", "/wait", "grunt", "-v"],
 			"shell": true
 		}
 	]

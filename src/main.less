@@ -1,0 +1,55 @@
+pre code {
+	display: block;
+}
+
+a i {
+	pointer-events: none;
+}
+
+label.btn [type=file] {
+	display: none;
+}
+
+table.table.data > thead > tr > th {
+	font-weight: 700;
+}
+
+.alert > *:first-child {
+	margin-top: unset;
+}
+
+.alert > *:last-child {
+	margin-bottom: unset;
+}
+
+.fancybox-button {
+	background: rgba(30, 30, 30, .6) !important;
+	border: unset !important;
+}
+
+#uploader {
+	margin-bottom: 1rem;
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: flex-end;
+}
+
+#p_uploads {
+	width: 100%;
+	&:empty {
+		display: none;
+		~ a.btn {
+			display: none;
+		}
+	}
+}
+
+#ManageFiles {
+	.btn:not(:disabled) {
+		cursor: pointer;
+	}
+	> .alert:empty {
+		display: none;
+	}
+}

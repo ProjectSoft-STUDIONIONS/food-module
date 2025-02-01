@@ -11,6 +11,7 @@ if (!$modx->hasPermission('exec_module')) {
 if (!is_array($modx->event->params)) {
 	$modx->event->params = [];
 }
+
 $params = $modx->event->params;
 $params["folders"] = $params["folders"] ? (string)$params["folders"] : 'food';
 
@@ -19,7 +20,8 @@ $base_path = str_replace('\\', '/', dirname(__FILE__)) . '/';
 define('SCHOOL_FOLDERS_BASE_PATH', $base_path);
 
 // Разрешённые директории
-$access_path = explode(',', $params["folders"]);
+$access_path = preg_split('/[\s,;]+/', $params["folders"]);
+//$access_path = explode(',', $params["folders"]);
 
 global $_lang, $content, $_style, $manager_language, $new_folder_permissions, $new_file_permissions, $startpath, $exts, $msg;
 
@@ -117,7 +119,6 @@ function getModule() {
 }
 
 function renameFile($new_file="", $file=""){
-
 	global $_lang, $startpath, $new_file_permissions, $exts;
 	$modx = evolutionCMS();
 	$msg = '';
@@ -181,6 +182,7 @@ function renameFile($new_file="", $file=""){
 	return $all;
 }
 
+// Удаление файла
 function deleteFile($file) {
 	global $_lang, $startpath, $new_file_permissions, $exts;
 	$all = [];
@@ -199,6 +201,7 @@ function deleteFile($file) {
 	return $all;
 }
 
+// Загрузка файлов
 function fileupload()
 {
 	$modx = evolutionCMS();
@@ -272,34 +275,37 @@ function fileupload()
 	return $all;
 }
 
+// Получаем данные модуля
 $module = getModule();
-
+// Иконка
 $module["icon"] = trim($module["icon"]) ? trim($module["icon"]) : "fa fa-cube";
 
-// Prevent php 8 warnings
+// Получить данные запроса ($_GET, $_POST, $_REQUEST)
 $_POST['mode'] = $_POST['mode'] ?? '';
 $_GET['mode'] = $_GET['mode'] ?? '';
 $_REQUEST['mode'] = $_REQUEST['mode'] ?? '';
 $_REQUEST['path'] = $_REQUEST['path'] ?? '';
 
+// Директория по умолчанию ()
 $path = $_REQUEST['path'];
 
+// Корневая директория
 $startpath = MODX_BASE_PATH;
 // Получаем рабочую директорию
 if (isset($_REQUEST['path']) && !empty($_REQUEST['path'])) {
 	$_REQUEST['path'] = str_replace('..', '', $_REQUEST['path']);
 	$startpath = is_dir($_REQUEST['path']) ? $_REQUEST['path'] : removeLastPath($_REQUEST['path']);
 } 
-
+// Проверяем, относится ли полученная директория к разрешённым
 if(!checkedPath($startpath, $access_path)):
 	$modx->sendRedirect('index.php?a=112&id=' . $module['id'] . '&mode=dir&path=' . MODX_BASE_PATH);
 endif;
 
 // Формируем путь к директории
 $startpath = $startpath == '/' ? '/' : rtrim($startpath, '/');
-
 $startpath = checkedPath($startpath, $access_path) ? $startpath : rtrim(MODX_BASE_PATH, '/');
 
+// Проверяем возможность чтения директории
 if (!is_readable($startpath)) {
 	$modx->webAlertAndQuit($_lang["not_readable_dir"]);
 }
@@ -307,9 +313,8 @@ if (!is_readable($startpath)) {
 // Разрешённые файлы
 $exts = ["xlsx", "pdf"];
 
+// Установка локали
 setlocale(LC_NUMERIC, 'C');
-
-ob_start();
 
 // Загрузка файлов
 if($_REQUEST['mode'] == 'upload'):
@@ -332,6 +337,9 @@ if($_REQUEST['mode'] == 'delete'):
 		$all = deleteFile($_REQUEST['file']);
 	endif;
 endif;
+
+// Начало сбора для вывода
+ob_start();
 
 // Чтение директории
 // Выводим директории только в корне

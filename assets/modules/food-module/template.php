@@ -156,7 +156,7 @@ $ljs_time = filemtime($js);
 <script src="/<?= $modPath;?>/js/main.js?<?= $ljs_time;?>"></script>
 <?php
 // Подключаем main.css
-$css = MODX_BASE_PATH . $modPath . '/css/main.css';
+$css = MODX_BASE_PATH . $modPath . '/css/main.min.css';
 $lcss_time = filemtime($css);
 ?>
-<link type="text/css" rel="stylesheet" href="/<?= $modPath;?>/css/main.css?<?= $lcss_time;?>">
+<link type="text/css" rel="stylesheet" href="/<?= $modPath;?>/css/main.min.css?<?= $lcss_time;?>">
