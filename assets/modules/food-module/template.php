@@ -3,7 +3,7 @@ if( ! defined('IN_MANAGER_MODE') || IN_MANAGER_MODE !== true) {
 	die("<b>INCLUDE_ORDERING_ERROR</b><br /><br />Please use the EVO Content Manager instead of accessing this file directly.");
 }
 
-$modPath = str_replace(MODX_BASE_PATH, '', dirname(__FILE__));
+$modPath = str_replace(MODX_BASE_PATH, '', $base_path);
 $upload_maxsize = $modx->config['upload_maxsize'];
 ?>
 <style type="text/css">

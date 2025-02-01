@@ -295,7 +295,7 @@ $startpath = MODX_BASE_PATH;
 if (isset($_REQUEST['path']) && !empty($_REQUEST['path'])) {
 	$_REQUEST['path'] = str_replace('..', '', $_REQUEST['path']);
 	$startpath = is_dir($_REQUEST['path']) ? $_REQUEST['path'] : removeLastPath($_REQUEST['path']);
-} 
+}
 // Проверяем, относится ли полученная директория к разрешённым
 if(!checkedPath($startpath, $access_path)):
 	$modx->sendRedirect('index.php?a=112&id=' . $module['id'] . '&mode=dir&path=' . MODX_BASE_PATH);
