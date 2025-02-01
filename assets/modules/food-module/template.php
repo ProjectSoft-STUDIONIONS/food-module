@@ -53,7 +53,7 @@ $upload_maxsize = $modx->config['upload_maxsize'];
 ?>
 		<div class="container breadcrumbs">
 			<i class="fa fa-folder-open-o FilesTopFolder"></i>
-			<a href="?a=112&id=5&mode=dir&path=<?= MODX_BASE_PATH; ?>"><?= $_lang["files_top_level"];?></a><?= $file_path ? "/<span><a href=\"?a=112&id=5&mode=dir&path=" . MODX_BASE_PATH . $file_path . "\">" . $file_path . "</a></span>" : "";?>
+			<a href="?a=112&id=<?= $module["id"];?>&mode=dir&path=<?= MODX_BASE_PATH; ?>"><?= $_lang["files_top_level"];?></a><?= $file_path ? "/<span><a href=\"?a=112&id=<?= $module["id"];?>&mode=dir&path=" . MODX_BASE_PATH . $file_path . "\">" . $file_path . "</a></span>" : "";?>
 		</div>
 		<div class="table-responsive">
 			<table class="table data table-bordered">
@@ -76,7 +76,7 @@ foreach($directorys as $dir):
 ?>
 					<tr>
 						<td>
-							<i class="<?= $_style['actions_folder'];?>"></i> <a href="?a=112&id=5&mode=dir&path=<?= MODX_BASE_PATH . $dir;?>/"><?= $dir;?></a>
+							<i class="<?= $_style['actions_folder'];?>"></i> <a href="?a=112&id=<?= $module["id"];?>&mode=dir&path=<?= MODX_BASE_PATH . $dir;?>/"><?= $dir;?></a>
 						</td>
 						<td class="text-right text-nowrap"><?= $perms;?></td>
 						<td class="text-right text-nowrap"><?= $modx->toDateFormat($ltime);?></td>
