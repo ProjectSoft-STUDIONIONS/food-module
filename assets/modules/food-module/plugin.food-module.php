@@ -21,7 +21,7 @@ switch($e->name){
 			if($row = $modx->db->getRow( $result )):
 				$disabled = intval($row["disabled"]);
 				$strip = $modx->stripAlias($row["name"]);
-				$row["icon"] = $row["icon"] ? ($row["icon"] == "" ? "fa fa-folder-open" : $row["icon"]) "fa fa-folder-open";
+				$row["icon"] = $row["icon"] ? ($row["icon"] == "" ? "fa fa-folder-open" : $row["icon"]) : "fa fa-folder-open";
 				if(!$disabled):
 					// Построение
 					$menuparams = [
