@@ -23,7 +23,7 @@ define('SCHOOL_FOLDERS_BASE_PATH', $base_path);
 $access_path = preg_split('/[\s,;]+/', $params["folders"]);
 //$access_path = explode(',', $params["folders"]);
 
-global $_lang, $content, $_style, $manager_language, $new_folder_permissions, $new_file_permissions, $startpath, $exts, $msg;
+global $_lang, $content, $_style, $modx_lang_attribute, $lastInstallTime, $manager_language, $new_folder_permissions, $new_file_permissions, $startpath, $exts, $msg;
 
 // Языковые пакеты
 include_once SCHOOL_FOLDERS_BASE_PATH . "lang/english.inc.php";
