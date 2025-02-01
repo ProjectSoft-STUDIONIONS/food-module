@@ -9,7 +9,7 @@
  * @package      evo
  * @internal     @events OnManagerMenuPrerender
  * @internal     @modx_category Manager and Admin
- * @internal     @properties &id_module=ID модуля FoodModule;int;; &title=Заголовок пункта меню;text;;
+ * @internal     @properties &id_module=ID модуля FoodModule;int;0;0 &title=Заголовок пункта меню;text;;; &sort=Позиция пункта;int;0;0;0
  * @internal     @installset base
  * @internal     @disabled 0
  * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
@@ -29,7 +29,7 @@
  * @package      evo
  * @internal     @events OnManagerMenuPrerender
  * @internal     @modx_category Manager and Admin
- * @internal     @properties &id_module=ID модуля FoodModule;int;; &title=Заголовок пункта меню;text;;
+ * @internal     @properties &id_module=ID модуля FoodModule;int;0;0 &title=Заголовок пункта меню;text;;; &sort=Позиция пункта;int;0;0;0
  * @internal     @installset base
  * @internal     @disabled 0
  * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
