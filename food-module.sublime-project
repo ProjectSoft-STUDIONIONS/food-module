@@ -1,0 +1,29 @@
+{
+	"folders":
+	[
+		{
+			"name": "Модуль загрузки файлов ежедневного питания для школы",
+			"path": "."
+		}
+	],
+	"settings":  {
+		"default_line_ending": "unix",
+		"show_line_endings": true,
+		"font_size": 14,
+		"tab_size": 4
+	},
+	"build_systems": [
+		{
+			"name": "Запуск полной сборки проекта",
+			"working_dir": "${project_path}",
+			"cmd": ["start", "/wait", "grunt", "-v", "default"],
+			"shell": true
+		},
+		{
+			"name": "Запуск скоростной сборки проекта",
+			"working_dir": "${project_path}",
+			"cmd": ["start", "/wait", "grunt", "-v", "speed"],
+			"shell": true
+		}
+	]
+}

@@ -1,0 +1,44 @@
+pre code {
+	display: block;
+}
+a i {
+	pointer-events: none;
+}
+.fancybox-button {
+	background: rgba(30, 30, 30, .6) !important;
+	border: unset !important;
+}
+#uploader {
+	margin-bottom: 1rem;
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: flex-end;
+}
+#p_uploads {
+	width: 100%;
+}
+#p_uploads:empty {
+	display: none;
+}
+#p_uploads:empty ~ a.btn {
+	display: none;
+}
+#ManageFiles .btn:not(:disabled) {
+	cursor: pointer;
+}
+label.btn [type=file] {
+	display: none;
+}
+#ManageFiles > .alert:empty {
+	display: none;
+}
+.alert > *:first-child {
+	margin-top: unset;
+}
+.alert > *:last-child {
+	margin-bottom: unset;
+}
+table.table.data > thead > tr > th {
+	font-weight: 700;
+}
