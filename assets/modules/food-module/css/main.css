@@ -46,7 +46,10 @@ table.table.data > thead > tr > th {
 #ManageFiles > .alert:empty {
   display: none;
 }
+#ManageFiles table.table td {
+  font-family: 'JetBrains Mono', monospace, 'Consolas', sans-serif;
+}
 #ManageFiles table.table td:first-child > span {
-  font-family: 'JetBrains Mono', 'Consolas', monospace, sans-serif;
+  font-family: 'JetBrains Mono', monospace, 'Consolas', sans-serif;
   white-space: pre;
 }
