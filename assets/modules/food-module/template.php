@@ -78,7 +78,7 @@ foreach($directorys as $dir):
 						<td>
 							<i class="<?= $_style['actions_folder'];?>"></i> <a href="?a=112&id=<?= $module["id"];?>&mode=dir&path=<?= MODX_BASE_PATH . $dir;?>/"><?= $dir;?></a>
 						</td>
-						<td class="text-right text-nowrap"><?= $perms;?></td>
+						<td class="text-right text-nowrap"><span><?= $perms;?></span></td>
 						<td class="text-right text-nowrap"><?= $modx->toDateFormat($ltime);?></td>
 						<td class="text-right text-nowrap"><?= $modx->nicesize($size);?></td>
 						<td class="text-right text-nowrap"></td>
@@ -98,7 +98,7 @@ if($files):
 		endif;
 ?>
 					<tr>
-						<td class="text-nowrap"><?= $file;?></td>
+						<td class="text-nowrap"><span><?= $file;?></span></td>
 						<td class="text-right text-nowrap"><?= $perms;?></td>
 						<td class="text-right text-nowrap"><?= $modx->toDateFormat($ltime);?></td>
 						<td class="text-right text-nowrap"><?= $modx->nicesize($stat);?></td>

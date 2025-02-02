@@ -46,3 +46,7 @@ table.table.data > thead > tr > th {
 #ManageFiles > .alert:empty {
   display: none;
 }
+#ManageFiles #ManageFiles table.table td:first-child span {
+  font-family: 'JetBrains Mono';
+  white-space: pre-line;
+}
