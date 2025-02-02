@@ -48,5 +48,5 @@ table.table.data > thead > tr > th {
 }
 #ManageFiles table.table td:first-child > span {
   font-family: 'JetBrains Mono', 'Consolas', monospace, sans-serif;
-  white-space: pre-line;
+  white-space: pre;
 }
