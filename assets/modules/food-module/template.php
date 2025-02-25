@@ -95,7 +95,6 @@ if($files):
 			$ltime = filemtime($tmp_file);
 			$stat = filesize($tmp_file);
 			$perms = substr(sprintf('%o', fileperms($tmp_file)), -4);
-		endif;
 ?>
 					<tr>
 						<td class="text-nowrap"><span><?= $file;?></span></td>
@@ -113,6 +112,7 @@ if($files):
 						</td>
 					</tr>
 <?php
+		endif;
 	endforeach;
 else:
 	if(checkedPath($startpath, $access_path)):
