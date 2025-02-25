@@ -10,7 +10,8 @@ module.exports = function(grunt) {
 			"replace",
 			"cssmin",
 			"copy",
-			"lineending"
+			"lineending",
+			"compress"
 		]
 	};
 
@@ -110,6 +111,24 @@ module.exports = function(grunt) {
 					'*.js'
 				],
 				dest: "assets/modules/food-module/js/",
+			},
+		},
+		compress: {
+			main: {
+				options: {
+					archive: 'food-uploader.zip'
+				},
+				files: [
+					{
+						expand: true,
+						cwd: '.',
+						src: [
+							'assets/**',
+							'install/**',
+						],
+						dest: '/food-uploader/'
+					},
+				],
 			},
 		},
 	});

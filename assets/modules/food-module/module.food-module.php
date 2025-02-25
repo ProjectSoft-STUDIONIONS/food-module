@@ -359,7 +359,29 @@ foreach ($dir as $fileinfo):
 				// Файлы
 				$ext = strtolower($fileinfo->getExtension());
 				if(in_array($ext, $exts)):
-					$files[] = $fileinfo->getFilename();
+					// Проверить дату (год) в имени файла
+					$name = $fileinfo->getFilename();
+					$re = '/^(?:[\w]+)?(\d{4})/';
+					preg_match($re, $name, $matches, PREG_UNMATCHED_AS_NULL);
+					// Если есть 4 цифры в имени файла
+					if($matches):
+						// Год сейчас
+						$year = intval(date("Y", time()));
+						// Год в имени файла
+						$file_year = intval($matches[1]);
+						// Если разница лет больше/равно 5 лет.
+						if($year - $file_year > 4):
+							// Удаляем файл
+							$file_absolute = path_join($startpath, $name);
+							@unlink($file_absolute);
+						else:
+							// Добавляем файл в отображение
+							$files[] = $name;
+						endif;
+					else:
+						// Добавляем файл в отображение
+						$files[] = $name;
+					endif;
 				endif;
 			endif;
 		endif;
