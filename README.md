@@ -6,4 +6,4 @@
 
 Модуль для Редакторов, у которых нет доступа к файлменеджеру административной панели (запрещён в настройках роли).
 
-Скачать и установить через Extras [food-uploader.zip](food-uploader.zip?raw=true)
+Скачать и установить через Extras [food-module.zip](food-module.zip?raw=true)
