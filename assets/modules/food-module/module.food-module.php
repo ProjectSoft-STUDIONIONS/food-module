@@ -23,7 +23,7 @@ define('SCHOOL_FOLDERS_BASE_PATH', $base_path);
 $access_path = preg_split('/[\s,;]+/', $params["folders"]);
 //$access_path = explode(',', $params["folders"]);
 
-global $_lang, $content, $_style, $modx_lang_attribute, $lastInstallTime, $manager_language, $new_folder_permissions, $new_file_permissions, $startpath, $exts, $msg;
+global $_lang, $content, $_style, $modx_lang_attribute, $lastInstallTime, $manager_language, $startpath, $exts, $msg;
 
 // Языковые пакеты
 include_once SCHOOL_FOLDERS_BASE_PATH . "lang/english.inc.php";
@@ -119,7 +119,7 @@ function getModule() {
 }
 
 function renameFile($new_file="", $file=""){
-	global $_lang, $startpath, $new_file_permissions, $exts;
+	global $_lang, $startpath, $exts;
 	$modx = evolutionCMS();
 	$msg = '';
 	$all = [];
@@ -184,7 +184,7 @@ function renameFile($new_file="", $file=""){
 
 // Удаление файла
 function deleteFile($file) {
-	global $_lang, $startpath, $new_file_permissions, $exts;
+	global $_lang, $startpath, $exts;
 	$all = [];
 	$all['error'] = "";
 	$all['success'] = "";
@@ -204,8 +204,8 @@ function deleteFile($file) {
 // Загрузка файлов
 function fileupload()
 {
-	$modx = evolutionCMS();
-	global $_lang, $startpath, $new_file_permissions, $exts;
+	$evo = evolutionCMS();
+	global $_lang, $startpath, $exts;
 	$msg = '';
 	$all = [];
 	$all['error'] = "";
@@ -215,7 +215,7 @@ function fileupload()
 		$msg = "";
 		$userfile= array();
 		$name = strtolower($_FILES['userfiles']['name'][$i]);
-		$name = $modx->stripAlias($name);
+		$name = $evo->stripAlias($name);
 		// На всякий случай
 		// Удаляет специальные символы
 		$name = preg_replace('/[^A-Za-z0-9\-\_.]/', '', $name);
@@ -233,20 +233,20 @@ function fileupload()
 		$path = $startpath . '/' . $userfile['name'];
 		$userfile['startpath'] = $startpath;
 		$userfile['path'] = $path;
-		$userfile['permissions'] = $new_file_permissions;
+		$userfile['permissions'] = octdec($evo->getConfig('new_file_permissions'));
 		$userfilename = $userfile['tmp_name'];
 		if(is_uploaded_file($userfilename)):
 			if(in_array($extension, $exts)):
 				if (@move_uploaded_file($userfile['tmp_name'], $userfile['path'])):
 					if (strtoupper(substr(PHP_OS, 0, 3)) != 'WIN'):
-						@chmod($userfile['path'], $new_file_permissions);
+						@chmod($userfile['path'], $userfile['permissions']);
 					endif;
 					$msg = '<dl class="dl-horizontal">';
 					$msg .= '<dt>' . $_lang["sch_file_upload"] . '</dt>';
 					$msg .= '<dd>' . $userfile['name'] . '</dd>';
 					$msg .= '</dl>';
 					$all['success'] .= $msg;
-					$modx->invokeEvent('OnFileManagerUpload', array(
+					$evo->invokeEvent('OnFileManagerUpload', array(
 						'filepath' => $userfile['startpath'],
 						'filename' => $userfile['name']
 					));
