@@ -361,27 +361,30 @@ foreach ($dir as $fileinfo):
 				if(in_array($ext, $exts)):
 					// Проверить дату (год) в имени файла
 					$name = $fileinfo->getFilename();
-					$re = '/^(?:[\w]+)?(\d{4})/';
-					preg_match($re, $name, $matches, PREG_UNMATCHED_AS_NULL);
+					/**
+					 * Пока удалим. Нужно разбираться
+					 */
+					//$re = '/^(?:[\w]+)?(\d{4})/';
+					//preg_match($re, $name, $matches, PREG_UNMATCHED_AS_NULL);
 					// Если есть 4 цифры в имени файла
-					if($matches):
+					//if($matches):
 						// Год сейчас
-						$year = intval(date("Y", time()));
+					//	$year = intval(date("Y", time()));
 						// Год в имени файла
-						$file_year = intval($matches[1]);
+					//	$file_year = intval($matches[1]);
 						// Если разница лет больше/равно 5 лет.
-						if($year - $file_year > 4):
+					//	if($year - $file_year > 4):
 							// Удаляем файл
-							$file_absolute = path_join($startpath, $name);
-							@unlink($file_absolute);
-						else:
+					//		$file_absolute = path_join($startpath, $name);
+					//		@unlink($file_absolute);
+					//	else:
 							// Добавляем файл в отображение
-							$files[] = $name;
-						endif;
-					else:
+					//		$files[] = $name;
+					//	endif;
+					//else:
 						// Добавляем файл в отображение
 						$files[] = $name;
-					endif;
+					//endif;
 				endif;
 			endif;
 		endif;
