@@ -46,12 +46,31 @@ table.table.data > thead > tr > th {
 }
 
 #ManageFiles {
+
+	@import "../bower_components/bootstrap/less/variables.less";
+	@import "../bower_components/bootstrap/less/glyphicons.less";
+
+	.glyphicon-chevron {
+		&-before {
+			&::before {
+				content: "\e257\e257";
+			}
+		}
+		&-after {
+			&::before {
+				content: "\e258\e258";
+			}
+		}
+	}
+
 	.btn:not(:disabled) {
 		cursor: pointer;
 	}
+
 	> .alert:empty {
 		display: none;
 	}
+
 	table.table {
 		td {
 			&:first-child {
@@ -62,5 +81,52 @@ table.table.data > thead > tr > th {
 			}
 			font-family: 'JetBrains Mono', monospace, 'Consolas', sans-serif;
 		}
+	}
+}
+
+div.dt-container {
+	div.dt-layout-row {
+		width: 100% !important;
+		flex: 1 0 auto;
+		margin-top: 1em !important;
+		margin-bottom: 1em !important;
+	}
+}
+
+.dt {
+	&-layout {
+		&-start {
+			.dt {
+				&-length,
+				&-search {
+					display: flex;
+				}
+			}
+		}
+	}
+	&-paging {
+		&-button {
+			&, * {
+				font-weight: 700;
+			}
+		}
+	}
+
+}
+
+.developer_food {
+	background-color: #fafafa;
+	color: #444;
+	position: sticky;
+	bottom: 0;
+	background: white;
+	z-index: 200;
+	margin-top: 1em;
+}
+
+.darkness {
+	.developer_food {
+		background-color: #282c34;
+		color: #bdbdbd;
 	}
 }

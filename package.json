@@ -1,6 +1,6 @@
 {
 	"name": "food-module",
-	"version": "1.0.3",
+	"version": "1.1.0",
 	"description": "Модуль загрузки файлов меню ежедневного питания",
 	"main": "Grunfile.js",
 	"scripts": {
@@ -23,8 +23,10 @@
 		"grunt-autoprefixer": "^3.0.4",
 		"grunt-contrib-copy": "^1.0.0",
 		"grunt-contrib-compress": "^2.0.0",
+		"grunt-contrib-concat": "^1.0.1",
 		"grunt-contrib-cssmin": "^4.0.0",
 		"grunt-contrib-less": "^3.0.0",
+		"grunt-contrib-uglify-es": "^3.3.0",
 		"grunt-lineending": "^1.0.0",
 		"grunt-replace": "^2.0.1",
 		"load-grunt-tasks": "^5.1.0",

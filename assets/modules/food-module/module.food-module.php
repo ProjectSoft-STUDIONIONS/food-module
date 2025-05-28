@@ -23,6 +23,7 @@ define('SCHOOL_FOLDERS_BASE_PATH', $base_path);
 $access_path = preg_split('/[\s,;]+/', $params["folders"]);
 //$access_path = explode(',', $params["folders"]);
 
+
 global $_lang, $content, $_style, $modx_lang_attribute, $lastInstallTime, $manager_language, $startpath, $exts, $msg;
 
 // Языковые пакеты
@@ -215,6 +216,9 @@ function fileupload()
 		$msg = "";
 		$userfile= array();
 		$name = strtolower($_FILES['userfiles']['name'][$i]);
+		// Транслит
+		$name = translitFileName($name);
+		$name = stripFileName($name);
 		$name = $evo->stripAlias($name);
 		// На всякий случай
 		// Удаляет специальные символы
@@ -275,10 +279,61 @@ function fileupload()
 	return $all;
 }
 
+/**
+ * Очистка имени файла от лишних символов
+ */
+function stripFileName($filename = "") {
+	$filename = strip_tags($filename);
+	$filename = preg_replace('/[^\.A-Za-z0-9 _-]/', '', $filename);
+	$filename = preg_replace('/\s+/', '-', $filename);
+	$filename = preg_replace('/_+/', '-', $filename);
+	$filename = preg_replace('/-+/', '-', $filename);
+	$filename = trim($filename, '-_.');
+	return $filename;
+}
+
+/**
+ * Транслит имени файла
+ */
+function translitFileName($filename){
+	$converter = array(
+		'а' => 'a',    'б' => 'b',    'в' => 'v',    'г' => 'g',    'д' => 'd',
+		'е' => 'e',    'ё' => 'e',    'ж' => 'zh',   'з' => 'z',    'и' => 'i',
+		'й' => 'y',    'к' => 'k',    'л' => 'l',    'м' => 'm',    'н' => 'n',
+		'о' => 'o',    'п' => 'p',    'р' => 'r',    'с' => 's',    'т' => 't',
+		'у' => 'u',    'ф' => 'f',    'х' => 'h',    'ц' => 'c',    'ч' => 'ch',
+		'ш' => 'sh',   'щ' => 'sch',  'ь' => '',     'ы' => 'y',    'ъ' => '',
+		'э' => 'e',    'ю' => 'yu',   'я' => 'ya',
+ 
+		'А' => 'A',    'Б' => 'B',    'В' => 'V',    'Г' => 'G',    'Д' => 'D',
+		'Е' => 'E',    'Ё' => 'E',    'Ж' => 'Zh',   'З' => 'Z',    'И' => 'I',
+		'Й' => 'Y',    'К' => 'K',    'Л' => 'L',    'М' => 'M',    'Н' => 'N',
+		'О' => 'O',    'П' => 'P',    'Р' => 'R',    'С' => 'S',    'Т' => 'T',
+		'У' => 'U',    'Ф' => 'F',    'Х' => 'H',    'Ц' => 'C',    'Ч' => 'Ch',
+		'Ш' => 'Sh',   'Щ' => 'Sch',  'Ь' => '',     'Ы' => 'Y',    'Ъ' => '',
+		'Э' => 'E',    'Ю' => 'Yu',   'Я' => 'Ya',
+	);
+	$filename = str_replace(array(' ', ','), '-', $filename);
+	$filename = strtr($filename, $converter);
+	$filename = $this->stripFileName($filename);
+	$filename = strtolower($filename);
+	return $filename;
+}
+
 // Получаем данные модуля
 $module = getModule();
 // Иконка
 $module["icon"] = trim($module["icon"]) ? trim($module["icon"]) : "fa fa-cube";
+
+foreach($access_path as $t_dir):
+	$t_dir = path_join(MODX_BASE_PATH, $t_dir);
+	if(!is_dir($t_dir)):
+		// Создаём директорию
+		@mkdir($t_dir, 0755, true);
+		// Приеняем права
+		@chmod($t_dir, 0755);
+	endif;
+endforeach;
 
 // Получить данные запроса ($_GET, $_POST, $_REQUEST)
 $_POST['mode'] = $_POST['mode'] ?? '';

@@ -14,8 +14,12 @@ $upload_maxsize = $modx->config['upload_maxsize'];
 		display: none;
 	}
 </style>
+<script>
+	const FOOD_FILE_PATH = "<?= $file_path;?>";
+	const FOOD_MOD_PATH = "/<?= $modPath;?>";
+</script>
 <div class="container">
-	<h1 class="text-left"><i class="<?= $module["icon"];?>"></i>Меню ежедневного питания</h1>
+	<h1 class="text-left"><i class="<?= $module["icon"];?>"></i><?= $_lang['sch_title']; ?></h1>
 	<h4 class="text-left" style="font-weight: 700;"><?= $title;?></h4>
 	<div id="actions"><div class="btn-group"></div></div>
 	<div id="ManageFiles">
@@ -56,7 +60,7 @@ $upload_maxsize = $modx->config['upload_maxsize'];
 			<a href="?a=112&id=<?= $module["id"];?>&mode=dir&path=<?= MODX_BASE_PATH; ?>"><?= $_lang["files_top_level"];?></a><?= $file_path ? "/<span><a href=\"?a=112&id=" . $module["id"] . "&mode=dir&path=" . MODX_BASE_PATH . $file_path . "\">" . $file_path . "</a></span>" : "";?>
 		</div>
 		<div class="table-responsive">
-			<table class="table data table-bordered">
+			<table id="table-<?= $file_path;?>" class="table data table-bordered">
 				<thead>
 					<tr>
 						<th><?= $_lang['files_filename']; ?></th>
@@ -118,7 +122,11 @@ else:
 	if(checkedPath($startpath, $access_path)):
 ?>
 					<tr>
-						<td colspan="5">Нет файлов для вывода</td>
+						<td class="text-nowrap"><span><?= $_lang["sch_files_not_found"];?></span></td>
+						<td class="text-center text-nowrap">---</td>
+						<td class="text-center text-nowrap">---</td>
+						<td class="text-center text-nowrap">---</td>
+						<td class="actions text-center">---</td>
 					</tr>
 <?php
 	endif;
@@ -128,6 +136,7 @@ endif;
 			</table>
 		</div>
 	</div>
+	<p class="developer_food text-right"><?= $_lang["sch_git_help"];?> <a href="https://github.com/ProjectSoft-STUDIONIONS/food-module/issues" target="_blank">https://github.com/ProjectSoft-STUDIONIONS/food-module/issues</a><br>Telegram: <a href="https://t.me/ProjectSoft" target="_blank">https://t.me/ProjectSoft</a></p>
 </div>
 <?php
 // Данных файлов может и не быть
@@ -146,6 +155,16 @@ endif;
 if(is_file(MODX_BASE_PATH . 'viewer/fancybox.min.js')):
 ?>
 <script src="/viewer/fancybox.min.js"></script>
+<?php
+endif;
+
+// Подключаем DataTables
+if(checkedPath($startpath, $access_path)):
+	$jsDT = MODX_BASE_PATH . $modPath . '/js/app.js';
+	$jsDT_time = filemtime($jsDT);
+?>
+	<!--link type="text/css" rel="stylesheet" href="/<?= $modPath;?>/css/app.css?<?= $jsDT_time;?>"></link-->
+	<script src="/<?= $modPath;?>/js/app.js?<?= $jsDT_time;?>"></script>
 <?php
 endif;
 
