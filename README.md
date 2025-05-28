@@ -6,6 +6,6 @@
 
 Модуль для Редакторов, у которых нет доступа к файлменеджеру административной панели (запрещён в настройках роли).
 
-Скачать и установить через Extras [food-module.zip](food-module.zip?raw=true)
+Скачать и установить через Extras [food-module.zip](../../releases/latest/download/food-module.zip)
 
-**Рабочий модуль только в этом архиве [food-module.zip](food-module.zip?raw=true). Сборка модуля производится с помощью grunt.**
+**Рабочий модуль только в этом архиве [food-module.zip](../../releases/latest/download/food-module.zip). Сборка модуля производится с помощью grunt.**
