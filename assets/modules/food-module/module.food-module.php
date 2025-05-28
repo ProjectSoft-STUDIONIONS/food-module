@@ -3,7 +3,7 @@ if (!defined('MODX_BASE_PATH')) {
 	http_response_code(403);
 	die('Go fuck yourself'); 
 }
-
+ini_set('default_charset','UTF-8');
 if (!$modx->hasPermission('exec_module')) {
 	$modx->sendRedirect('index.php?a=106');
 }
@@ -121,7 +121,7 @@ function getModule() {
 
 function renameFile($new_file="", $file=""){
 	global $_lang, $startpath, $exts;
-	$modx = evolutionCMS();
+	$evo = evolutionCMS();
 	$msg = '';
 	$all = [];
 	$all['error'] = "";
@@ -141,7 +141,14 @@ function renameFile($new_file="", $file=""){
 	// Транслит имени файла
 	$pthinfo = pathinfo($new_file);
 	$f_name = $pthinfo['filename'];
-	$f_name = $modx->stripAlias($f_name);
+
+	$nameparts = explode('.', $f_name);
+		$nameparts = array_map(array(
+			$evo,
+			'stripAlias'
+		), $nameparts, array('file_manager')
+	);
+	$f_name = implode('.', $nameparts);
 	// На всякий случай
 	// Удаляет специальные символы
 	$f_name = preg_replace('/[^A-Za-z0-9\-\_.]/', '', $f_name);
@@ -215,18 +222,19 @@ function fileupload()
 		if (empty($_FILES['userfiles']['tmp_name'][$i])) continue;
 		$msg = "";
 		$userfile= array();
-		$name = strtolower($_FILES['userfiles']['name'][$i]);
-		// Транслит
-		$name = translitFileName($name);
-		$name = stripFileName($name);
-		$name = $evo->stripAlias($name);
+		$nameparts = explode('.', $name);
+		$nameparts = array_map(array(
+			$evo,
+			'stripAlias'
+		), $nameparts, array('file_manager'));
+		$name = implode('.', $nameparts);
 		// На всякий случай
-		// Удаляет специальные символы
+		// Специальные символы.
 		$name = preg_replace('/[^A-Za-z0-9\-\_.]/', '', $name);
-		// Заменяет несколько тире на одно
+		// несколько тире на одно
 		$name = preg_replace('/-+/', '-', $name);
-		// Заменяет несколько нижних тире на одно
-		$name = preg_replace('/_+/', '_', $name);
+		// несколько нижних тире на одно
+		$name = trim(preg_replace('/_+/', '_', $name));
 		$extension = pathinfo($name, PATHINFO_EXTENSION);
 		$userfile['name'] = $name;
 		$userfile['type'] = $_FILES['userfiles']['type'][$i];
@@ -277,47 +285,6 @@ function fileupload()
 		endif;
 	endforeach;
 	return $all;
-}
-
-/**
- * Очистка имени файла от лишних символов
- */
-function stripFileName($filename = "") {
-	$filename = strip_tags($filename);
-	$filename = preg_replace('/[^\.A-Za-z0-9 _-]/', '', $filename);
-	$filename = preg_replace('/\s+/', '-', $filename);
-	$filename = preg_replace('/_+/', '-', $filename);
-	$filename = preg_replace('/-+/', '-', $filename);
-	$filename = trim($filename, '-_.');
-	return $filename;
-}
-
-/**
- * Транслит имени файла
- */
-function translitFileName($filename){
-	$converter = array(
-		'а' => 'a',    'б' => 'b',    'в' => 'v',    'г' => 'g',    'д' => 'd',
-		'е' => 'e',    'ё' => 'e',    'ж' => 'zh',   'з' => 'z',    'и' => 'i',
-		'й' => 'y',    'к' => 'k',    'л' => 'l',    'м' => 'm',    'н' => 'n',
-		'о' => 'o',    'п' => 'p',    'р' => 'r',    'с' => 's',    'т' => 't',
-		'у' => 'u',    'ф' => 'f',    'х' => 'h',    'ц' => 'c',    'ч' => 'ch',
-		'ш' => 'sh',   'щ' => 'sch',  'ь' => '',     'ы' => 'y',    'ъ' => '',
-		'э' => 'e',    'ю' => 'yu',   'я' => 'ya',
- 
-		'А' => 'A',    'Б' => 'B',    'В' => 'V',    'Г' => 'G',    'Д' => 'D',
-		'Е' => 'E',    'Ё' => 'E',    'Ж' => 'Zh',   'З' => 'Z',    'И' => 'I',
-		'Й' => 'Y',    'К' => 'K',    'Л' => 'L',    'М' => 'M',    'Н' => 'N',
-		'О' => 'O',    'П' => 'P',    'Р' => 'R',    'С' => 'S',    'Т' => 'T',
-		'У' => 'U',    'Ф' => 'F',    'Х' => 'H',    'Ц' => 'C',    'Ч' => 'Ch',
-		'Ш' => 'Sh',   'Щ' => 'Sch',  'Ь' => '',     'Ы' => 'Y',    'Ъ' => '',
-		'Э' => 'E',    'Ю' => 'Yu',   'Я' => 'Ya',
-	);
-	$filename = str_replace(array(' ', ','), '-', $filename);
-	$filename = strtr($filename, $converter);
-	$filename = $this->stripFileName($filename);
-	$filename = strtolower($filename);
-	return $filename;
 }
 
 // Получаем данные модуля

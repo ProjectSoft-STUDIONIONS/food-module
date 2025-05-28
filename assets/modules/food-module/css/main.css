@@ -714,6 +714,8 @@ table.table.data > thead > tr > th {
 }
 #p_uploads {
   width: 100%;
+  font-family: 'JetBrains Mono', monospace, 'Consolas', sans-serif;
+  white-space: pre;
 }
 #p_uploads:empty {
   display: none;
@@ -1564,7 +1566,6 @@ div.dt-container div.dt-layout-row {
   color: #444;
   position: sticky;
   bottom: 0;
-  background: white;
   z-index: 200;
   margin-top: 1em;
 }
