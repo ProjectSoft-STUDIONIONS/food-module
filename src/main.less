@@ -1,3 +1,29 @@
+@font-face {
+	font-family: 'JetBrains Mono';
+	src:  url('../fonts/JetBrainsMono-Regular.ttf?wx8936');
+	src:  url('../fonts/JetBrainsMono-Regular.ttf?wx8936') format('truetype'),
+		url('../fonts/JetBrainsMono-Regular.woff2?wx8936') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+@font-face {
+	font-family: 'JetBrains Mono';
+	src:  url('../fonts/JetBrainsMono-Italic.ttf?wx8936');
+	src:  url('../fonts/JetBrainsMono-Italic.ttf?wx8936') format('truetype'),
+		url('../fonts/JetBrainsMono-Italic.woff2?wx8936') format('woff2');
+	font-weight: normal;
+	font-style: italic;
+	font-display: block;
+}
+
+body > .container {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
 pre code {
 	display: block;
 }
@@ -48,25 +74,21 @@ table.table.data > thead > tr > th {
 }
 
 #ManageFiles {
+	@import "variables.less";
+	@import "style.less";
 
-	@import "../bower_components/bootstrap/less/variables.less";
-	@import "../bower_components/bootstrap/less/glyphicons.less";
-
-	.glyphicon-chevron {
-		&-before {
-			&::before {
-				content: "\e257\e257";
-			}
-		}
-		&-after {
-			&::before {
-				content: "\e258\e258";
-			}
-		}
-	}
+	flex: 1 0 auto;
 
 	.btn:not(:disabled) {
 		cursor: pointer;
+	}
+
+	[class^="icon-food-"], [class*=" icon-food-"] {
+		&::before {
+			padding-top: 2px;
+			margin-bottom: 1px;
+			display: block;
+		}
 	}
 
 	> .alert:empty {
@@ -113,6 +135,13 @@ div.dt-container {
 			}
 		}
 	}
+	&-buttons {
+		.btn {
+			&, &:last-child, &:not(:first-child) {
+				margin-left: 10px;
+			}
+		}
+	}
 
 }
 
@@ -122,7 +151,15 @@ div.dt-container {
 	position: sticky;
 	bottom: 0;
 	z-index: 200;
-	margin-top: 1em;
+	margin-top: 0;
+	margin-bottom: 0;
+	border-top: 1px solid #c4c4c4;
+	margin-left: -20px;
+	margin-right: -20px;
+	padding: 10px 30px 0px;
+	font-family: 'JetBrains Mono', monospace, 'Consolas', sans-serif;
+	font-style: italic;
+	flex: 0 0 auto;
 }
 
 .darkness {

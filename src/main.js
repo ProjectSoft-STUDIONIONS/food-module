@@ -300,7 +300,8 @@
 	// Если есть dir, значит список файлов
 	if(FOOD_FILE_PATH) {
 		const url = `${location.origin}/${FOOD_FILE_PATH}/`;
-		let table = new DataTable(`#table-${FOOD_FILE_PATH}`, {
+		//${FOOD_FILE_PATH}
+		let table = new DataTable(`#table`, {
 			// Колонки
 			columns: [
 				{ name: 'file' },

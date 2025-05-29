@@ -679,6 +679,29 @@ div.table-responsive > div.dt-container > div.row > div[class^=col-]:first-child
 div.table-responsive > div.dt-container > div.row > div[class^=col-]:last-child {
   padding-right: 0;
 }
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Regular.ttf?wx8936');
+  src: url('../fonts/JetBrainsMono-Regular.ttf?wx8936') format('truetype'), url('../fonts/JetBrainsMono-Regular.woff2?wx8936') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Italic.ttf?wx8936');
+  src: url('../fonts/JetBrainsMono-Italic.ttf?wx8936') format('truetype'), url('../fonts/JetBrainsMono-Italic.woff2?wx8936') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+  font-display: block;
+}
+body > .container {
+  min-height: 100vh;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+}
 pre code {
   display: block;
 }
@@ -723,817 +746,49 @@ table.table.data > thead > tr > th {
 #p_uploads:empty ~ a.btn {
   display: none;
 }
-@font-face {
-  font-family: "Glyphicons Halflings";
-  src: url("../fonts/glyphicons-halflings-regular.eot");
-  src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+#ManageFiles {
+  -ms-flex: 1 0 auto;
+      flex: 1 0 auto;
 }
-#ManageFiles .glyphicon {
-  position: relative;
-  top: 1px;
-  display: inline-block;
-  font-family: "Glyphicons Halflings";
+@font-face {
+  font-family: 'Food';
+  src: url('../fonts/Food.ttf?wx8936') format('truetype'), url('../fonts/Food.woff?wx8936') format('woff');
+  font-weight: normal;
   font-style: normal;
-  font-weight: 400;
+  font-display: block;
+}
+#ManageFiles [class^="icon-food-"],
+#ManageFiles [class*=" icon-food-"] {
+  font-family: 'Food' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-#ManageFiles .glyphicon-asterisk:before {
-  content: "\002a";
+#ManageFiles .icon-food-prev:before {
+  content: "\e900";
 }
-#ManageFiles .glyphicon-plus:before {
-  content: "\002b";
+#ManageFiles .icon-food-next:before {
+  content: "\e901";
 }
-#ManageFiles .glyphicon-euro:before,
-#ManageFiles .glyphicon-eur:before {
-  content: "\20ac";
+#ManageFiles .icon-food-forward:before {
+  content: "\e902";
 }
-#ManageFiles .glyphicon-minus:before {
-  content: "\2212";
-}
-#ManageFiles .glyphicon-cloud:before {
-  content: "\2601";
-}
-#ManageFiles .glyphicon-envelope:before {
-  content: "\2709";
-}
-#ManageFiles .glyphicon-pencil:before {
-  content: "\270f";
-}
-#ManageFiles .glyphicon-glass:before {
-  content: "\e001";
-}
-#ManageFiles .glyphicon-music:before {
-  content: "\e002";
-}
-#ManageFiles .glyphicon-search:before {
-  content: "\e003";
-}
-#ManageFiles .glyphicon-heart:before {
-  content: "\e005";
-}
-#ManageFiles .glyphicon-star:before {
-  content: "\e006";
-}
-#ManageFiles .glyphicon-star-empty:before {
-  content: "\e007";
-}
-#ManageFiles .glyphicon-user:before {
-  content: "\e008";
-}
-#ManageFiles .glyphicon-film:before {
-  content: "\e009";
-}
-#ManageFiles .glyphicon-th-large:before {
-  content: "\e010";
-}
-#ManageFiles .glyphicon-th:before {
-  content: "\e011";
-}
-#ManageFiles .glyphicon-th-list:before {
-  content: "\e012";
-}
-#ManageFiles .glyphicon-ok:before {
-  content: "\e013";
-}
-#ManageFiles .glyphicon-remove:before {
-  content: "\e014";
-}
-#ManageFiles .glyphicon-zoom-in:before {
-  content: "\e015";
-}
-#ManageFiles .glyphicon-zoom-out:before {
-  content: "\e016";
-}
-#ManageFiles .glyphicon-off:before {
-  content: "\e017";
-}
-#ManageFiles .glyphicon-signal:before {
-  content: "\e018";
-}
-#ManageFiles .glyphicon-cog:before {
-  content: "\e019";
-}
-#ManageFiles .glyphicon-trash:before {
-  content: "\e020";
-}
-#ManageFiles .glyphicon-home:before {
-  content: "\e021";
-}
-#ManageFiles .glyphicon-file:before {
-  content: "\e022";
-}
-#ManageFiles .glyphicon-time:before {
-  content: "\e023";
-}
-#ManageFiles .glyphicon-road:before {
-  content: "\e024";
-}
-#ManageFiles .glyphicon-download-alt:before {
-  content: "\e025";
-}
-#ManageFiles .glyphicon-download:before {
-  content: "\e026";
-}
-#ManageFiles .glyphicon-upload:before {
-  content: "\e027";
-}
-#ManageFiles .glyphicon-inbox:before {
-  content: "\e028";
-}
-#ManageFiles .glyphicon-play-circle:before {
-  content: "\e029";
-}
-#ManageFiles .glyphicon-repeat:before {
-  content: "\e030";
-}
-#ManageFiles .glyphicon-refresh:before {
-  content: "\e031";
-}
-#ManageFiles .glyphicon-list-alt:before {
-  content: "\e032";
-}
-#ManageFiles .glyphicon-lock:before {
-  content: "\e033";
-}
-#ManageFiles .glyphicon-flag:before {
-  content: "\e034";
-}
-#ManageFiles .glyphicon-headphones:before {
-  content: "\e035";
-}
-#ManageFiles .glyphicon-volume-off:before {
-  content: "\e036";
-}
-#ManageFiles .glyphicon-volume-down:before {
-  content: "\e037";
-}
-#ManageFiles .glyphicon-volume-up:before {
-  content: "\e038";
-}
-#ManageFiles .glyphicon-qrcode:before {
-  content: "\e039";
-}
-#ManageFiles .glyphicon-barcode:before {
-  content: "\e040";
-}
-#ManageFiles .glyphicon-tag:before {
-  content: "\e041";
-}
-#ManageFiles .glyphicon-tags:before {
-  content: "\e042";
-}
-#ManageFiles .glyphicon-book:before {
-  content: "\e043";
-}
-#ManageFiles .glyphicon-bookmark:before {
-  content: "\e044";
-}
-#ManageFiles .glyphicon-print:before {
-  content: "\e045";
-}
-#ManageFiles .glyphicon-camera:before {
-  content: "\e046";
-}
-#ManageFiles .glyphicon-font:before {
-  content: "\e047";
-}
-#ManageFiles .glyphicon-bold:before {
-  content: "\e048";
-}
-#ManageFiles .glyphicon-italic:before {
-  content: "\e049";
-}
-#ManageFiles .glyphicon-text-height:before {
-  content: "\e050";
-}
-#ManageFiles .glyphicon-text-width:before {
-  content: "\e051";
-}
-#ManageFiles .glyphicon-align-left:before {
-  content: "\e052";
-}
-#ManageFiles .glyphicon-align-center:before {
-  content: "\e053";
-}
-#ManageFiles .glyphicon-align-right:before {
-  content: "\e054";
-}
-#ManageFiles .glyphicon-align-justify:before {
-  content: "\e055";
-}
-#ManageFiles .glyphicon-list:before {
-  content: "\e056";
-}
-#ManageFiles .glyphicon-indent-left:before {
-  content: "\e057";
-}
-#ManageFiles .glyphicon-indent-right:before {
-  content: "\e058";
-}
-#ManageFiles .glyphicon-facetime-video:before {
-  content: "\e059";
-}
-#ManageFiles .glyphicon-picture:before {
-  content: "\e060";
-}
-#ManageFiles .glyphicon-map-marker:before {
-  content: "\e062";
-}
-#ManageFiles .glyphicon-adjust:before {
-  content: "\e063";
-}
-#ManageFiles .glyphicon-tint:before {
-  content: "\e064";
-}
-#ManageFiles .glyphicon-edit:before {
-  content: "\e065";
-}
-#ManageFiles .glyphicon-share:before {
-  content: "\e066";
-}
-#ManageFiles .glyphicon-check:before {
-  content: "\e067";
-}
-#ManageFiles .glyphicon-move:before {
-  content: "\e068";
-}
-#ManageFiles .glyphicon-step-backward:before {
-  content: "\e069";
-}
-#ManageFiles .glyphicon-fast-backward:before {
-  content: "\e070";
-}
-#ManageFiles .glyphicon-backward:before {
-  content: "\e071";
-}
-#ManageFiles .glyphicon-play:before {
-  content: "\e072";
-}
-#ManageFiles .glyphicon-pause:before {
-  content: "\e073";
-}
-#ManageFiles .glyphicon-stop:before {
-  content: "\e074";
-}
-#ManageFiles .glyphicon-forward:before {
-  content: "\e075";
-}
-#ManageFiles .glyphicon-fast-forward:before {
-  content: "\e076";
-}
-#ManageFiles .glyphicon-step-forward:before {
-  content: "\e077";
-}
-#ManageFiles .glyphicon-eject:before {
-  content: "\e078";
-}
-#ManageFiles .glyphicon-chevron-left:before {
-  content: "\e079";
-}
-#ManageFiles .glyphicon-chevron-right:before {
-  content: "\e080";
-}
-#ManageFiles .glyphicon-plus-sign:before {
-  content: "\e081";
-}
-#ManageFiles .glyphicon-minus-sign:before {
-  content: "\e082";
-}
-#ManageFiles .glyphicon-remove-sign:before {
-  content: "\e083";
-}
-#ManageFiles .glyphicon-ok-sign:before {
-  content: "\e084";
-}
-#ManageFiles .glyphicon-question-sign:before {
-  content: "\e085";
-}
-#ManageFiles .glyphicon-info-sign:before {
-  content: "\e086";
-}
-#ManageFiles .glyphicon-screenshot:before {
-  content: "\e087";
-}
-#ManageFiles .glyphicon-remove-circle:before {
-  content: "\e088";
-}
-#ManageFiles .glyphicon-ok-circle:before {
-  content: "\e089";
-}
-#ManageFiles .glyphicon-ban-circle:before {
-  content: "\e090";
-}
-#ManageFiles .glyphicon-arrow-left:before {
-  content: "\e091";
-}
-#ManageFiles .glyphicon-arrow-right:before {
-  content: "\e092";
-}
-#ManageFiles .glyphicon-arrow-up:before {
-  content: "\e093";
-}
-#ManageFiles .glyphicon-arrow-down:before {
-  content: "\e094";
-}
-#ManageFiles .glyphicon-share-alt:before {
-  content: "\e095";
-}
-#ManageFiles .glyphicon-resize-full:before {
-  content: "\e096";
-}
-#ManageFiles .glyphicon-resize-small:before {
-  content: "\e097";
-}
-#ManageFiles .glyphicon-exclamation-sign:before {
-  content: "\e101";
-}
-#ManageFiles .glyphicon-gift:before {
-  content: "\e102";
-}
-#ManageFiles .glyphicon-leaf:before {
-  content: "\e103";
-}
-#ManageFiles .glyphicon-fire:before {
-  content: "\e104";
-}
-#ManageFiles .glyphicon-eye-open:before {
-  content: "\e105";
-}
-#ManageFiles .glyphicon-eye-close:before {
-  content: "\e106";
-}
-#ManageFiles .glyphicon-warning-sign:before {
-  content: "\e107";
-}
-#ManageFiles .glyphicon-plane:before {
-  content: "\e108";
-}
-#ManageFiles .glyphicon-calendar:before {
-  content: "\e109";
-}
-#ManageFiles .glyphicon-random:before {
-  content: "\e110";
-}
-#ManageFiles .glyphicon-comment:before {
-  content: "\e111";
-}
-#ManageFiles .glyphicon-magnet:before {
-  content: "\e112";
-}
-#ManageFiles .glyphicon-chevron-up:before {
-  content: "\e113";
-}
-#ManageFiles .glyphicon-chevron-down:before {
-  content: "\e114";
-}
-#ManageFiles .glyphicon-retweet:before {
-  content: "\e115";
-}
-#ManageFiles .glyphicon-shopping-cart:before {
-  content: "\e116";
-}
-#ManageFiles .glyphicon-folder-close:before {
-  content: "\e117";
-}
-#ManageFiles .glyphicon-folder-open:before {
-  content: "\e118";
-}
-#ManageFiles .glyphicon-resize-vertical:before {
-  content: "\e119";
-}
-#ManageFiles .glyphicon-resize-horizontal:before {
-  content: "\e120";
-}
-#ManageFiles .glyphicon-hdd:before {
-  content: "\e121";
-}
-#ManageFiles .glyphicon-bullhorn:before {
-  content: "\e122";
-}
-#ManageFiles .glyphicon-bell:before {
-  content: "\e123";
-}
-#ManageFiles .glyphicon-certificate:before {
-  content: "\e124";
-}
-#ManageFiles .glyphicon-thumbs-up:before {
-  content: "\e125";
-}
-#ManageFiles .glyphicon-thumbs-down:before {
-  content: "\e126";
-}
-#ManageFiles .glyphicon-hand-right:before {
-  content: "\e127";
-}
-#ManageFiles .glyphicon-hand-left:before {
-  content: "\e128";
-}
-#ManageFiles .glyphicon-hand-up:before {
-  content: "\e129";
-}
-#ManageFiles .glyphicon-hand-down:before {
-  content: "\e130";
-}
-#ManageFiles .glyphicon-circle-arrow-right:before {
-  content: "\e131";
-}
-#ManageFiles .glyphicon-circle-arrow-left:before {
-  content: "\e132";
-}
-#ManageFiles .glyphicon-circle-arrow-up:before {
-  content: "\e133";
-}
-#ManageFiles .glyphicon-circle-arrow-down:before {
-  content: "\e134";
-}
-#ManageFiles .glyphicon-globe:before {
-  content: "\e135";
-}
-#ManageFiles .glyphicon-wrench:before {
-  content: "\e136";
-}
-#ManageFiles .glyphicon-tasks:before {
-  content: "\e137";
-}
-#ManageFiles .glyphicon-filter:before {
-  content: "\e138";
-}
-#ManageFiles .glyphicon-briefcase:before {
-  content: "\e139";
-}
-#ManageFiles .glyphicon-fullscreen:before {
-  content: "\e140";
-}
-#ManageFiles .glyphicon-dashboard:before {
-  content: "\e141";
-}
-#ManageFiles .glyphicon-paperclip:before {
-  content: "\e142";
-}
-#ManageFiles .glyphicon-heart-empty:before {
-  content: "\e143";
-}
-#ManageFiles .glyphicon-link:before {
-  content: "\e144";
-}
-#ManageFiles .glyphicon-phone:before {
-  content: "\e145";
-}
-#ManageFiles .glyphicon-pushpin:before {
-  content: "\e146";
-}
-#ManageFiles .glyphicon-usd:before {
-  content: "\e148";
-}
-#ManageFiles .glyphicon-gbp:before {
-  content: "\e149";
-}
-#ManageFiles .glyphicon-sort:before {
-  content: "\e150";
-}
-#ManageFiles .glyphicon-sort-by-alphabet:before {
-  content: "\e151";
-}
-#ManageFiles .glyphicon-sort-by-alphabet-alt:before {
-  content: "\e152";
-}
-#ManageFiles .glyphicon-sort-by-order:before {
-  content: "\e153";
-}
-#ManageFiles .glyphicon-sort-by-order-alt:before {
-  content: "\e154";
-}
-#ManageFiles .glyphicon-sort-by-attributes:before {
-  content: "\e155";
-}
-#ManageFiles .glyphicon-sort-by-attributes-alt:before {
-  content: "\e156";
-}
-#ManageFiles .glyphicon-unchecked:before {
-  content: "\e157";
-}
-#ManageFiles .glyphicon-expand:before {
-  content: "\e158";
-}
-#ManageFiles .glyphicon-collapse-down:before {
-  content: "\e159";
-}
-#ManageFiles .glyphicon-collapse-up:before {
-  content: "\e160";
-}
-#ManageFiles .glyphicon-log-in:before {
-  content: "\e161";
-}
-#ManageFiles .glyphicon-flash:before {
-  content: "\e162";
-}
-#ManageFiles .glyphicon-log-out:before {
-  content: "\e163";
-}
-#ManageFiles .glyphicon-new-window:before {
-  content: "\e164";
-}
-#ManageFiles .glyphicon-record:before {
-  content: "\e165";
-}
-#ManageFiles .glyphicon-save:before {
-  content: "\e166";
-}
-#ManageFiles .glyphicon-open:before {
-  content: "\e167";
-}
-#ManageFiles .glyphicon-saved:before {
-  content: "\e168";
-}
-#ManageFiles .glyphicon-import:before {
-  content: "\e169";
-}
-#ManageFiles .glyphicon-export:before {
-  content: "\e170";
-}
-#ManageFiles .glyphicon-send:before {
-  content: "\e171";
-}
-#ManageFiles .glyphicon-floppy-disk:before {
-  content: "\e172";
-}
-#ManageFiles .glyphicon-floppy-saved:before {
-  content: "\e173";
-}
-#ManageFiles .glyphicon-floppy-remove:before {
-  content: "\e174";
-}
-#ManageFiles .glyphicon-floppy-save:before {
-  content: "\e175";
-}
-#ManageFiles .glyphicon-floppy-open:before {
-  content: "\e176";
-}
-#ManageFiles .glyphicon-credit-card:before {
-  content: "\e177";
-}
-#ManageFiles .glyphicon-transfer:before {
-  content: "\e178";
-}
-#ManageFiles .glyphicon-cutlery:before {
-  content: "\e179";
-}
-#ManageFiles .glyphicon-header:before {
-  content: "\e180";
-}
-#ManageFiles .glyphicon-compressed:before {
-  content: "\e181";
-}
-#ManageFiles .glyphicon-earphone:before {
-  content: "\e182";
-}
-#ManageFiles .glyphicon-phone-alt:before {
-  content: "\e183";
-}
-#ManageFiles .glyphicon-tower:before {
-  content: "\e184";
-}
-#ManageFiles .glyphicon-stats:before {
-  content: "\e185";
-}
-#ManageFiles .glyphicon-sd-video:before {
-  content: "\e186";
-}
-#ManageFiles .glyphicon-hd-video:before {
-  content: "\e187";
-}
-#ManageFiles .glyphicon-subtitles:before {
-  content: "\e188";
-}
-#ManageFiles .glyphicon-sound-stereo:before {
-  content: "\e189";
-}
-#ManageFiles .glyphicon-sound-dolby:before {
-  content: "\e190";
-}
-#ManageFiles .glyphicon-sound-5-1:before {
-  content: "\e191";
-}
-#ManageFiles .glyphicon-sound-6-1:before {
-  content: "\e192";
-}
-#ManageFiles .glyphicon-sound-7-1:before {
-  content: "\e193";
-}
-#ManageFiles .glyphicon-copyright-mark:before {
-  content: "\e194";
-}
-#ManageFiles .glyphicon-registration-mark:before {
-  content: "\e195";
-}
-#ManageFiles .glyphicon-cloud-download:before {
-  content: "\e197";
-}
-#ManageFiles .glyphicon-cloud-upload:before {
-  content: "\e198";
-}
-#ManageFiles .glyphicon-tree-conifer:before {
-  content: "\e199";
-}
-#ManageFiles .glyphicon-tree-deciduous:before {
-  content: "\e200";
-}
-#ManageFiles .glyphicon-cd:before {
-  content: "\e201";
-}
-#ManageFiles .glyphicon-save-file:before {
-  content: "\e202";
-}
-#ManageFiles .glyphicon-open-file:before {
-  content: "\e203";
-}
-#ManageFiles .glyphicon-level-up:before {
-  content: "\e204";
-}
-#ManageFiles .glyphicon-copy:before {
-  content: "\e205";
-}
-#ManageFiles .glyphicon-paste:before {
-  content: "\e206";
-}
-#ManageFiles .glyphicon-alert:before {
-  content: "\e209";
-}
-#ManageFiles .glyphicon-equalizer:before {
-  content: "\e210";
-}
-#ManageFiles .glyphicon-king:before {
-  content: "\e211";
-}
-#ManageFiles .glyphicon-queen:before {
-  content: "\e212";
-}
-#ManageFiles .glyphicon-pawn:before {
-  content: "\e213";
-}
-#ManageFiles .glyphicon-bishop:before {
-  content: "\e214";
-}
-#ManageFiles .glyphicon-knight:before {
-  content: "\e215";
-}
-#ManageFiles .glyphicon-baby-formula:before {
-  content: "\e216";
-}
-#ManageFiles .glyphicon-tent:before {
-  content: "\26fa";
-}
-#ManageFiles .glyphicon-blackboard:before {
-  content: "\e218";
-}
-#ManageFiles .glyphicon-bed:before {
-  content: "\e219";
-}
-#ManageFiles .glyphicon-apple:before {
-  content: "\f8ff";
-}
-#ManageFiles .glyphicon-erase:before {
-  content: "\e221";
-}
-#ManageFiles .glyphicon-hourglass:before {
-  content: "\231b";
-}
-#ManageFiles .glyphicon-lamp:before {
-  content: "\e223";
-}
-#ManageFiles .glyphicon-duplicate:before {
-  content: "\e224";
-}
-#ManageFiles .glyphicon-piggy-bank:before {
-  content: "\e225";
-}
-#ManageFiles .glyphicon-scissors:before {
-  content: "\e226";
-}
-#ManageFiles .glyphicon-bitcoin:before {
-  content: "\e227";
-}
-#ManageFiles .glyphicon-btc:before {
-  content: "\e227";
-}
-#ManageFiles .glyphicon-xbt:before {
-  content: "\e227";
-}
-#ManageFiles .glyphicon-yen:before {
-  content: "\00a5";
-}
-#ManageFiles .glyphicon-jpy:before {
-  content: "\00a5";
-}
-#ManageFiles .glyphicon-ruble:before {
-  content: "\20bd";
-}
-#ManageFiles .glyphicon-rub:before {
-  content: "\20bd";
-}
-#ManageFiles .glyphicon-scale:before {
-  content: "\e230";
-}
-#ManageFiles .glyphicon-ice-lolly:before {
-  content: "\e231";
-}
-#ManageFiles .glyphicon-ice-lolly-tasted:before {
-  content: "\e232";
-}
-#ManageFiles .glyphicon-education:before {
-  content: "\e233";
-}
-#ManageFiles .glyphicon-option-horizontal:before {
-  content: "\e234";
-}
-#ManageFiles .glyphicon-option-vertical:before {
-  content: "\e235";
-}
-#ManageFiles .glyphicon-menu-hamburger:before {
-  content: "\e236";
-}
-#ManageFiles .glyphicon-modal-window:before {
-  content: "\e237";
-}
-#ManageFiles .glyphicon-oil:before {
-  content: "\e238";
-}
-#ManageFiles .glyphicon-grain:before {
-  content: "\e239";
-}
-#ManageFiles .glyphicon-sunglasses:before {
-  content: "\e240";
-}
-#ManageFiles .glyphicon-text-size:before {
-  content: "\e241";
-}
-#ManageFiles .glyphicon-text-color:before {
-  content: "\e242";
-}
-#ManageFiles .glyphicon-text-background:before {
-  content: "\e243";
-}
-#ManageFiles .glyphicon-object-align-top:before {
-  content: "\e244";
-}
-#ManageFiles .glyphicon-object-align-bottom:before {
-  content: "\e245";
-}
-#ManageFiles .glyphicon-object-align-horizontal:before {
-  content: "\e246";
-}
-#ManageFiles .glyphicon-object-align-left:before {
-  content: "\e247";
-}
-#ManageFiles .glyphicon-object-align-vertical:before {
-  content: "\e248";
-}
-#ManageFiles .glyphicon-object-align-right:before {
-  content: "\e249";
-}
-#ManageFiles .glyphicon-triangle-right:before {
-  content: "\e250";
-}
-#ManageFiles .glyphicon-triangle-left:before {
-  content: "\e251";
-}
-#ManageFiles .glyphicon-triangle-bottom:before {
-  content: "\e252";
-}
-#ManageFiles .glyphicon-triangle-top:before {
-  content: "\e253";
-}
-#ManageFiles .glyphicon-console:before {
-  content: "\e254";
-}
-#ManageFiles .glyphicon-superscript:before {
-  content: "\e255";
-}
-#ManageFiles .glyphicon-subscript:before {
-  content: "\e256";
-}
-#ManageFiles .glyphicon-menu-left:before {
-  content: "\e257";
-}
-#ManageFiles .glyphicon-menu-right:before {
-  content: "\e258";
-}
-#ManageFiles .glyphicon-menu-down:before {
-  content: "\e259";
-}
-#ManageFiles .glyphicon-menu-up:before {
-  content: "\e260";
-}
-#ManageFiles .glyphicon-chevron-before::before {
-  content: "\e257\e257";
-}
-#ManageFiles .glyphicon-chevron-after::before {
-  content: "\e258\e258";
+#ManageFiles .icon-food-last:before {
+  content: "\e903";
 }
 #ManageFiles .btn:not(:disabled) {
   cursor: pointer;
+}
+#ManageFiles [class^="icon-food-"]::before,
+#ManageFiles [class*=" icon-food-"]::before {
+  padding-top: 2px;
+  margin-bottom: 1px;
+  display: block;
 }
 #ManageFiles > .alert:empty {
   display: none;
@@ -1561,13 +816,27 @@ div.dt-container div.dt-layout-row {
 .dt-paging-button * {
   font-weight: 700;
 }
+.dt-buttons .btn,
+.dt-buttons .btn:last-child,
+.dt-buttons .btn:not(:first-child) {
+  margin-left: 10px;
+}
 .developer_food {
   background-color: #fafafa;
   color: #444;
   position: sticky;
   bottom: 0;
   z-index: 200;
-  margin-top: 1em;
+  margin-top: 0;
+  margin-bottom: 0;
+  border-top: 1px solid #c4c4c4;
+  margin-left: -20px;
+  margin-right: -20px;
+  padding: 10px 30px 0px;
+  font-family: 'JetBrains Mono', monospace, 'Consolas', sans-serif;
+  font-style: italic;
+  -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
 }
 .darkness .developer_food {
   background-color: #282c34;
