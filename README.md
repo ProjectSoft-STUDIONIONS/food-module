@@ -12,4 +12,4 @@
 
 ## Скриншот
 
-![SCREENSHOT](../src/screen.png)
+![SCREENSHOT](../../src/screen.png?raw=true)
