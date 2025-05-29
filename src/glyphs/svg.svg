@@ -1,0 +1,52 @@
+<svg version="1.1" id="Layer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 453.5 453.5" style="enable-background:new 0 0 453.5 453.5;" xml:space="preserve">
+	<style type="text/css">
+		.st0 {
+			stroke:#000000;
+			stroke-width:2;
+			stroke-miterlimit:10;
+		}
+		.svg_black {
+			fill: #000000;
+		}
+		.svg_white {
+			fill: #ffffff;
+		}
+		#svg-circle-round {
+			transform-origin: center center;
+			animation-duration: 2s;
+			animation-name: svgCircleRotate;
+			animation-iteration-count: infinite;
+			animation-timing-function: linear;
+		}
+		@keyframes svgCircleRotate {
+			0% {
+				transform: rotate(0deg);
+			}
+			25% {
+				transform: rotate(90deg);
+			}
+			50% {
+				transform: rotate(180deg);
+			}
+			75% {
+				transform: rotate(270deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
+	<g id="svg-circle-round">
+		<path class="st0 svg_white" d="M225.5,453.5c-60.3-0.3-116.9-24.1-159.5-66.8C23.4,343.9,0,287.1,0,226.8c0-60.6,23.6-117.5,66.4-160.4
+			C109.2,23.6,166.2,0,226.8,0c8.3,0,16.8,0.5,25.2,1.4c54.1,9.9,93.3,56.9,93.3,112c0,62.7-51,113.8-113.8,113.8
+			c-62.2,0-112.8,50.6-112.8,112.8c0,60,46.9,109.4,106.7,112.6L225.5,453.5z"/>
+		<path class="svg_black" d="M231.6,149.3c-19.8,0-35.9-16.1-35.9-35.9c0-19.8,16.1-35.9,35.9-35.9c19.8,0,35.9,16.1,35.9,35.9
+			C267.5,133.2,251.4,149.3,231.6,149.3z"/>
+		<path class="st0 svg_black" d="M226.8,453.5c-0.2,0-0.5,0-0.7,0l-0.6,0c-60.4-3.2-107.7-53.1-107.7-113.6c0-62.8,51-113.8,113.8-113.8
+			c62.2,0,112.8-50.6,112.8-112.8c0-54.5-38.9-101.2-92.5-111l0.1-1C307.1,7.5,358,33.7,395.3,75c37.6,41.7,58.3,95.6,58.3,151.7
+			c0,60.6-23.6,117.5-66.4,160.4C344.3,430,287.3,453.5,226.8,453.5z"/>
+		<path class="svg_white" d="M231.6,375.8c-19.8,0-35.9-16.1-35.9-35.9c0-19.8,16.1-35.9,35.9-35.9c19.8,0,35.9,16.1,35.9,35.9
+			C267.5,359.7,251.4,375.8,231.6,375.8z"/>
+	</g>
+</svg>
