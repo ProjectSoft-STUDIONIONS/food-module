@@ -21,8 +21,6 @@ define('SCHOOL_FOLDERS_BASE_PATH', $base_path);
 
 // Разрешённые директории
 $access_path = preg_split('/[\s,;]+/', $params["folders"]);
-//$access_path = explode(',', $params["folders"]);
-
 
 global $_lang, $content, $_style, $modx_lang_attribute, $lastInstallTime, $manager_language, $startpath, $exts, $msg;
 
@@ -170,7 +168,6 @@ function renameFile($new_file="", $file=""){
 	if(is_file($oFile)):
 		// Продолжаем
 		if(!is_file($nFile)):
-			// Продолжаем
 			// Переименовываем
 			if(@rename($oFile, $nFile)):
 				// Удачно
@@ -316,16 +313,16 @@ $startpath = MODX_BASE_PATH;
 // Получаем рабочую директорию
 if (isset($_REQUEST['path']) && !empty($_REQUEST['path'])) {
 	$_REQUEST['path'] = str_replace('..', '', $_REQUEST['path']);
-	$startpath = is_dir($_REQUEST['path']) ? $_REQUEST['path'] : removeLastPath($_REQUEST['path']);
+	$startpath = is_dir(MODX_BASE_PATH . $_REQUEST['path']) ? MODX_BASE_PATH . $_REQUEST['path'] : removeLastPath(MODX_BASE_PATH . $_REQUEST['path']);
 }
 // Проверяем, относится ли полученная директория к разрешённым
 if(!checkedPath($startpath, $access_path)):
-	$modx->sendRedirect('index.php?a=112&id=' . $module['id'] . '&mode=dir&path=' . MODX_BASE_PATH);
+	$modx->sendRedirect('index.php?a=112&id=' . $module['id']);
+	exit();
 endif;
 
 // Формируем путь к директории
 $startpath = $startpath == '/' ? '/' : rtrim($startpath, '/');
-$startpath = checkedPath($startpath, $access_path) ? $startpath : rtrim(MODX_BASE_PATH, '/');
 
 // Проверяем возможность чтения директории
 if (!is_readable($startpath)) {
@@ -365,9 +362,8 @@ ob_start();
 
 // Чтение директории
 // Выводим директории только в корне
-$file_path = ltrim($startpath, MODX_BASE_PATH);
+$file_path = $path ? "/" . $path : "/";
 $dir = new DirectoryIterator($startpath);
-
 foreach ($dir as $fileinfo):
 	if (!$fileinfo->isDot()):
 		if($fileinfo->isDir()):
@@ -383,44 +379,42 @@ foreach ($dir as $fileinfo):
 				if(in_array($ext, $exts)):
 					// Проверить дату (год) в имени файла
 					$name = $fileinfo->getFilename();
-					/**
-					 * Пока удалим. Нужно разбираться
-					 */
-					//$re = '/^(?:[\w]+)?(\d{4})/';
-					//preg_match($re, $name, $matches, PREG_UNMATCHED_AS_NULL);
+					$re = '/^(?:[\w]+)?(\d{4})/';
+					preg_match($re, $name, $matches, PREG_UNMATCHED_AS_NULL);
 					// Если есть 4 цифры в имени файла
-					//if($matches):
+					if($matches):
 						// Год сейчас
-					//	$year = intval(date("Y", time()));
+						$year = intval(date("Y", time()));
 						// Год в имени файла
-					//	$file_year = intval($matches[1]);
+						$file_year = intval($matches[1]);
 						// Если разница лет больше/равно 5 лет.
-					//	if($year - $file_year > 4):
+						if($year - $file_year > 4):
 							// Удаляем файл
-					//		$file_absolute = path_join($startpath, $name);
-					//		@unlink($file_absolute);
-					//	else:
+							$file_absolute = path_join($startpath, $name);
+							@unlink($file_absolute);
+						else:
 							// Добавляем файл в отображение
-					//		$files[] = $name;
-					//	endif;
-					//else:
+							$files[] = $name;
+						endif;
+					else:
 						// Добавляем файл в отображение
 						$files[] = $name;
-					//endif;
+					endif;
 				endif;
 			endif;
 		endif;
 	endif;
 endforeach;
-
+print_r($files, true);
 // Сортировка директорий
 sort($directorys);
 // Сортировка файлов
 rsort($files);
+
 // Имя директории
 $title_path = pathinfo($startpath, PATHINFO_BASENAME);
 // Заголовок
-$title = checkedPath($startpath, $access_path) ? 'Директория: ' . $title_path : 'Директории';
+$title = checkedPath($startpath, $access_path) ? 'Директория: <code>' . $title_path . '</code>' : 'Директории';
 
 // Подключение файлов
 include_once MODX_MANAGER_PATH . 'includes/header.inc.php';
