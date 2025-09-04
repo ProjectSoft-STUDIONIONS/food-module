@@ -1,4 +1,3 @@
-
 (function (factory) {
 	var registeredInModuleLoader;
 	if (typeof define === 'function' && define.amd) {

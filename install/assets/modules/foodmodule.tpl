@@ -1,27 +1,33 @@
 /**
  * FoodModuleMenu
  *
- * Модуль для звгрузки файлов ежедневного питания школы.
+ * Модуль для загрузки файлов ежедневного питания школы.
  *
  * @category     module
- * @version      1.1.0
+ * @version      1.2.0
  * @internal     @properties &folders=Директории для загрузки;text;food,food-individual
  * @internal     @modx_category Manager and Admin
+ * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
+ * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
+ * @reportissues https://github.com/ProjectSoft-STUDIONIONS/food-module/issues
  * @author       Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
- * @lastupdate   2025-05-28
+ * @lastupdate   2025-09-04
  */
 
 /**
  * FoodModuleMenu
  *
- * Модуль для звгрузки файлов ежедневного питания школы.
+ * Модуль для загрузки файлов ежедневного питания школы.
  *
  * @category     module
- * @version      1.1.0
+ * @version      1.2.0
  * @internal     @properties &folders=Директории для загрузки;text;food,food-individual
  * @internal     @modx_category Manager and Admin
+ * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
+ * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
+ * @reportissues https://github.com/ProjectSoft-STUDIONIONS/food-module/issues
  * @author       Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
- * @lastupdate   2025-05-28
+ * @lastupdate   2025-09-04
  */
 
 require_once MODX_BASE_PATH . 'assets/modules/food-module/module.food-module.php';

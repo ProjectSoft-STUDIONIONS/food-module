@@ -1,7 +1,7 @@
 <?php
 if (!defined('MODX_BASE_PATH')) {
 	http_response_code(403);
-	die('Go fuck yourself'); 
+	exit();
 }
 ini_set('default_charset','UTF-8');
 if (!$modx->hasPermission('exec_module')) {
@@ -405,7 +405,7 @@ foreach ($dir as $fileinfo):
 		endif;
 	endif;
 endforeach;
-print_r($files, true);
+
 // Сортировка директорий
 sort($directorys);
 // Сортировка файлов

@@ -1,7 +1,7 @@
 <?php
 if (!defined('MODX_BASE_PATH')) {
 	http_response_code(403);
-	die('Go fuck yourself'); 
+	exit();
 }
 
 global $manager_language;

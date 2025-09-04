@@ -1,11 +1,19 @@
 <?php
 if( ! defined('IN_MANAGER_MODE') || IN_MANAGER_MODE !== true) {
-	die("<b>INCLUDE_ORDERING_ERROR</b><br /><br />Please use the EVO Content Manager instead of accessing this file directly.");
+	http_response_code(403);
+	exit();
 }
 
 $modPath = str_replace(MODX_BASE_PATH, '', $base_path);
 $upload_maxsize = $modx->config['upload_maxsize'];
 ?>
+<?php
+// Подключаем main.css
+$css = MODX_BASE_PATH . $modPath . 'css/main.min.css';
+$lcss_time = filemtime($css);
+?>
+<link type="text/css" rel="stylesheet" href="/<?= $modPath;?>css/main.min.css?<?= $lcss_time;?>">
+
 <style type="text/css">
 	.evo-popup-close.close {
 		cursor: pointer;
@@ -19,7 +27,7 @@ $upload_maxsize = $modx->config['upload_maxsize'];
 	const FOOD_MOD_PATH = "/<?= $modPath;?>";
 </script>
 <div class="container">
-	<h1 class="text-left"><i class="<?= $module["icon"];?>"></i><?= $_lang['sch_title']; ?></h1>
+	<h1 class="text-left"><i class="fa fa-folder-open"></i><?= $_lang['sch_title']; ?></h1>
 	<h2 class="text-left" style="font-weight: 700;"><?= $title;?></h2>
 	<div id="actions" style="display: none;"><div class="btn-group"></div></div>
 	<div id="ManageFiles">
@@ -72,6 +80,7 @@ $upload_maxsize = $modx->config['upload_maxsize'];
 						<th style="width: 1%;" class="text-nowrap"><?= $_lang['sch_permission'] ?></th>
 						<th style="width: 1%;" class="text-nowrap"><?= $_lang['files_modified']; ?></th>
 <?php
+					// Для файлов
 					if(checkedPath($startpath, $access_path)):
 ?>
 						<th style="width: 1%;" class="text-nowrap"><?= $_lang['files_filesize']; ?></th>
@@ -83,6 +92,7 @@ $upload_maxsize = $modx->config['upload_maxsize'];
 				</thead>
 				<tbody>
 <?php
+if(!checkedPath($startpath, $access_path)):
 foreach($directorys as $dir):
 	$f = MODX_BASE_PATH . $dir;
     $size = dir_size($f);
@@ -98,7 +108,8 @@ foreach($directorys as $dir):
 					</tr>
 <?php
 endforeach;
-$stat = 0;
+endif;
+if(checkedPath($startpath, $access_path)):
 if($files):
 	foreach($files as $file):
 		$tmp_file = $startpath . "/" . $file;
@@ -130,6 +141,7 @@ if($files):
 		endif;
 	endforeach;
 endif;
+endif;
 ?>
 				</tbody>
 			</table>
@@ -157,7 +169,7 @@ if(is_file(MODX_BASE_PATH . 'viewer/fancybox.min.js')):
 <?php
 endif;
 
-// Подключаем DataTables
+// Подключаем DataTables только внутри директории
 if(checkedPath($startpath, $access_path)):
 	$jsDT = MODX_BASE_PATH . $modPath . 'js/app.min.js';
 	$jsDT_time = filemtime($jsDT);
@@ -171,9 +183,3 @@ $js = MODX_BASE_PATH . $modPath . 'js/main.min.js';
 $ljs_time = filemtime($js);
 ?>
 <script src="/<?= $modPath;?>js/main.min.js?<?= $ljs_time;?>"></script>
-<?php
-// Подключаем main.css
-$css = MODX_BASE_PATH . $modPath . 'css/main.min.css';
-$lcss_time = filemtime($css);
-?>
-<link type="text/css" rel="stylesheet" href="/<?= $modPath;?>css/main.min.css?<?= $lcss_time;?>">
