@@ -336,6 +336,16 @@
 		// Изменим layout Классы
 		DataTable.ext.classes.layout.start = 'dt-layout-start col-lg-6';
 		DataTable.ext.classes.layout.end = 'dt-layout-end col-lg-6';
+		// Drag and Drop Block
+		DataTable.ext.buttons.dragdrop = {
+			className: 'dt-dragdrop-block',
+			text: '',
+			attr: {
+				style: 'width: 100%'
+			},
+			tag: "div",
+			action: function(e, dt, button, config, cb) { return !1; }
+		};
 		// Если есть dir, значит список файлов
 		if(FOOD_FILE_PATH) {
 			const url = `${location.origin}/${FOOD_FILE_PATH}/`;
@@ -425,12 +435,23 @@
 								messageBottom: false,
 								autoPrint: true,
 							},
+							{
+								extend: 'pageLength',
+								className: 'dt-button-page-length',
+								dropIcon: true,
+								attr: {
+									style: "width: 100%"
+								}
+							}
 						],
-						'pageLength': 'pageLength',
+						/*'pageLength': 'pageLength',*/
 						'search': 'search',
 					},
 					topEnd: {
 						buttons: [
+							{
+								extend: 'dragdrop',
+							},
 							{
 								text: '<i class="fa fa-floppy-o"></i>Выберите файлы для загрузки',
 								className: 'button-upload btn btn-success',

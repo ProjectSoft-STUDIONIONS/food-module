@@ -1318,7 +1318,16 @@ div.dt-container div.dt-layout-row.dt-layout-table {
       justify-content: flex-start;
   -ms-flex-align: start;
       align-items: flex-start;
-  gap: 0.4em;
+  gap: 1em;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.dt-layout-row:first-child .dt-layout-start .dt-dragdrop-block,
+.dt-layout-row:first-child .dt-layout-end .dt-dragdrop-block {
+  width: 100%;
+  min-height: 5.2em;
+  box-shadow: 0 0 1px #000;
+  border-radius: 0.5em;
 }
 .dt-layout-row:first-child .dt-layout-start .dt-button,
 .dt-layout-row:first-child .dt-layout-end .dt-button {
@@ -1336,6 +1345,14 @@ div.dt-container div.dt-layout-row.dt-layout-table {
   .dt-layout-row:first-child .dt-layout-end {
     margin-bottom: unset;
   }
+}
+.dt-layout-row:first-child .dt-layout-start .buttons-page-length {
+  width: 100%;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+}
+.dt-layout-row:first-child .dt-layout-start .buttons-page-length .dt-button-down-arrow ~ .dt-button-down-arrow {
+  display: none;
 }
 .dt-layout-row:first-child .dt-layout-end .btn-group.dt-buttons {
   display: -ms-flexbox;

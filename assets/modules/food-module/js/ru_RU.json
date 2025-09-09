@@ -125,9 +125,9 @@
 		"csv": "CSV",
 		"excel": "Excel",
 		"pageLength": {
-			"1": "Показать 1 строку",
-			"-1": "Показать все строки",
-			"_": "Показать %d строк"
+			"1": "Показать 1 строку<span class=\"dt-button-down-arrow\">▼</span>",
+			"-1": "Показать все строки<span class=\"dt-button-down-arrow\">▼</span>",
+			"_": "Показать %d строк<span class=\"dt-button-down-arrow\">▼</span>"
 		},
 		"removeState": "Удалить",
 		"renameState": "Переименовать",

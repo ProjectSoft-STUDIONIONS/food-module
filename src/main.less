@@ -213,7 +213,14 @@ div.dt {
 							.dt-buttons {
 								justify-content: flex-start;
 								align-items: flex-start;
-								gap: .4em;
+								gap: 1em;
+								flex-wrap: wrap;
+							}
+							.dt-dragdrop-block {
+								width: 100%;
+								min-height: 5.2em;
+								box-shadow: 0 0 1px #000;
+								border-radius: 0.5em;
 							}
 							.dt-button {
 								margin: unset !important;
@@ -227,6 +234,13 @@ div.dt {
 							}
 						}
 						&-start {
+							.buttons-page-length {
+								width: 100%;
+								justify-content: space-between;
+								.dt-button-down-arrow ~ .dt-button-down-arrow {
+									display: none;
+								}
+							}
 						}
 						&-end {
 							.btn-group.dt-buttons {

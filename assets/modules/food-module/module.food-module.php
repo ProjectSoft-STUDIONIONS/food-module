@@ -387,11 +387,13 @@ foreach ($dir as $fileinfo):
 						$year = intval(date("Y", time()));
 						// Год в имени файла
 						$file_year = intval($matches[1]);
-						// Если разница лет больше/равно 5 лет.
-						if($year - $file_year > 4):
+						// Если разница лет больше/равно 2 года.
+						if($year - $file_year > 2):
 							// Удаляем файл
-							$file_absolute = path_join($startpath, $name);
-							@unlink($file_absolute);
+							//$file_absolute = $fileinfo->getRealPath();
+							//$file_absolute = path_join($startpath, $name);
+							deleteFile($name);
+							//@unlink($file_absolute);
 						else:
 							// Добавляем файл в отображение
 							$files[] = $name;
