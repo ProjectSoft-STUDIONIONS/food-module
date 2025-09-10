@@ -1,11 +1,12 @@
 /**
- * Скрипт модуля FoodModuleMenu v1.2.0 для Evolution CMS
+ * Скрипт модуля FoodModuleMenu v1.3.0 для Evolution CMS
  * Модуль загрузки файлов меню ежедневного питания
  * Актуально для сайтов школ России
  * Автор: Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
  * GitHub: https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
- * Last Update: 2025-09-09 18:07:31 GMT+0400
+ * Last Update: 2025-09-10 12:01:14 GMT+0400
  */
+window.DT_table = false;
 (function (factory) {
 	var registeredInModuleLoader;
 	if (typeof define === 'function' && define.amd) {
@@ -312,6 +313,22 @@
 	}
 
 	window.uploadFiles = function(el) {
+		let alerts = $('.alert-danger, .alert-success');
+		$(alerts).animate({
+			height: 0
+		},
+		{
+			duration: 150,
+			easing: "linear",
+			complete: function(){
+				//element.style.
+				[...alerts].forEach(function(element) {
+					element.innerHTML = '<i class="icon-close">×</i>';
+					element.style.setProperty("display", "none");
+				});
+			},
+			queue: false
+		});
 		let p = $("#p_uploads"),
 			files = [...el.files],
 			out = [], str = "";
@@ -325,11 +342,17 @@
 					out.push(a.name);
 				}else{
 					p.html("");
-					alert("Нельзя загрузить данный тип файла!\n" + a.type);
+					alert("Нельзя загрузить данный тип файла!\nИмя: " + a.name + "\nТип файла: " + a.type);
 					document.upload.reset();
 					return !1;
 				}
 			}
+		}
+		let btn = document.querySelector('.button-upload');
+		if(out.length){
+			btn.innerHTML = '<i class="fa fa-upload"></i>Загрузить';
+		}else{
+			btn.innerHTML = '<i class="fa fa-floppy-o"></i>Выберите файлы для загрузки';
 		}
 		p.html(out.join("<br>"));
 		return !1;
@@ -349,10 +372,17 @@
 			className: 'dt-dragdrop-block',
 			text: '',
 			attr: {
-				style: 'width: 100%'
+				title: 'Перетащите сюда файлы *.xlsx или *.pdf для загрузки'
 			},
-			tag: "div",
-			action: function(e, dt, button, config, cb) { return !1; }
+			tag: "button",
+			action: function (e, dt, node, config) {
+					let uploader, input;
+					if( uploader = document.querySelector('[name="upload"]')){
+						if(input = uploader.querySelector('[type=file]')) {
+							input.click();
+						}
+					}
+				}
 		};
 		// Если есть dir, значит список файлов
 		if(FOOD_FILE_PATH) {
@@ -452,7 +482,6 @@
 								}
 							}
 						],
-						/*'pageLength': 'pageLength',*/
 						'search': 'search',
 					},
 					topEnd: {
@@ -465,9 +494,14 @@
 								className: 'button-upload btn btn-success',
 								action: function (e, dt, node, config) {
 									let uploader, input;
-									if( uploader = document.querySelector('#uploader')){
+									if( uploader = document.querySelector('[name="upload"]')){
 										if(input = uploader.querySelector('[type=file]')) {
-											input.click();
+											if(input.files.length){
+												work();
+												uploader.submit();
+											}else{
+												input.click();
+											}
 										}
 									}
 								}
@@ -652,22 +686,62 @@
 				}
 			});
 			table.on( 'buttons-processing', proceeingButton);
+			setTimeout(() => {
+				const dropArea = document.querySelector('.dt-dragdrop-block'),
+					inputFile = document.querySelector('input[type="file"]'),
+					preventDefaults = function(e) {
+						e.preventDefault();
+						e.stopPropagation();
+					},
+					handleDrop = function(e) {
+						inputFile.files = e.dataTransfer.files;
+						inputFile.dispatchEvent(new Event('change'));
+					},
+					highlight = function(e) {
+						dropArea.classList.add('active');
+					},
+					unhighlight = function(e) {
+						dropArea.classList.remove('active');
+					};
+				['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+					dropArea.addEventListener(eventName, preventDefaults, false)
+					document.body.addEventListener(eventName, preventDefaults, false)
+				});
+
+				['dragenter', 'dragover'].forEach(eventName => {
+					dropArea.addEventListener(eventName, highlight, false);
+				});
+
+				['dragleave', 'drop'].forEach(eventName => {
+					dropArea.addEventListener(eventName, unhighlight, false);
+				});
+
+				// Handle dropped files
+				dropArea.addEventListener('drop', handleDrop, false);
+			}, 1000);
+			window.DT_table = table;
 		}
 	}
-
-	setTimeout(function() {
-		let p = $("#ManageFiles > .alert");
-		p.animate({
+	$(document).on('click', '.alert .icon-close', function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		let item = e.target,
+			element = item.parentElement;
+		//item.innerHTML = '<i class="icon-close">×</i>';
+		//item.parentElement.setAttribute('style', "display: none;");
+		$(element).animate({
 			height: 0
 		},
 		{
-			duration: 300,
+			duration: 150,
 			easing: "linear",
 			complete: function(){
-				p.html("");
-				p.removeAttr("style");
+				//element.style.
+				element.innerHTML = '<i class="icon-close">×</i>';
+				element.style.setProperty("display", "none");
 			},
 			queue: false
 		});
-	}, 5000);
+		return !1;
+	});
 })(jQuery);

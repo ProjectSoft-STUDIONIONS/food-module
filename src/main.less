@@ -75,7 +75,7 @@ table.table.data > thead > tr > th {
 		content: "Выбранные файлы:";
 		font-weight: 700;
 		display: block;
-		color: #ff0000;
+		color: #333333;
 		text-align: left;
 		margin-bottom: .5em;
 	}
@@ -113,8 +113,31 @@ table.table.data > thead > tr > th {
 		}
 	}
 
-	> .alert:empty {
-		display: none;
+	> .alert {
+		margin-top: 1em;
+		position: relative;
+		padding: .75rem 1.25rem;
+		&:empty {
+			display: none;
+		}
+		.icon-close {
+			user-select: none;
+			cursor: pointer;
+			position: absolute;
+			top: 0.25em;
+			right: 0.1em;
+			line-height: 0.7;
+			font-weight: 700;
+			font-size: 1.7em;
+			width: 0.7em;
+			height: 0.7em;
+			&:hover{
+				color: #FF0000;
+			}
+		}
+		&.alert-icon-close {
+			padding-right: 2em;
+		}
 	}
 
 	table.table {
@@ -186,6 +209,39 @@ div.dt {
 	}
 }
 .dt {
+	&-dragdrop-block {
+		width: 100%;
+		min-height: 5.2em;
+		box-shadow: 0 0 1px #000;
+		border-radius: 0.5em;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		&.active {
+			outline-color: #419ad6;
+			outline-width: 2px;
+			outline-style: solid;
+		}
+		&::before {
+			content: "Перетащите сюда файлы (*.xlsx или *.pdf)";
+			font-size: 2.3vi;
+			background-image: linear-gradient(
+				#cedbe9 0%,
+				#aac5de 17%,
+				#6199c7 50%,
+				#3a84c4 51%,
+				#419ad6 59%,
+				#26558b 100%
+			);
+			color: transparent;
+			background-clip: text;
+			@media (max-width: 991px){
+				font-size: 4vi;
+			};
+		}
+	}
 	&-container {
 		margin-top: 1em;
 	}
@@ -215,12 +271,6 @@ div.dt {
 								align-items: flex-start;
 								gap: 1em;
 								flex-wrap: wrap;
-							}
-							.dt-dragdrop-block {
-								width: 100%;
-								min-height: 5.2em;
-								box-shadow: 0 0 1px #000;
-								border-radius: 0.5em;
 							}
 							.dt-button {
 								margin: unset !important;

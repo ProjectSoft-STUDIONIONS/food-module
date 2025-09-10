@@ -1162,7 +1162,7 @@ table.table.data > thead > tr > th {
   content: "Выбранные файлы:";
   font-weight: 700;
   display: block;
-  color: #ff0000;
+  color: #333333;
   text-align: left;
   margin-bottom: 0.5em;
 }
@@ -1221,8 +1221,33 @@ table.table.data > thead > tr > th {
   margin-bottom: 1px;
   display: block;
 }
+#ManageFiles > .alert {
+  margin-top: 1em;
+  position: relative;
+  padding: 0.75rem 1.25rem;
+}
 #ManageFiles > .alert:empty {
   display: none;
+}
+#ManageFiles > .alert .icon-close {
+  -webkit-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  position: absolute;
+  top: 0.25em;
+  right: 0.1em;
+  line-height: 0.7;
+  font-weight: 700;
+  font-size: 1.7em;
+  width: 0.7em;
+  height: 0.7em;
+}
+#ManageFiles > .alert .icon-close:hover {
+  color: #FF0000;
+}
+#ManageFiles > .alert.alert-icon-close {
+  padding-right: 2em;
 }
 #ManageFiles table.table td {
   font-family: 'JetBrains Mono', monospace, 'Consolas', sans-serif;
@@ -1281,6 +1306,39 @@ div.dt-container div.dt-layout-row.dt-layout-table {
   margin-top: 0.9em !important;
   margin-bottom: 0.9em !important;
 }
+.dt-dragdrop-block {
+  width: 100%;
+  min-height: 5.2em;
+  box-shadow: 0 0 1px #000;
+  border-radius: 0.5em;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+.dt-dragdrop-block.active {
+  outline-color: #419ad6;
+  outline-width: 2px;
+  outline-style: solid;
+}
+.dt-dragdrop-block::before {
+  content: "Перетащите сюда файлы (*.xlsx или *.pdf)";
+  font-size: 2.3vi;
+  background-image: linear-gradient(#cedbe9 0%, #aac5de 17%, #6199c7 50%, #3a84c4 51%, #419ad6 59%, #26558b 100%);
+  color: transparent;
+  background-clip: text;
+}
+@media (max-width: 991px) {
+  .dt-dragdrop-block::before {
+    font-size: 4vi;
+  }
+}
 .dt-container {
   margin-top: 1em;
 }
@@ -1321,13 +1379,6 @@ div.dt-container div.dt-layout-row.dt-layout-table {
   gap: 1em;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-}
-.dt-layout-row:first-child .dt-layout-start .dt-dragdrop-block,
-.dt-layout-row:first-child .dt-layout-end .dt-dragdrop-block {
-  width: 100%;
-  min-height: 5.2em;
-  box-shadow: 0 0 1px #000;
-  border-radius: 0.5em;
 }
 .dt-layout-row:first-child .dt-layout-start .dt-button,
 .dt-layout-row:first-child .dt-layout-end .dt-button {

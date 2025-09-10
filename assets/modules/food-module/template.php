@@ -40,23 +40,22 @@ $lcss_time = filemtime($css);
 			<span class="link-dir"><a href="?a=112&id=<?= $module["id"];?>&mode=dir&path=<?= $title_path; ?>"><?= $title_path; ?></a></span>
 <?php
 	endif;
+		$style_error = $all['error'] ? '' : ' style="display: none;"';
+		$style_success = $all['success'] ?  '' : ' style="display: none;"';
 ?>
 		</div>
-		<div class="alert alert-danger" role="alert"><?= $all['error'];?></div>
-		<div class="alert alert-success" role="alert"><?= $all['success'];?></div>
+		<div class="alert alert-danger alert-icon-close" role="alert"<?= $style_error;?>><?= $all['error'];?><i class="icon-close">×</i></div>
+		<div class="alert alert-success alert-icon-close" role="alert"<?= $style_success;?>><?= $all['success'];?><i class="icon-close">×</i></div>
 <?php
 	// Форма загрузки
 	if (((@ini_get("file_uploads") == true) || get_cfg_var("file_uploads") == 1) && is_writable($startpath) && checkedPath($startpath, $access_path)):
 ?>
+		<p id="p_uploads" class="alert alert-info"></p>
 		<form class="text-right" name="upload" method="post" action="?a=112&id=<?= $module['id']; ?>&mode=dir&path=<?= $title_path; ?>" enctype="multipart/form-data" style="display: none;">
 			<input type="hidden" name="MAX_FILE_SIZE" value="<?= isset($upload_maxsize) ? $upload_maxsize : 3145728 ?>">
 			<input type="hidden" name="mode" value="upload">
-			<div id="uploader" class="text-right">
-				<label class="btn btn-secondary text-uppercase" style="display: none;">
-					<input type="file" name="userfiles[]" onchange="uploadFiles(this);" multiple accept=".xlsx,.pdf">
-				</label>
-				<p id="p_uploads" class="alert alert-info"></p>
-				<a class="btn btn-success text-uppercase" href="javascript:;" onclick="document.upload.submit()"><i class="<?= $_style['files_upload'];?>"></i> <?= $_lang['files_uploadfile']; ?></a>
+			<div id="uploader" class="text-right" style="display: none !important;">
+				<input type="file" name="userfiles[]" onchange="uploadFiles(this);" multiple accept=".xlsx,.pdf">
 			</div>
 		</form>
 <?php
