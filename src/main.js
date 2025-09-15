@@ -322,6 +322,7 @@ window.DT_table = false;
 			queue: false
 		});
 		let p = $("#p_uploads"),
+			dragdrop = document.querySelector('.dt-dragdrop-block'),
 			files = [...el.files],
 			out = [], str = "";
 		for (let a of files){
@@ -334,6 +335,7 @@ window.DT_table = false;
 					out.push(a.name);
 				}else{
 					p.html("");
+					dragdrop && dragdrop.removeAttribute('data-title-after');
 					alert("Нельзя загрузить данный тип файла!\nИмя: " + a.name + "\nТип файла: " + a.type);
 					document.upload.reset();
 					return !1;
@@ -342,9 +344,14 @@ window.DT_table = false;
 		}
 		let btn = document.querySelector('.button-upload');
 		if(out.length){
+			let prefix = `Выбрано:`,
+				sufix = out.length == 1 ? `файл` : (out.length < 5 ? `файла` : `файлов`),
+				drops = `${prefix} ${out.length} ${sufix}`;
 			btn.innerHTML = '<i class="fa fa-upload"></i>Загрузить';
+			dragdrop && dragdrop.setAttribute('data-title-after', drops);
 		}else{
 			btn.innerHTML = '<i class="fa fa-floppy-o"></i>Выберите файлы для загрузки';
+			dragdrop && dragdrop.removeAttribute('data-title-after');
 		}
 		p.html(out.join("<br>"));
 		return !1;
@@ -353,9 +360,9 @@ window.DT_table = false;
 		DataTable.Buttons.defaults.dom.button.liner.tag = '';
 		DataTable.Buttons.defaults.dom.container.className = DataTable.Buttons.defaults.dom.container.className + ' btn-group';
 		// Изменим PDF Классы
-		DataTable.ext.buttons.pdfHtml5.className = DataTable.ext.buttons.pdfHtml5.className + ' btn btn-secondary';
+		DataTable.ext.buttons.pdfHtml5.className = DataTable.ext.buttons.pdfHtml5.className + '';
 		// Изменим Excel Классы
-		DataTable.ext.buttons.excelHtml5.className = DataTable.ext.buttons.excelHtml5.className + ' btn btn-secondary';
+		DataTable.ext.buttons.excelHtml5.className = DataTable.ext.buttons.excelHtml5.className + '';
 		// Изменим layout Классы
 		DataTable.ext.classes.layout.start = 'dt-layout-start col-lg-6';
 		DataTable.ext.classes.layout.end = 'dt-layout-end col-lg-6';
@@ -364,7 +371,8 @@ window.DT_table = false;
 			className: 'dt-dragdrop-block',
 			text: '',
 			attr: {
-				title: 'Перетащите сюда файлы *.xlsx или *.pdf для загрузки'
+				'title': "Перетащите сюда файлы *.xlsx или *.pdf для загрузки\nИли выберите их с помощю диалога",
+				'data-title-before': "Перетащите сюда файлы (*.xlsx или *.pdf)\nИли выберите их с помощю диалога"
 			},
 			tag: "button",
 			action: function (e, dt, node, config) {
@@ -439,7 +447,7 @@ window.DT_table = false;
 						buttons: [
 							{
 								extend: 'colvis',
-								className: 'button-colvis btn btn-primary',
+								className: 'button-colvis',
 								text: `<i class="fas fa-layer-group"></i>Видимость столбцов`,
 								attr: {
 									title: `Видимость столбцов`
@@ -502,6 +510,7 @@ window.DT_table = false;
 							{
 								extend: 'excel',
 								text: '<i class="fa fa-file-excel"></i>Экспорт в XLSX',
+								className: 'btn',
 								download: '',
 								filename: `Экспорт ${FOOD_FILE_PATH} в XLSX`,
 								title: `Директория ${url}`,
@@ -589,21 +598,12 @@ window.DT_table = false;
 
 									xlsx["[Content_Types].xml"] = contentType;
 								},
-								action: function (e, dt, node, config, cb) {
-									DataTable.ext.buttons.excelHtml5.action.call(
-										this,
-										e,
-										dt,
-										node,
-										config,
-										cb
-									);
-								}
 							},
 							// Кнопка экспорта PDF
 							{
 								extend: 'pdf',
 								text: '<i class="fa fa-file-pdf"></i>Экспорт в PDF',
+								className: 'btn',
 								download: '',
 								filename: `Экспорт ${FOOD_FILE_PATH} в PDF`,
 								title: `Директория ${url}`,
@@ -659,16 +659,6 @@ window.DT_table = false;
 									// Текст контента.
 									doc.content[0].text = title.join('\r\n');
 								},
-								action: function (e, dt, node, config, cb) {
-									DataTable.ext.buttons.pdfHtml5.action.call(
-										this,
-										e,
-										dt,
-										node,
-										config,
-										cb
-									);
-								}
 							}
 						]
 					}
@@ -711,7 +701,12 @@ window.DT_table = false;
 				// Handle dropped files
 				dropArea.addEventListener('drop', handleDrop, false);
 			}, 1000);
-			window.DT_table = table;
+			/*setTimeout(() => {
+				[...document.querySelectorAll('.alert .icon-close')].forEach((el) => {
+					el.click();
+				})
+			}, 5000);*/
+			//window.DT_table = table;
 		}
 	}
 	$(document).on('click', '.alert .icon-close', function(e) {

@@ -1132,13 +1132,20 @@ table.table.data > thead > tr > th {
 .alert > *:last-child {
   margin-bottom: unset;
 }
+.alert dl,
+.alert div {
+  margin-bottom: 0.5em;
+}
+.alert dl dd {
+  margin-bottom: 0;
+}
 .fancybox-button {
   background: rgba(30, 30, 30, 0.6) !important;
   border: unset !important;
 }
 #uploader {
-  display: -ms-inline-flexbox;
-  display: inline-flex;
+  display: -ms-flexbox;
+  display: flex;
   -ms-flex-direction: column;
       flex-direction: column;
   -ms-flex-pack: end;
@@ -1157,13 +1164,14 @@ table.table.data > thead > tr > th {
   display: flex;
   -ms-flex-direction: column;
       flex-direction: column;
+  text-align: right;
 }
 #p_uploads::before {
   content: "Выбранные файлы:";
   font-weight: 700;
   display: block;
   color: #333333;
-  text-align: left;
+  text-align: right;
   margin-bottom: 0.5em;
 }
 #p_uploads:empty,
@@ -1273,8 +1281,7 @@ div.dt-container .form-inline {
 div.dt-buttons span.dt-button-spacer:empty {
   display: none;
 }
-div.dt-container div.dt-search label,
-div.dt-container div.dt-length label {
+div.dt-container div.dt-search label {
   width: 5em;
   -ms-flex-align: center;
       align-items: center;
@@ -1283,9 +1290,7 @@ div.dt-container div.dt-length label {
   padding-right: 0.3em;
 }
 div.dt-container div.dt-search input,
-div.dt-container div.dt-length input,
-div.dt-container div.dt-search select,
-div.dt-container div.dt-length select {
+div.dt-container div.dt-search select {
   -ms-flex: 1;
       flex: 1;
   margin-left: unset;
@@ -1313,34 +1318,77 @@ div.dt-container div.dt-layout-row.dt-layout-table {
   border-radius: 0.5em;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: row;
-      flex-direction: row;
+  -ms-flex-direction: column !important;
+      flex-direction: column !important;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -ms-flex-align: center;
-      align-items: center;
-  -ms-flex-pack: center;
-      justify-content: center;
+  -ms-flex-align: center !important;
+      align-items: center !important;
+  -ms-flex-line-pack: center !important;
+      align-content: center !important;
+  -ms-flex-pack: center !important;
+      justify-content: center !important;
+  gap: 0 !important;
 }
 .dt-dragdrop-block.active {
   outline-color: #419ad6;
   outline-width: 2px;
   outline-style: solid;
 }
-.dt-dragdrop-block::before {
-  content: "Перетащите сюда файлы (*.xlsx или *.pdf)";
-  font-size: 2.3vi;
-  background-image: linear-gradient(#cedbe9 0%, #aac5de 17%, #6199c7 50%, #3a84c4 51%, #419ad6 59%, #26558b 100%);
-  color: transparent;
-  background-clip: text;
+.dt-dragdrop-block::before,
+.dt-dragdrop-block::after {
+  white-space: break-spaces;
 }
-@media (max-width: 991px) {
-  .dt-dragdrop-block::before {
-    font-size: 4vi;
-  }
+.dt-dragdrop-block::before {
+  content: attr(data-title-before);
+}
+.dt-dragdrop-block::after {
+  color: #5cb85c;
+  content: attr(data-title-after);
+  line-height: 1;
+}
+.dt-button {
+  text-transform: uppercase;
+  line-height: 1;
+}
+.dt-button.processing {
+  position: relative;
+}
+.dt-button.button-colvis {
+  -ms-flex-positive: 1 !important;
+      flex-grow: 1 !important;
+}
+.dt-button-collection {
+  padding: 1em;
+}
+.dt-button-collection [role="menu"] {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  margin-left: -1em;
+  margin-right: -1em;
+}
+.dt-button-collection [role="menu"] .dt-button {
+  border: unset !important;
+  box-shadow: unset !important;
+  outline: unset !important;
+  outline-offset: 0 !important;
+  text-transform: none;
+}
+.dt-button-collection [role="menu"] .dt-button:hover {
+  background-color: #e6e6e6;
 }
 .dt-container {
   margin-top: 1em;
+}
+.dt-layout-row .dt-button-down-arrow {
+  -ms-flex: 1 0 auto;
+      flex: 1 0 auto;
+  text-align: right;
+}
+.dt-layout-row .dt-button-down-arrow ~ .dt-button-down-arrow {
+  display: none;
 }
 .dt-layout-row:first-child {
   -ms-flex-align: self-end !important;
@@ -1385,8 +1433,8 @@ div.dt-container div.dt-layout-row.dt-layout-table {
   margin: unset !important;
   -ms-flex-positive: 0;
       flex-grow: 0;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
+  display: -ms-flexbox;
+  display: flex;
   -ms-flex-direction: row;
       flex-direction: row;
   gap: 1em;
@@ -1397,13 +1445,48 @@ div.dt-container div.dt-layout-row.dt-layout-table {
     margin-bottom: unset;
   }
 }
-.dt-layout-row:first-child .dt-layout-start .buttons-page-length {
-  width: 100%;
-  -ms-flex-pack: justify;
-      justify-content: space-between;
+.dt-layout-row:first-child .dt-layout-start {
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  -ms-flex-direction: column;
+      flex-direction: column;
 }
-.dt-layout-row:first-child .dt-layout-start .buttons-page-length .dt-button-down-arrow ~ .dt-button-down-arrow {
-  display: none;
+.dt-layout-row:first-child .dt-layout-start > :not(:last-child) {
+  margin-right: inherit !important;
+  -ms-flex: 1 0 auto;
+      flex: 1 0 auto;
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.dt-layout-row:first-child .dt-layout-start .dt-search {
+  -ms-flex: 1 0 auto;
+      flex: 1 0 auto;
+  width: 100%;
+}
+.dt-layout-row:first-child .dt-layout-start .dt-search input {
+  margin-left: inherit;
+  width: 100%;
+}
+.dt-layout-row:first-child .dt-layout-start .dt-search {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  -ms-flex-align: center;
+      align-items: center;
+  gap: 10px;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  margin-bottom: 5px;
+}
+.dt-layout-row:first-child .dt-layout-start .dt-search,
+.dt-layout-row:first-child .dt-layout-start .dt-search * {
+  font-weight: 400;
 }
 .dt-layout-row:first-child .dt-layout-end .btn-group.dt-buttons {
   display: -ms-flexbox;
@@ -1415,7 +1498,6 @@ div.dt-container div.dt-layout-row.dt-layout-table {
   -ms-flex-pack: end !important;
       justify-content: end !important;
 }
-.dt-layout-start .dt-length,
 .dt-layout-start .dt-search {
   display: -ms-flexbox;
   display: flex;
@@ -1432,16 +1514,6 @@ div.dt-container div.dt-layout-row.dt-layout-table {
 .dt-buttons .btn:last-child,
 .dt-buttons .btn:not(:first-child) {
   margin-left: 10px;
-}
-.dt-button-collection {
-  padding: 1em;
-}
-.dt-button-collection [role="menu"] {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-      flex-direction: column;
-  gap: 1em;
 }
 div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
   max-width: 100%;

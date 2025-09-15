@@ -42,12 +42,22 @@ table.table.data > thead > tr > th {
 	font-weight: 700;
 }
 
-.alert > *:first-child {
-	margin-top: unset;
-}
-
-.alert > *:last-child {
-	margin-bottom: unset;
+.alert {
+	> *:first-child {
+		margin-top: unset;
+	}
+	> *:last-child {
+		margin-bottom: unset;
+	}
+	dl,
+	div {
+		margin-bottom: .5em;
+	}
+	dl {
+		dd {
+			margin-bottom: 0;
+		}
+	}
 }
 
 .fancybox-button {
@@ -56,7 +66,7 @@ table.table.data > thead > tr > th {
 }
 
 #uploader {
-	display: inline-flex;
+	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 	align-items: flex-end;
@@ -71,12 +81,13 @@ table.table.data > thead > tr > th {
 	white-space: pre;
 	display: flex;
 	flex-direction: column;
+	text-align: right;
 	&::before {
 		content: "Выбранные файлы:";
 		font-weight: 700;
 		display: block;
 		color: #333333;
-		text-align: left;
+		text-align: right;
 		margin-bottom: .5em;
 	}
 	&:empty {
@@ -172,8 +183,7 @@ div.dt-buttons span.dt-button-spacer {
 		display: none;
 	}
 }
-div.dt-container div.dt-search,
-div.dt-container div.dt-length {
+div.dt-container div.dt-search {
 	label {
 		width: 5em;
 		align-items: center;
@@ -215,31 +225,59 @@ div.dt {
 		box-shadow: 0 0 1px #000;
 		border-radius: 0.5em;
 		display: flex;
-		flex-direction: row;
+		flex-direction: column !important;
 		flex-wrap: wrap;
-		align-items: center;
-		justify-content: center;
+		align-items: center !important;
+		align-content: center !important;
+		justify-content: center !important;
+		gap: 0 !important;
 		&.active {
 			outline-color: #419ad6;
 			outline-width: 2px;
 			outline-style: solid;
 		}
+		&::before,
+		&::after {
+			white-space: break-spaces;
+		}
 		&::before {
-			content: "Перетащите сюда файлы (*.xlsx или *.pdf)";
-			font-size: 2.3vi;
-			background-image: linear-gradient(
-				#cedbe9 0%,
-				#aac5de 17%,
-				#6199c7 50%,
-				#3a84c4 51%,
-				#419ad6 59%,
-				#26558b 100%
-			);
-			color: transparent;
-			background-clip: text;
-			@media (max-width: 991px){
-				font-size: 4vi;
-			};
+			content: attr(data-title-before);
+		}
+		&::after {
+			color: #5cb85c;
+			content: attr(data-title-after);
+			line-height: 1;
+		}
+	}
+	&-button {
+		text-transform: uppercase;
+		line-height: 1;
+		&.processing {
+			position: relative;
+		}
+		&.button {
+			&-colvis {
+				flex-grow: 1 !important;
+			}
+		}
+		&-collection {
+			padding: 1em;
+			[role="menu"] {
+				display: flex;
+				flex-direction: column;
+				margin-left: -1em;
+				margin-right: -1em;
+				.dt-button {
+					border: unset !important;
+					box-shadow: unset !important;
+					outline: unset !important;
+					outline-offset: 0 !important;
+					text-transform: none;
+					&:hover {
+						background-color: #e6e6e6;
+					}
+				}
+			}
 		}
 	}
 	&-container {
@@ -247,6 +285,13 @@ div.dt {
 	}
 	&-layout {
 		&-row {
+			.dt-button-down-arrow {
+				flex: 1 0 auto;
+				text-align: right;
+				~ .dt-button-down-arrow {
+					display: none;
+				}
+			}
 			&:first-child {
 				align-items: self-end !important;
 				@media (max-width: 991px) {
@@ -275,7 +320,7 @@ div.dt {
 							.dt-button {
 								margin: unset !important;
 								flex-grow: 0;
-								display: inline-flex;
+								display: flex;
 								flex-direction: row;
 								gap: 1em;
 							}
@@ -284,11 +329,34 @@ div.dt {
 							}
 						}
 						&-start {
-							.buttons-page-length {
+							justify-content: flex-start;
+							flex-direction: column;
+							>:not(:last-child) {
+								margin-right: inherit !important;
+								flex: 1 0 auto;
 								width: 100%;
-								justify-content: space-between;
-								.dt-button-down-arrow ~ .dt-button-down-arrow {
-									display: none;
+								display: flex;
+								flex-direction: row;
+								flex-wrap: wrap;
+							}
+							.dt-search {
+								flex: 1 0 auto;
+								width: 100%;
+								input {
+									margin-left: inherit;
+									width: 100%;
+								}
+							}
+							.dt-search {
+								display: flex;
+								justify-content: flex-start;
+								align-items: center;
+								gap: 10px;
+								flex-direction: row;
+								margin-bottom: 5px;
+								&,
+								* {
+									font-weight: 400;
 								}
 							}
 						}
@@ -306,7 +374,6 @@ div.dt {
 		}
 		&-start {
 			.dt {
-				&-length,
 				&-search {
 					display: flex;
 				}
@@ -334,16 +401,6 @@ div.dt {
 		.btn {
 			&, &:last-child, &:not(:first-child) {
 				margin-left: 10px;
-			}
-		}
-	}
-	&-button {
-		&-collection {
-			padding: 1em;
-			[role="menu"] {
-				display: flex;
-				flex-direction: column;
-				gap: 1em;
 			}
 		}
 	}

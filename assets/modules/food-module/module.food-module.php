@@ -14,6 +14,24 @@ if (!is_array($modx->event->params)) {
 
 $params = $modx->event->params;
 $params["folders"] = $params["folders"] ? (string)$params["folders"] : 'food';
+$opts = [
+	'options' => [
+		'min_range' => 1,
+		'max_range' => 5,
+		'default'   => 2
+	],
+];
+
+$autodelete = filter_var($params["autodelete"], FILTER_VALIDATE_BOOLEAN);
+$autodelete_year = filter_var($params["autodelete_year"], FILTER_VALIDATE_INT, $opts);
+
+define("FOOD_AUTODELETE", $autodelete);
+define("FOOD_AUTODELETE_YEAR", $autodelete_year);
+
+// Вывод сообщений
+$all = [];
+$all['error'] = "";
+$all['success'] = "";
 
 // Директория модуля
 $base_path = str_replace('\\', '/', dirname(__FILE__)) . '/';
@@ -22,7 +40,7 @@ define('SCHOOL_FOLDERS_BASE_PATH', $base_path);
 // Разрешённые директории
 $access_path = preg_split('/[\s,;]+/', $params["folders"]);
 
-global $_lang, $content, $_style, $modx_lang_attribute, $lastInstallTime, $manager_language, $startpath, $exts, $msg;
+global $_lang, $content, $_style, $modx_lang_attribute, $lastInstallTime, $manager_language, $startpath, $exts, $msg, $all;
 
 // Языковые пакеты
 include_once SCHOOL_FOLDERS_BASE_PATH . "lang/english.inc.php";
@@ -37,10 +55,6 @@ if($manager_language!="english" && file_exists(SCHOOL_FOLDERS_BASE_PATH . "lang/
 // Массивы директорий и файлов
 $directorys = [];
 $files = [];
-// Вывод сообщений
-$all = [];
-$all['error'] = "";
-$all['success'] = "";
 
 // path join
 function path_join(...$base) {
@@ -52,7 +66,10 @@ function path_join(...$base) {
 }
 
 function string_join(...$string) {
-	$result = implode("<br>", $string);
+	$result = "";
+	try {
+		$result = "<div>" . implode("<br>", $string) . "</div>";
+	}catch(Exception $e){}
     return $result;
 }
 
@@ -118,23 +135,20 @@ function getModule() {
 }
 
 function renameFile($new_file="", $file=""){
-	global $_lang, $startpath, $exts;
+	global $_lang, $startpath, $exts, $all;
 	$evo = evolutionCMS();
 	$msg = '';
-	$all = [];
-	$all['error'] = "";
-	$all['success'] = "";
 	// Если имена одинаковые - ничего не делаем. Выходим
 	if($file == $new_file):
-		return $all;
+		return;
 	endif;
 	// Исходный файл
 	$old_pathinfo = pathinfo($file);
 	$old_pathinfo['extension'] = trim($old_pathinfo['extension']);
 	// Переименование только pdf или xlsx
 	if(!in_array($old_pathinfo['extension'], $exts)):
-		$all['error'] = string_join("<strong>Запрет на переименование файла</strong>", $file);
-		return $all;
+		$all['error'] .= string_join("<strong>" . $_lang['sch_file_error_perms_rename'] . "</strong>", $file);
+		return;
 	endif;
 	// Транслит имени файла
 	$pthinfo = pathinfo($new_file);
@@ -159,8 +173,8 @@ function renameFile($new_file="", $file=""){
 	$new_file = $f_name . "." . $old_pathinfo['extension'];
 	// Если имена одинаковые - выходим c ошибкой
 	if($file == $new_file):
-		$all['error'] = string_join("<strong>$new_file</strong>", $_lang["sch_file_duble"]);
-		return $all;
+		$all['error'] .= string_join("<strong>$new_file</strong>", $_lang["sch_file_duble"]);
+		return;
 	endif;
 	$oFile = path_join($startpath, $file);
 	$nFile = path_join($startpath, $new_file);
@@ -171,50 +185,44 @@ function renameFile($new_file="", $file=""){
 			// Переименовываем
 			if(@rename($oFile, $nFile)):
 				// Удачно
-				$all['success'] = string_join("<strong>" . $_lang['sch_file_rename'] . "</strong>", "$file => $new_file");
+				$all['success'] .= string_join("<strong>" . $_lang['sch_file_rename'] . "</strong>", "$file => $new_file");
 			else:
 				// Не удачно
-				$all['error'] = string_join("<strong>" . $_lang['sch_file_error_rename'] . "</strong>", "$file => $new_file");
+				$all['error'] .= string_join("<strong>" . $_lang['sch_file_error_rename'] . "</strong>", "$file => $new_file");
 			endif;
 		else:
 			// Уже есть данный файл
-			$all['error'] = string_join("<strong>$new_file</strong>", $_lang["sch_file_duble"]);
+			$all['error'] .= string_join("<strong>$new_file</strong>", $_lang["sch_file_duble"]);
 		endif;
 	else:
 		// Не существует
-		$all['error'] = string_join("<strong>$file</strong>", $_lang["sch_file_notfound"]);
+		$all['error'] .= string_join("<strong>$file</strong>", $_lang["sch_file_notfound"]);
 	endif;
-	return $all;
+	return;
 }
 
 // Удаление файла
-function deleteFile($file) {
-	global $_lang, $startpath, $exts;
-	$all = [];
-	$all['error'] = "";
-	$all['success'] = "";
+function deleteFile($file, $auto = false) {
+	global $_lang, $startpath, $exts, $all;
 	$old_file = path_join($startpath, $file);
 	if(is_file($old_file)):
 		if(@unlink($old_file)):
-			$all['success'] = "<strong>Файл удалён</strong><br>$file";
+			$all['success'] .= string_join("<strong>" . ($auto ? $_lang["sch_autodelete_title"] . "<br>" : "") . $_lang["sch_file_delete"] . "</strong>" , $file);
 		else:
-			$all['error'] = "<strong>Файл не удалён</strong><br>$file";
+			$all['error'] .= string_join("<strong>" . ($auto ? $_lang["sch_autodelete_title"] . "<br>" : "") . $_lang["sch_file_not_delete"] . "</strong>", $file);
 		endif;
 	else:
-		$all['error'] = "<strong>Файл не существует</strong><br>$file";
+		$all['error'] .= string_join("<strong>" . ($auto ? $_lang["sch_autodelete_title"] . "<br>" : "") . $_lang["sch_file_notfound"] . "</strong>", $file);
 	endif;
-	return $all;
+	return;
 }
 
 // Загрузка файлов
 function fileupload()
 {
 	$evo = evolutionCMS();
-	global $_lang, $startpath, $exts;
+	global $_lang, $startpath, $exts, $all;
 	$msg = '';
-	$all = [];
-	$all['error'] = "";
-	$all['success'] = "";
 	foreach ($_FILES['userfiles']['name'] as $i => $name):
 		if (empty($_FILES['userfiles']['tmp_name'][$i])) continue;
 		$msg = "";
@@ -281,7 +289,7 @@ function fileupload()
 			$all['error'] .= $msg;
 		endif;
 	endforeach;
-	return $all;
+	return;
 }
 
 // Получаем данные модуля
@@ -339,21 +347,21 @@ setlocale(LC_NUMERIC, 'C');
 if($_REQUEST['mode'] == 'upload'):
 	if(checkedPath($path, $access_path)):
 		$print = $path;
-		$all = fileupload();
+		fileupload();
 	endif;
 endif;
 
 // Переименовывание файла
 if($_REQUEST['mode'] == 'rename'):
 	if($_REQUEST['newfile'] && $_REQUEST['file']):
-		$all = renameFile($_REQUEST['newfile'], $_REQUEST['file']);
+		renameFile($_REQUEST['newfile'], $_REQUEST['file']);
 	endif;
 endif;
 
 // Удаление файла
 if($_REQUEST['mode'] == 'delete'):
 	if($_REQUEST['file']):
-		$all = deleteFile($_REQUEST['file']);
+		deleteFile($_REQUEST['file']);
 	endif;
 endif;
 
@@ -388,11 +396,12 @@ foreach ($dir as $fileinfo):
 						// Год в имени файла
 						$file_year = intval($matches[1]);
 						// Если разница лет больше/равно 2 года.
-						if($year - $file_year > 2):
+						if($year - $file_year > FOOD_AUTODELETE_YEAR && FOOD_AUTODELETE):
 							// Удаляем файл
 							//$file_absolute = $fileinfo->getRealPath();
 							//$file_absolute = path_join($startpath, $name);
-							deleteFile($name);
+
+							deleteFile($name, true);
 							//@unlink($file_absolute);
 						else:
 							// Добавляем файл в отображение
@@ -416,7 +425,7 @@ rsort($files);
 // Имя директории
 $title_path = pathinfo($startpath, PATHINFO_BASENAME);
 // Заголовок
-$title = checkedPath($startpath, $access_path) ? 'Директория: <code>' . $title_path . '</code>' : 'Директории';
+$title = checkedPath($startpath, $access_path) ? $_lang["sch_directory"] . ': <code>' . $title_path . '</code>' : $_lang["sch_directorys"];
 
 // Подключение файлов
 include_once MODX_MANAGER_PATH . 'includes/header.inc.php';
