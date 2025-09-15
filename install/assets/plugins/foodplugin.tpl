@@ -5,7 +5,7 @@
  * Плагин встраивания пункта меню для FoodModule.
  *
  * @category     plugin
- * @version      1.3.0
+ * @version      1.4.0
  * @package      evo
  * @internal     @events OnManagerMenuPrerender
  * @internal     @modx_category Manager and Admin
@@ -25,7 +25,7 @@
  * Плагин встраивания пункта меню для FoodModule.
  *
  * @category     plugin
- * @version      1.3.0
+ * @version      1.4.0
  * @package      evo
  * @internal     @events OnManagerMenuPrerender
  * @internal     @modx_category Manager and Admin
