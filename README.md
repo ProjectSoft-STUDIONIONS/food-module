@@ -8,7 +8,9 @@
 
 Скачать и установить через Extras [food-module.zip](../../releases/latest/download/food-module.zip)
 
-**Рабочий модуль только в этом архиве [food-module.zip](../../releases/latest/download/food-module.zip). Сборка модуля производится с помощью grunt.**
+**Рабочий модуль только в этом архиве [food-module.zip](../../releases/latest/download/food-module.zip).**
+
+Сборка модуля производится с помощью `npm` и `grunt` на стороне GitHub при публикации реализа.
 
 ## Скриншот
 
