@@ -83,7 +83,7 @@ $lcss_time = filemtime($css);
 					if(checkedPath($startpath, $access_path)):
 ?>
 						<th style="width: 1%;" class="text-nowrap"><?= $_lang['files_filesize']; ?></th>
-						<th style="width: 1%;" class="text-nowrap"><?= $_lang['files_fileoptions'] ?></th>
+						<th style="width: 1%;" class="text-nowrap"><?= $_lang['sch_actions'] ?></th>
 <?php
 					endif;
 ?>
@@ -120,19 +120,14 @@ if($files):
 			$perms = substr(sprintf('%o', fileperms($tmp_file)), -4);
 ?>
 					<tr>
-						<td class="text-nowrap"><?php if(is_file(MODX_BASE_PATH . "viewer/jquery.min.js") && is_file(MODX_BASE_PATH . 'viewer/fancybox.min.js')):
+						<td class="text-nowrap"><i class="fa fa-file-o"></i><?php if(is_file(MODX_BASE_PATH . "viewer/jquery.min.js") && is_file(MODX_BASE_PATH . 'viewer/fancybox.min.js')):
 ?><a data-file="<?= $file_path . "/" . $file;?>" href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['files_viewfile'];?>:
 <?= $file;?>"><?= $file;?></a><?php else: ?><a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['file_download_file'];?>:
 <?= $file;?>" download><?= $file;?></a><?php endif; ?></td>
 						<td class="text-right text-nowrap"><?= $perms;?></td>
 						<td class="text-right text-nowrap"><?= $modx->toDateFormat($ltime);?></td>
 						<td class="text-right text-nowrap"><?= $modx->nicesize($stat);?></td>
-						<td class="actions text-right"><?php
-						if(is_file(MODX_BASE_PATH . "viewer/jquery.min.js") && is_file(MODX_BASE_PATH . 'viewer/fancybox.min.js')): ?><a data-file="<?= $file_path . "/" . $file;?>" href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['files_viewfile'];?>:
-<?= $file;?>"><i class="<?= $_style['files_view'];?>"></i></a><?php
-						else: ?><a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['file_download_file'];?>:
-<?= $file;?>" download><i class="<?= $_style['files_download'];?>"></i></a><?php
-						endif;?><a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['rename'];?>:
+						<td class="actions text-center"><a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['rename'];?>:
 <?= $file;?>" data-mod="<?= $file;?>" data-mode="rename" data-newfile="<?= $file;?>"><i class="<?= $_style['files_rename'];?>"></i></a><a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['file_delete_file'];?>:
 <?= $file;?>" data-mod="<?= $file;?>" data-mode="delete"><i class="<?= $_style['files_delete'];?>"></i></a></td>
 					</tr>

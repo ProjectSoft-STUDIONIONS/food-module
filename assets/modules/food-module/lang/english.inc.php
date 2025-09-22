@@ -21,3 +21,5 @@ $_lang["sch_git_help"]                           = "Сообщить о проб
 $_lang["sch_directory"]                          = "Директория";
 $_lang["sch_directorys"]                         = "Директории";
 
+$_lang["sch_actions"]                            = "Действия";
+

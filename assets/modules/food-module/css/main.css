@@ -1107,6 +1107,10 @@ div.dt-button-background {
   font-style: italic;
   font-display: block;
 }
+:root {
+  --link-select-color: #efefef;
+  --link-select-color-hover: #ffffff;
+}
 body > .container {
   min-height: 100vh;
   display: -ms-flexbox;
@@ -1608,7 +1612,50 @@ table.dataTable thead > tr > th.dt-ordering-desc span.dt-column-order::after {
   color: var(--primary, #0098ff);
   opacity: 1;
 }
+table.dataTable > tbody > tr.selected > td > a:not(.badge):not(.btn):not(.dropdown-item) {
+  color: var(--link-select-color, #efefef);
+}
+table.dataTable > tbody > tr.selected > td > a:not(.badge):not(.btn):not(.dropdown-item):hover {
+  color: var(--link-select-color-hover, #ffffff);
+}
+table.dataTable > tbody > tr.selected > td > a:not(.badge):not(.btn):not(.dropdown-item) .fa,
+table.dataTable > tbody > tr.selected > td > a:not(.badge):not(.btn):not(.dropdown-item) span .fa {
+  color: var(--link-select-color, #efefef);
+}
+table.dataTable > tbody > tr.selected > td > a:not(.badge):not(.btn):not(.dropdown-item):hover .fa,
+table.dataTable > tbody > tr.selected > td > a:not(.badge):not(.btn):not(.dropdown-item) span:hover .fa {
+  color: #555;
+}
+table.dataTable > tbody > tr.selected > td > a:not(.badge):not(.btn):not(.dropdown-item):hover .fa.fa-trash,
+table.dataTable > tbody > tr.selected > td > a:not(.badge):not(.btn):not(.dropdown-item) span:hover .fa.fa-trash {
+  color: #f00;
+}
+table.table.dataTable > tbody > tr {
+  background-color: var(--white, #ffffff);
+}
+table.table.dataTable > tbody > tr > td {
+  transition: box-shadow 0.3s ease;
+}
+table.table.dataTable > tbody > tr > td .fas.fa-file {
+  margin-right: 0.6em;
+}
+table.table.dataTable > tbody > tr > td .fa.fa-file-o {
+  margin-right: 0.6em;
+}
+table.table.dataTable > tbody > tr > td a[data-mode] {
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+}
 .page-item .page-link {
   width: 3rem;
   text-align: center;
+}
+.dt-info .select-info {
+  display: none !important;
+}
+.dt-info .select-info .select-item {
+  display: none;
+}
+.dt-info .select-info .select-item:first-child {
+  display: block;
 }
