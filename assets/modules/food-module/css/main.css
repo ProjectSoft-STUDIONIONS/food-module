@@ -1,20 +1,22 @@
 :root {
   --dt-row-selected: 0, 136, 204;
   --dt-row-selected-text: 255, 255, 255;
-  --dt-row-selected-link: 9, 10, 11;
+  --dt-row-selected-link: 228, 228, 228;
   --dt-row-stripe: 0, 0, 0;
   --dt-row-hover: 0, 0, 0;
   --dt-column-ordering: 0, 0, 0;
+  --dt-header-align-items: center;
+  --dt-header-vertical-align: middle;
   --dt-html-background: white;
 }
 :root.dark {
   --dt-html-background: #212529;
 }
-table.dataTable td.dt-control {
+table.dataTable tbody td.dt-control {
   text-align: center;
   cursor: pointer;
 }
-table.dataTable td.dt-control:before {
+table.dataTable tbody td.dt-control:before {
   display: inline-block;
   box-sizing: border-box;
   content: "";
@@ -23,7 +25,7 @@ table.dataTable td.dt-control:before {
   border-bottom: 5px solid transparent;
   border-right: 0px solid transparent;
 }
-table.dataTable tr.dt-hasChild td.dt-control:before {
+table.dataTable tbody tr.dt-hasChild td.dt-control:before {
   border-top: 10px solid rgba(0, 0, 0, 0.5);
   border-left: 5px solid transparent;
   border-bottom: 0px solid transparent;
@@ -143,8 +145,10 @@ table.dataTable thead > tr > td.dt-ordering-asc span.dt-column-order:before,
 table.dataTable thead > tr > td.dt-ordering-desc span.dt-column-order:after {
   opacity: 0.6;
 }
+table.dataTable thead > tr > th.dt-orderable-none:not(.dt-ordering-asc, .dt-ordering-desc) span.dt-column-order:empty,
 table.dataTable thead > tr > th.sorting_desc_disabled span.dt-column-order:after,
 table.dataTable thead > tr > th.sorting_asc_disabled span.dt-column-order:before,
+table.dataTable thead > tr > td.dt-orderable-none:not(.dt-ordering-asc, .dt-ordering-desc) span.dt-column-order:empty,
 table.dataTable thead > tr > td.sorting_desc_disabled span.dt-column-order:after,
 table.dataTable thead > tr > td.sorting_asc_disabled span.dt-column-order:before {
   display: none;
@@ -165,8 +169,8 @@ table.dataTable tfoot > tr > td div.dt-column-footer {
   display: flex;
   -ms-flex-pack: justify;
       justify-content: space-between;
-  -ms-flex-align: center;
-      align-items: center;
+  -ms-flex-align: var(--dt-header-align-items);
+      align-items: var(--dt-header-align-items);
   gap: 4px;
 }
 table.dataTable thead > tr > th div.dt-column-header span.dt-column-title,
@@ -347,6 +351,7 @@ table.dataTable thead td,
 table.dataTable tfoot th,
 table.dataTable tfoot td {
   text-align: left;
+  vertical-align: var(--dt-header-vertical-align);
 }
 table.dataTable thead th.dt-head-left,
 table.dataTable thead td.dt-head-left,
@@ -450,7 +455,7 @@ table.table.dataTable > tbody > tr.selected > * {
   color: rgb(var(--dt-row-selected-text));
 }
 table.table.dataTable > tbody > tr.selected a {
-  color: #090a0b;
+  color: #e4e4e4;
   color: rgb(var(--dt-row-selected-link));
 }
 table.table.dataTable.table-striped > tbody > tr:nth-of-type(2n+1) > * {
@@ -1092,6 +1097,70 @@ div.dt-button-background {
   }
 }
 @font-face {
+  font-family: 'FoodIcon';
+  src: url("../fonts/FoodIcon.ttf?1bfa6de1db0b9c51ac22a0b7e6a91faa") format("truetype"), url("../fonts/FoodIcon.woff2?1bfa6de1db0b9c51ac22a0b7e6a91faa") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+[class^="food-icon"]::before,
+[class*=" food-icon"]::before {
+  font-family: 'FoodIcon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.food-icon-folder-open::before {
+  content: "\e900";
+}
+.food-icon-folder-open-o::before {
+  content: "\e901";
+}
+.food-icon-tasks::before {
+  content: "\e902";
+}
+.food-icon-lists::before {
+  content: "\e903";
+}
+.food-icon-print::before {
+  content: "\e904";
+}
+.food-icon-flopy-save::before {
+  content: "\e905";
+}
+.food-icon-download::before {
+  content: "\e906";
+}
+.food-icon-prev::before {
+  content: "\e907";
+}
+.food-icon-next::before {
+  content: "\e908";
+}
+.food-icon-first::before {
+  content: "\e909";
+}
+.food-icon-last::before {
+  content: "\e90a";
+}
+.food-icon-file:before {
+  content: "\e90b";
+}
+.food-icon-edit:before {
+  content: "\e90c";
+}
+.food-icon-trash:before {
+  content: "\e90d";
+}
+.food-icon-new-window:before {
+  content: "\e90e";
+}
+@font-face {
   font-family: 'JetBrains Mono';
   src: url("../fonts/JetBrainsMono-Regular.ttf?6546516986753145355468");
   src: url("../fonts/JetBrainsMono-Regular.ttf?6546516986753145355468") format('truetype'), url("../fonts/JetBrainsMono-Regular.woff2?6546516986753145355468") format('woff2');
@@ -1124,11 +1193,34 @@ pre code {
 a i {
   pointer-events: none;
 }
+a.food-icon {
+  text-decoration: none !important;
+}
 label.btn [type=file] {
   display: none;
 }
 table.table.data > thead > tr > th {
   font-weight: 700;
+}
+td:first-child i {
+  margin-right: 0.4em;
+}
+td.actions .btn {
+  border-radius: 0.3em;
+}
+table.table.data > tbody > tr > td {
+  vertical-align: middle;
+}
+.table.data td:last-child,
+.table.data th:last-child,
+.table.data.table-sm td:last-child,
+.table.data.table-sm th:last-child,
+.table.data td:first-child,
+.table.data th:first-child,
+.table.data.table-sm td:first-child,
+.table.data.table-sm th:first-child {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 .alert > *:first-child {
   margin-top: unset;
@@ -1189,49 +1281,12 @@ table.table.data > thead > tr > th {
   -ms-flex: 1 0 auto;
       flex: 1 0 auto;
 }
-@font-face {
-  font-family: 'Food';
-  src: url('../fonts/Food.ttf?6546516986753145355468') format('truetype'), url('../fonts/Food.woff?6546516986753145355468') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
-#ManageFiles [class^="icon-food-"],
-#ManageFiles [class*=" icon-food-"] {
-  font-family: 'Food' !important;
-  speak: never;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-#ManageFiles .icon-food-prev:before {
-  content: "\e900";
-}
-#ManageFiles .icon-food-next:before {
-  content: "\e901";
-}
-#ManageFiles .icon-food-forward:before {
-  content: "\e902";
-}
-#ManageFiles .icon-food-last:before {
-  content: "\e903";
-}
 #ManageFiles .breadcrumbs a,
 #ManageFiles .breadcrumbs span {
   display: inline;
 }
 #ManageFiles .btn:not(:disabled) {
   cursor: pointer;
-}
-#ManageFiles [class^="icon-food-"]::before,
-#ManageFiles [class*=" icon-food-"]::before {
-  padding-top: 2px;
-  margin-bottom: 1px;
-  display: block;
 }
 #ManageFiles > .alert {
   margin-top: 1em;
@@ -1400,7 +1455,7 @@ div.dt-container div.dt-layout-row.dt-layout-table {
 }
 @media (max-width: 991px) {
   .dt-layout-row:first-child {
-    gap: 0.6em;
+    gap: 1em;
   }
 }
 .dt-layout-row:first-child .dt-layout-start,
@@ -1413,7 +1468,6 @@ div.dt-container div.dt-layout-row.dt-layout-table {
   display: flex !important;
   -ms-flex-wrap: wrap !important;
       flex-wrap: wrap !important;
-  gap: 0.6em !important;
 }
 .dt-layout-row:first-child .dt-layout-start > *,
 .dt-layout-row:first-child .dt-layout-end > * {
@@ -1441,7 +1495,9 @@ div.dt-container div.dt-layout-row.dt-layout-table {
   display: flex;
   -ms-flex-direction: row;
       flex-direction: row;
-  gap: 1em;
+  gap: 0.4em;
+  -ms-flex-align: center;
+      align-items: center;
 }
 @media screen and (max-width: 767px) {
   .dt-layout-row:first-child .dt-layout-start,
@@ -1483,10 +1539,9 @@ div.dt-container div.dt-layout-row.dt-layout-table {
       justify-content: flex-start;
   -ms-flex-align: center;
       align-items: center;
-  gap: 10px;
+  gap: 1em;
   -ms-flex-direction: row;
       flex-direction: row;
-  margin-bottom: 5px;
 }
 .dt-layout-row:first-child .dt-layout-start .dt-search,
 .dt-layout-row:first-child .dt-layout-start .dt-search * {
@@ -1519,9 +1574,43 @@ div.dt-container div.dt-layout-row.dt-layout-table {
 .dt-buttons .btn:not(:first-child) {
   margin-left: 10px;
 }
+div.dt-container div.dt-layout-row button.btn {
+  padding: 0.55em 1em;
+}
+div.dt-container div.dt-layout-row.dt-layout-table button.btn {
+  padding: 0.3em 0.6em;
+}
+div.dt-container div.dt-layout-row div.dt-layout-cell {
+  gap: 1em;
+}
+div.dt-container div.dt-layout-row div.dt-layout-cell:empty {
+  display: unset;
+}
+div.dt-container div.dt-layout-row div.dt-layout-cell.dt-layout-end {
+  -ms-flex-pack: end;
+      justify-content: flex-end;
+  margin-left: unset;
+  margin-right: unset;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: end;
+      align-items: end;
+}
 div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
   max-width: 100%;
   overflow: auto;
+}
+.dt-button-page-colvis::after,
+.dt-button-page-length::after {
+  content: "▼";
+  -ms-flex: 1 0 auto;
+      flex: 1 0 auto;
+  text-align: right;
+}
+div.dt-button-collection .dt-button-active:after {
+  font-weight: 700;
 }
 .table-wrapper:has(> #table) {
   max-width: 100%;
@@ -1572,7 +1661,7 @@ table.dataTable thead > tr > th.dt-ordering-descc span.dt-column-order {
       flex-direction: column;
   width: auto;
   height: auto;
-  gap: 0.3em;
+  gap: 0.4em;
 }
 table.dataTable thead > tr > td.dt-orderable-asc span.dt-column-order::after,
 table.dataTable thead > tr > th.dt-orderable-asc span.dt-column-order::after,
@@ -1649,6 +1738,18 @@ table.table.dataTable > tbody > tr > td a[data-mode] {
 .page-item .page-link {
   width: 3rem;
   text-align: center;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+.page-item .page-link,
+.page-item .page-link * {
+  line-height: 1;
 }
 .dt-info .select-info {
   display: none !important;

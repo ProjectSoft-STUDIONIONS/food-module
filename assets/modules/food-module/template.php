@@ -32,7 +32,7 @@ $lcss_time = filemtime($css);
 	<div id="actions" style="display: none;"><div class="btn-group"></div></div>
 	<div id="ManageFiles">
 		<div class="container breadcrumbs">
-			<i class="fa fa-folder-open-o FilesTopFolder"></i>
+			<i class="food-icon food-icon-folder-open-o FilesTopFolder"></i>
 			<a href="?a=112&id=<?= $module["id"];?>"><?= $_lang["sch_food_top"];?></a>
 <?php
 	if(checkedPath($startpath, $access_path)):
@@ -75,15 +75,23 @@ $lcss_time = filemtime($css);
 			<table id="table" class="table data table-bordered">
 				<thead>
 					<tr>
-						<th><?= $_lang['files_filename']; ?></th>
-						<th style="width: 1%;" class="text-nowrap"><?= $_lang['sch_permission'] ?></th>
-						<th style="width: 1%;" class="text-nowrap"><?= $_lang['files_modified']; ?></th>
 <?php
 					// Для файлов
 					if(checkedPath($startpath, $access_path)):
 ?>
+						<th><?= $_lang['files_filename']; ?></th>
+						<th style="width: 1%;" class="text-nowrap"><?= $_lang['sch_permission'] ?></th>
+						<th style="width: 1%;" class="text-nowrap"><?= $_lang['files_modified']; ?></th>
 						<th style="width: 1%;" class="text-nowrap"><?= $_lang['files_filesize']; ?></th>
 						<th style="width: 1%;" class="text-nowrap"><?= $_lang['sch_actions'] ?></th>
+<?php
+					endif;
+?>
+<?php
+					if(!checkedPath($startpath, $access_path)):
+?>
+							<th width="100%"><?= $_lang["sch_directorys"]; ?></th>
+							<th width="auto"></th>
 <?php
 					endif;
 ?>
@@ -93,17 +101,12 @@ $lcss_time = filemtime($css);
 <?php
 if(!checkedPath($startpath, $access_path)):
 foreach($directorys as $dir):
-	$f = MODX_BASE_PATH . $dir;
-    $size = dir_size($f);
-	$ltime = filemtime($f);
-	$perms = substr(sprintf('%o', fileperms($f)), -4);
 ?>
 					<tr>
 						<td>
-							<i class="<?= $_style['actions_folder'];?>"></i> <a href="?a=112&id=<?= $module["id"];?>&mode=dir&path=<?= $dir;?>"><?= $dir;?></a>
+							<i class="food-icon food-icon-folder-open-o"></i> <a href="?a=112&id=<?= $module["id"];?>&mode=dir&path=<?= $dir;?>"><?= $dir;?></a>
 						</td>
-						<td class="text-right text-nowrap"><?= $perms;?></td>
-						<td class="text-right text-nowrap"><?= $modx->toDateFormat($ltime);?></td>
+						<td class="text-right text-nowrap"><a href="/<?= $dir;?>/" target="_blank" class="food-icon food-icon-new-window"></a></td>
 					</tr>
 <?php
 endforeach;
@@ -120,16 +123,24 @@ if($files):
 			$perms = substr(sprintf('%o', fileperms($tmp_file)), -4);
 ?>
 					<tr>
-						<td class="text-nowrap"><i class="fa fa-file-o"></i><?php if(is_file(MODX_BASE_PATH . "viewer/jquery.min.js") && is_file(MODX_BASE_PATH . 'viewer/fancybox.min.js')):
+						<td class="text-nowrap"><i class="food-icon food-icon-file"></i><?php if(is_file(MODX_BASE_PATH . "viewer/jquery.min.js") && is_file(MODX_BASE_PATH . 'viewer/fancybox.min.js')):
 ?><a data-file="<?= $file_path . "/" . $file;?>" href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['files_viewfile'];?>:
 <?= $file;?>"><?= $file;?></a><?php else: ?><a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['file_download_file'];?>:
 <?= $file;?>" download><?= $file;?></a><?php endif; ?></td>
 						<td class="text-right text-nowrap"><?= $perms;?></td>
 						<td class="text-right text-nowrap"><?= $modx->toDateFormat($ltime);?></td>
 						<td class="text-right text-nowrap"><?= $modx->nicesize($stat);?></td>
-						<td class="actions text-center"><a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['rename'];?>:
+						<td class="actions text-center">
+							<button class="food-icon food-icon-edit btn" title="<?= $_lang['rename'];?>:
+<?= $file;?>" data-mod="<?= $file;?>" data-mode="rename" data-newfile="<?= $file;?>"></button>
+							<button class="food-icon food-icon-trash btn btn-danger" title="<?= $_lang['file_delete_file'];?>:
+<?= $file;?>" data-mod="<?= $file;?>" data-mode="delete"></button>
+							<!--
+							<a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['rename'];?>:
 <?= $file;?>" data-mod="<?= $file;?>" data-mode="rename" data-newfile="<?= $file;?>"><i class="<?= $_style['files_rename'];?>"></i></a><a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['file_delete_file'];?>:
-<?= $file;?>" data-mod="<?= $file;?>" data-mode="delete"><i class="<?= $_style['files_delete'];?>"></i></a></td>
+<?= $file;?>" data-mod="<?= $file;?>" data-mode="delete"><i class="<?= $_style['files_delete'];?>"></i></a>
+							-->
+						</td>
 					</tr>
 <?php
 		endif;
@@ -177,3 +188,119 @@ $js = MODX_BASE_PATH . $modPath . 'js/main.min.js';
 $ljs_time = filemtime($js);
 ?>
 <script src="/<?= $modPath;?>js/main.min.js?<?= $ljs_time;?>"></script>
+<!--
+<h3>Convert fonts to SVG</h3>
+<div class="svgcontainer" id="svgcontainer"></div>
+<script src="https://unpkg.com/wawoff2@2.0.1/build/decompress_binding.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js'></script>
+<script>
+	let fontFile = "https://getbootstrap.com/docs/3.3/dist/fonts/glyphicons-halflings-regular.woff2";
+
+// init
+loadFont(fontFile, processFont);
+
+//default
+let params = {
+  fontSize: 100,
+  decimals: 2
+};
+
+// process font file after loading and parsing
+function processFont(font) {
+  showGlyphs(font, params)
+}
+
+
+// create svg sprites from font glyphs
+function showGlyphs(font, params) {
+  // sanitize font name
+  let fontFamily = font.tables.name.fontFamily.en.replaceAll(' ', '_').replaceAll('.', '_');
+  let unitsPerEm = font.unitsPerEm;
+  let ratio = params.fontSize / unitsPerEm;
+  let ascender = font.ascender;
+  let descender = Math.abs(font.descender);
+  let lineHeight = (ascender + descender) * ratio;
+  let baseline = +((100 / (ascender + descender)) * descender).toFixed(3) + 2;
+
+  let decimals = params.decimals;
+  let glyphs = font.glyphs.glyphs;
+  let keys = Object.keys(glyphs).length;
+  let htmlOutput = '';
+  let useMarkup = '';
+
+  for (let i = 0; i < keys; i++) {
+    let glyph = glyphs[i];
+    let lineHeight = (ascender + descender) * ratio;
+    let leftSB = glyph.leftSideBearing * ratio;
+    let rightSB = (glyph.advanceWidth - glyph.xMax) * ratio;
+    let glyphW = (glyph.advanceWidth) * ratio;
+    let poxX = 0;
+
+    // adjust negative widths
+    if ((glyph.advanceWidth + leftSB) < 0) {
+      glyphW = Math.abs(leftSB) + Math.abs(glyph.advanceWidth) + Math.abs(rightSB);
+      poxX = Math.abs(leftSB);
+    }
+
+    // get svg path data
+    let path = glyph.getPath(
+      poxX,
+      ascender * ratio,
+      params.fontSize
+    ).toSVG(decimals);
+
+
+    if (Object.hasOwn(glyph, 'points')) {
+      // add symbol definitions
+      htmlOutput += `<symbol id="symbol_${glyph.name}" data-id="${glyph.index}" viewBox="0 0 ${+(glyphW).toFixed(2)} ${+(lineHeight).toFixed(2)}"> ${path}</symbol>`;
+
+      // add visible <use> instances
+      useMarkup += `<svg id="use_wrap_${glyph.name}"  viewBox="0 0 ${+(glyphW).toFixed(2)} ${+(lineHeight).toFixed(2)}"><use href="#symbol_${glyph.name}" /></svg>`;
+    }
+  }
+
+  // add hidden svg sprite
+  htmlOutput = `<svg xmlns="http://www.w3.org/2000/svg" id="sprite_${fontFamily}" style="width:0; height:0; position:absolute; overflow:hidden;">` + htmlOutput + `</svg>` + useMarkup;
+
+  // render html
+  svgcontainer.innerHTML = htmlOutput;
+
+}
+
+
+/**
+ * load font via opentype.js
+ * decompress woff2 to truetype using
+ * https://github.com/fontello/wawoff2
+ * Based on yne's comment:
+ * https://github.com/opentypejs/opentype.js/issues/183#issuecomment-1147228025
+ */
+function loadFont(src, callback) {
+  let buffer = {};
+  let font = {};
+  let ext;
+
+  // is file
+  if (src instanceof Object) {
+    // get file extension to skip woff2 decompression
+    let filename = src[0].name.split(".");
+    ext = filename[filename.length - 1];
+    buffer = src[0].arrayBuffer();
+  }
+  // is url
+  else {
+    let url = src.split(".");
+    ext = url[url.length - 1];
+    buffer = fetch(src).then((res) => res.arrayBuffer());
+  }
+  buffer.then((data) => {
+    // decompress woff2
+    if (ext === "woff2") {
+      data = Uint8Array.from(Module.decompress(data)).buffer;
+    }
+    font = opentype.parse(data);
+    callback(font);
+  });
+}
+</script>
+-->

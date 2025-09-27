@@ -1,10 +1,10 @@
 /**
- * Скрипт модуля FoodModuleMenu v1.4.0 для Evolution CMS
+ * Скрипт модуля FoodModuleMenu v1.4.1 для Evolution CMS
  * Модуль загрузки файлов меню ежедневного питания
  * Актуально для сайтов школ России
  * Автор: Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
  * GitHub: https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
- * Last Update: 2025-09-22 23:38:26 GMT+0400
+ * Last Update: 2025-09-27 15:07:53 GMT+0400
  */
 window.DT_table = false;
 (function (factory) {
@@ -261,7 +261,7 @@ window.DT_table = false;
 			}
 			return !1;
 		});
-		$(document).on('click', 'a[data-mod]', function(e) {
+		$(document).on('click', '[data-mod]', function(e) {
 			let element = e.target,
 				form_mode = document.querySelector('[name=modifed] [name=mode]'),
 				form_file = document.querySelector('[name=modifed] [name=file]'),
@@ -355,10 +355,10 @@ window.DT_table = false;
 			let prefix = `Выбрано:`,
 				sufix = out.length == 1 ? `файл` : (out.length < 5 ? `файла` : `файлов`),
 				drops = `${prefix} ${out.length} ${sufix}`;
-			btn.innerHTML = '<i class="fa fa-upload"></i>Загрузить';
+			btn.innerHTML = 'Загрузить';
 			dragdrop && dragdrop.setAttribute('data-title-after', drops);
 		}else{
-			btn.innerHTML = '<i class="fa fa-floppy-o"></i>Выберите файлы для загрузки';
+			btn.innerHTML = 'Выберите файлы для загрузки';
 			dragdrop && dragdrop.removeAttribute('data-title-after');
 		}
 		p.html(out.join("<br>"));
@@ -456,19 +456,20 @@ window.DT_table = false;
 						buttons: [
 							{
 								extend: 'colvis',
-								className: 'button-colvis',
-								text: `<i class="fas fa-layer-group"></i>Видимость столбцов`,
+								className: 'button-colvis dt-button-page-colvis food-icon food-icon-tasks',// fa-layer-group <i class="fas fa-layer-group"></i>
+								text: `Видимость столбцов`,
 								attr: {
 									title: `Видимость столбцов`
 								},
 								columns: [1,2,3,4],
 								select: true,
+								dropIcon: false,
 								//postfixButtons: ['colvisRestore']
 							},
 							{
 								extend: 'print',
-								className: 'button-print btn btn-success',
-								text: `<i class="fas fa-print"></i>Печать`,
+								className: 'button-print btn btn-success food-icon food-icon-print',
+								text: `Печать`,
 								attr: {
 									title: `Печать`
 								},
@@ -484,8 +485,8 @@ window.DT_table = false;
 							},
 							{
 								extend: 'pageLength',
-								className: 'dt-button-page-length',
-								dropIcon: true,
+								className: 'dt-button-page-length dt-button-page-length food-icon food-icon-lists',
+								dropIcon: false,
 								attr: {
 									style: "width: 100%"
 								}
@@ -499,8 +500,8 @@ window.DT_table = false;
 								extend: 'dragdrop',
 							},
 							{
-								text: '<i class="fa fa-floppy-o"></i>Выберите файлы для загрузки',
-								className: 'button-upload btn btn-success',
+								text: 'Выберите файлы для загрузки',
+								className: 'button-upload btn btn-success food-icon food-icon-flopy-save text-uppercase',
 								action: function (e, dt, node, config) {
 									let uploader, input;
 									if( uploader = document.querySelector('[name="upload"]')){
@@ -518,8 +519,8 @@ window.DT_table = false;
 							// Кнопка экспорта XLSX
 							{
 								extend: 'excel',
-								text: '<i class="fa fa-file-excel"></i>Экспорт в XLSX',
-								className: 'btn',
+								text: 'Экспорт в XLSX',
+								className: 'btn text-uppercase food-icon food-icon-download',
 								download: '',
 								filename: `Экспорт ${FOOD_FILE_PATH} в XLSX`,
 								title: `Директория ${url}`,
@@ -611,8 +612,8 @@ window.DT_table = false;
 							// Кнопка экспорта PDF
 							{
 								extend: 'pdf',
-								text: '<i class="fa fa-file-pdf"></i>Экспорт в PDF',
-								className: 'btn',
+								text: 'Экспорт в PDF',
+								className: 'btn text-uppercase food-icon food-icon-download',
 								download: '',
 								filename: `Экспорт ${FOOD_FILE_PATH} в PDF`,
 								title: `Директория ${url}`,
@@ -670,7 +671,12 @@ window.DT_table = false;
 								},
 							}
 						]
-					}
+					},
+					bottomStart: [],
+					bottomEnd: [
+						"info",
+						"paging"
+					],
 				},
 				language: {
 					url: `${FOOD_MOD_PATH}js/ru_RU.json`,

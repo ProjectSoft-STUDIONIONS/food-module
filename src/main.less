@@ -1,5 +1,8 @@
 @import "variables";
 
+@text-gap: .4em;
+@element-gap: 1em;
+
 @font-face {
 	font-family: 'JetBrains Mono';
 	src:  url("@{icomoon-font-path}/JetBrainsMono-Regular.ttf?@{icomoon-hash}");
@@ -35,8 +38,13 @@ pre code {
 	display: block;
 }
 
-a i {
-	pointer-events: none;
+a {
+	i {
+		pointer-events: none;
+	}
+	&.food-icon {
+		text-decoration: none !important;
+	}
 }
 
 label.btn [type=file] {
@@ -45,6 +53,33 @@ label.btn [type=file] {
 
 table.table.data > thead > tr > th {
 	font-weight: 700;
+}
+
+td {
+	&:first-child i {
+		margin-right: @text-gap;
+	}
+	&.actions {
+		.btn {
+			border-radius: .3em;
+		}
+	}
+}
+
+table.table.data > tbody > tr > td {
+	vertical-align: middle;
+}
+
+.table.data td:last-child,
+.table.data th:last-child,
+.table.data.table-sm td:last-child,
+.table.data.table-sm th:last-child,
+.table.data td:first-child,
+.table.data th:first-child,
+.table.data.table-sm td:first-child,
+.table.data.table-sm th:first-child, {
+	padding-left: 0.75rem;
+	padding-right: 0.75rem;
 }
 
 .alert {
@@ -119,14 +154,6 @@ table.table.data > thead > tr > th {
 	}
 	.btn:not(:disabled) {
 		cursor: pointer;
-	}
-
-	[class^="icon-food-"], [class*=" icon-food-"] {
-		&::before {
-			padding-top: 2px;
-			margin-bottom: 1px;
-			display: block;
-		}
 	}
 
 	> .alert {
@@ -300,7 +327,7 @@ div.dt {
 			&:first-child {
 				align-items: self-end !important;
 				@media (max-width: 991px) {
-					gap: 0.6em;
+					gap: @element-gap;
 				}
 				.dt {
 					&-layout {
@@ -310,7 +337,7 @@ div.dt {
 							justify-content: center;
 							display: flex !important;
 							flex-wrap: wrap !important;
-							gap: 0.6em !important;
+							//- gap: 0.6em !important;
 							> * {
 								margin: unset !important;
 								flex: 1;
@@ -319,7 +346,7 @@ div.dt {
 							.dt-buttons {
 								justify-content: flex-start;
 								align-items: flex-start;
-								gap: 1em;
+								gap: @element-gap;
 								flex-wrap: wrap;
 							}
 							.dt-button {
@@ -327,7 +354,8 @@ div.dt {
 								flex-grow: 0;
 								display: flex;
 								flex-direction: row;
-								gap: 1em;
+								gap: @text-gap;
+								align-items: center;
 							}
 							@media screen and (max-width: 767px) {
 								margin-bottom: unset;
@@ -356,9 +384,8 @@ div.dt {
 								display: flex;
 								justify-content: flex-start;
 								align-items: center;
-								gap: 10px;
+								gap: @element-gap;
 								flex-direction: row;
-								margin-bottom: 5px;
 								&,
 								* {
 									font-weight: 400;
@@ -412,9 +439,50 @@ div.dt {
 
 }
 
-div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
-	max-width: 100%;
-	overflow: auto;
+div.dt-container {
+	div.dt-layout-row {
+		button.btn {
+			padding: 0.55em 1em;
+		}
+		&.dt-layout-table {
+			button.btn {
+				padding: 0.3em 0.6em;
+			}
+		}
+		div.dt-layout-cell {
+			gap: @element-gap;
+			&:empty {
+				display: unset;
+			}
+			&.dt-layout-end {
+				justify-content: flex-end;
+				margin-left: unset;
+				margin-right: unset;
+				flex-direction: column;
+				display: flex;
+				align-items: end;
+			}
+		}
+		&.dt-layout-table {
+			div.dt-layout-cell {
+				max-width: 100%;
+				overflow: auto;
+			}
+		}
+	}
+}
+
+.dt-button-page-colvis,
+.dt-button-page-length {
+	&::after {
+		content: "▼";
+		flex: 1 0 auto;
+		text-align: right;
+	}
+}
+
+div.dt-button-collection .dt-button-active:after {
+	font-weight: 700;
 }
 
 .table-wrapper:has(> #table) {
@@ -465,7 +533,7 @@ table.dataTable thead>tr>th {
 			flex-direction: column;
 			width: auto;
 			height: auto;
-			gap: .3em;
+			gap: @text-gap;
 			&::after,
 			&:before {
 				position: relative;
@@ -573,6 +641,14 @@ table {
 			&-link {
 				width: 3rem;
 				text-align: center;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: center;
+				&,
+				* {
+					line-height: 1;
+				}
 			}
 		}
 	}

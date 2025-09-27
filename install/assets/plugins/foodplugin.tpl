@@ -5,7 +5,7 @@
  * Плагин встраивания пункта меню для FoodModule.
  *
  * @category     plugin
- * @version      1.4.0
+ * @version      1.4.1
  * @package      evo
  * @internal     @events OnManagerMenuPrerender
  * @internal     @modx_category Manager and Admin
@@ -16,7 +16,7 @@
  * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
  * @reportissues https://github.com/ProjectSoft-STUDIONIONS/food-module/issues
  * @author       Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
- * @lastupdate   2025-09-22
+ * @lastupdate   2025-09-27
  */
 
 /**
@@ -25,7 +25,7 @@
  * Плагин встраивания пункта меню для FoodModule.
  *
  * @category     plugin
- * @version      1.4.0
+ * @version      1.4.1
  * @package      evo
  * @internal     @events OnManagerMenuPrerender
  * @internal     @modx_category Manager and Admin
@@ -36,7 +36,7 @@
  * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
  * @reportissues https://github.com/ProjectSoft-STUDIONIONS/food-module/issues
  * @author       Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
- * @lastupdate   2025-09-22
+ * @lastupdate   2025-09-27
  */
 
 require MODX_BASE_PATH.'assets/modules/food-module/plugin.food-module.php';

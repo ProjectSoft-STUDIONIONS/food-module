@@ -13,6 +13,7 @@ module.exports = function(grunt) {
 			"concat",
 			"uglify",
 			"lineending",
+			"copy",
 			"compress"
 		],
 		src: [
@@ -47,6 +48,7 @@ module.exports = function(grunt) {
 					'assets/modules/food-module/css/main.css' : [
 						'bower_components/datatables.net-bs/css/dataTables.bootstrap.css',
 						'bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.css',
+						'bower_components/webfont-food/dest/css/foodIcon.css',
 						'src/main.less'
 					]
 				}
@@ -330,6 +332,18 @@ module.exports = function(grunt) {
 					},
 				]
 			}
+		},
+		copy: {
+			main: {
+				files: [
+					{
+						expand: true,
+						cwd: 'bower_components/webfont-food/dest/fonts',
+						src: ['*.*'],
+						dest: 'assets/modules/food-module/fonts/',
+					},
+				],
+			},
 		},
 		compress: {
 			main: {

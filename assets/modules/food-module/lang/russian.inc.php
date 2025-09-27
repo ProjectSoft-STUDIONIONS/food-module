@@ -22,4 +22,5 @@ $_lang["sch_directory"]                          = "Директория";
 $_lang["sch_directorys"]                         = "Директории";
 
 $_lang["sch_actions"]                            = "Действия";
+$_lang["sch_new_window"]                         = "Открыть для просмотра в новой вкладке";
 
