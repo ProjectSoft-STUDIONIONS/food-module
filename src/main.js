@@ -683,8 +683,10 @@ window.DT_table = false;
 						e.stopPropagation();
 					},
 					handleDrop = function(e) {
+						preventDefaults(e);
 						inputFile.files = e.dataTransfer.files;
 						inputFile.dispatchEvent(new Event('change'));
+						return !1;
 					},
 					highlight = function(e) {
 						dropArea.classList.add('active');
@@ -692,6 +694,7 @@ window.DT_table = false;
 					unhighlight = function(e) {
 						dropArea.classList.remove('active');
 					};
+
 				['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
 					dropArea.addEventListener(eventName, preventDefaults, false)
 					document.body.addEventListener(eventName, preventDefaults, false)
