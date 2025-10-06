@@ -1097,68 +1097,81 @@ div.dt-button-background {
   }
 }
 @font-face {
-  font-family: 'FoodIcon';
-  src: url("../fonts/FoodIcon.ttf?1bfa6de1db0b9c51ac22a0b7e6a91faa") format("truetype"), url("../fonts/FoodIcon.woff2?1bfa6de1db0b9c51ac22a0b7e6a91faa") format("woff2");
+  font-family: "FoodIcon";
+  src: url("../fonts/FoodIcon.woff2?6f6866d1b4c769ca8c1ff2a06128e17d") format("woff2"), url("../fonts/FoodIcon.ttf?6f6866d1b4c769ca8c1ff2a06128e17d") format("truetype");
   font-weight: normal;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
 }
-[class^="food-icon"]::before,
-[class*=" food-icon"]::before {
-  font-family: 'FoodIcon' !important;
-  speak: never;
+[class^="food-icon-"]:before,
+[class*=" food-icon-"]:before {
+  font-family: "FoodIcon" !important;
+  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
+  text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.food-icon-folder-open::before {
+.food-icon-download:before {
   content: "\e900";
 }
-.food-icon-folder-open-o::before {
+.food-icon-edit:before {
   content: "\e901";
 }
-.food-icon-tasks::before {
+.food-icon-export-pdf:before {
   content: "\e902";
 }
-.food-icon-lists::before {
+.food-icon-export-xlsx:before {
   content: "\e903";
 }
-.food-icon-print::before {
+.food-icon-export:before {
   content: "\e904";
 }
-.food-icon-flopy-save::before {
+.food-icon-file:before {
   content: "\e905";
 }
-.food-icon-download::before {
+.food-icon-first:before {
   content: "\e906";
 }
-.food-icon-prev::before {
+.food-icon-flopy-save:before {
   content: "\e907";
 }
-.food-icon-next::before {
+.food-icon-folder-open-o:before {
   content: "\e908";
 }
-.food-icon-first::before {
+.food-icon-folder-open:before {
   content: "\e909";
 }
-.food-icon-last::before {
+.food-icon-last:before {
   content: "\e90a";
 }
-.food-icon-file:before {
+.food-icon-lists:before {
   content: "\e90b";
 }
-.food-icon-edit:before {
+.food-icon-new-window:before {
   content: "\e90c";
 }
-.food-icon-trash:before {
+.food-icon-next:before {
   content: "\e90d";
 }
-.food-icon-new-window:before {
+.food-icon-prev:before {
   content: "\e90e";
+}
+.food-icon-print:before {
+  content: "\e90f";
+}
+.food-icon-tasks:before {
+  content: "\e910";
+}
+.food-icon-tools:before {
+  content: "\e911";
+}
+.food-icon-trash:before {
+  content: "\e912";
 }
 @font-face {
   font-family: 'JetBrains Mono';
@@ -1450,13 +1463,17 @@ div.dt-container div.dt-layout-row.dt-layout-table {
   display: none;
 }
 .dt-layout-row:first-child {
-  -ms-flex-align: self-end !important;
-      align-items: self-end !important;
+  -ms-flex-align: self-start !important;
+      align-items: self-start !important;
 }
 @media (max-width: 991px) {
   .dt-layout-row:first-child {
     gap: 1em;
   }
+}
+.dt-layout-row:first-child .button-collection-tools {
+  -ms-flex-positive: 1 !important;
+      flex-grow: 1 !important;
 }
 .dt-layout-row:first-child .dt-layout-start,
 .dt-layout-row:first-child .dt-layout-end {
@@ -1573,6 +1590,12 @@ div.dt-container div.dt-layout-row.dt-layout-table {
 .dt-buttons .btn:last-child,
 .dt-buttons .btn:not(:first-child) {
   margin-left: 10px;
+}
+.dt-dragdrop-block {
+  min-height: 5.5em;
+}
+button.button-collection-export ~ div.dt-button-collection {
+  left: auto !important;
 }
 div.dt-container div.dt-layout-row button.btn {
   padding: 0.55em 1em;

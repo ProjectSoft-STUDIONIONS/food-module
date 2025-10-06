@@ -325,9 +325,12 @@ div.dt {
 				}
 			}
 			&:first-child {
-				align-items: self-end !important;
+				align-items: self-start !important;
 				@media (max-width: 991px) {
 					gap: @element-gap;
+				}
+				.button-collection-tools {
+					flex-grow: 1 !important;
 				}
 				.dt {
 					&-layout {
@@ -437,6 +440,14 @@ div.dt {
 		}
 	}
 
+}
+
+.dt-dragdrop-block {
+	min-height: 5.5em;
+}
+
+button.button-collection-export ~ div.dt-button-collection {
+	left: auto !important;
 }
 
 div.dt-container {
