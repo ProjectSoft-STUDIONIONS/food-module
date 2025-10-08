@@ -1,10 +1,10 @@
 /**
- * Скрипт модуля FoodModuleMenu v1.4.2 для Evolution CMS
+ * Скрипт модуля FoodModuleMenu v1.4.3 для Evolution CMS
  * Модуль загрузки файлов меню ежедневного питания
  * Актуально для сайтов школ России
  * Автор: Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
  * GitHub: https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
- * Last Update: 2025-10-06 11:18:27 GMT+0400
+ * Last Update: 2025-10-08 15:28:23 GMT+0400
  */
 window.DT_table = false;
 (function (factory) {
@@ -175,13 +175,6 @@ window.DT_table = false;
 		}catch(e){}
 	},
 	dialogClose = () => {
-		// Закрытие диалога
-		/*if(dialog) {
-			dialog.close();
-			document.body.removeChild(dialog);
-			document.body.classList.remove('scroll-lock');
-			dialog = false;
-		}*/
 	},
 	proceeingButton = function ( e, indicator ) {
 		if ( indicator ) {
@@ -189,6 +182,11 @@ window.DT_table = false;
 		} else {
 			stopWork();
 		}
+	},
+	getExtFile = function (filename) {
+		let baseName = filename.split('/').pop();  // извлекаем имя файла
+		if(baseName.indexOf('.') === -1 || baseName.startsWith('.')) return '';  // если расширения нет, возвращаем пустую строку
+		return baseName.slice(baseName.lastIndexOf('.') + 1); // расширение файла
 	},
 	componentName = `Модуль питания для Evolution CMS`,
 	userName = `ProjectSoft`;
@@ -698,7 +696,7 @@ window.DT_table = false;
 			});
 			table.on( 'buttons-processing', proceeingButton);
 			setTimeout(() => {
-				const dropArea = document.querySelector('.dt-dragdrop-block'),
+				const dropArea = document.querySelector('#food-module-evo'),
 					inputFile = document.querySelector('input[type="file"]'),
 					preventDefaults = function(e) {
 						e.preventDefault();
@@ -706,39 +704,67 @@ window.DT_table = false;
 					},
 					handleDrop = function(e) {
 						preventDefaults(e);
-						inputFile.files = e.dataTransfer.files;
-						inputFile.dispatchEvent(new Event('change'));
+						if(dropArea) {
+							if(inputFile) {
+								const maxCountFile = inputFile.getAttribute('max');
+								let dataTransfer = new DataTransfer();
+								// Пробежимся по переданным файлам
+								for(let file of e.dataTransfer.files) {
+									let ext = getExtFile(file.name).toLowerCase();
+									switch(ext){
+										case "pdf":
+										case "xlsx":
+											if(dataTransfer.files.length < maxCountFile) {
+												dataTransfer.items.add(file);
+											}else{
+												console.log(`%cFile ${file.name} not upload!\nThe maximum number of files has been exceeded`, "background: green; color: white");
+											}
+											break;
+										default:
+											console.log(`%cFile ${file.name} not suported!`, "background: red; color: white");
+									}
+								}
+								inputFile.files = dataTransfer.files;
+								inputFile.dispatchEvent(new Event('change'));
+							}
+						}
 						return !1;
 					},
 					highlight = function(e) {
-						dropArea.classList.add('active');
+						if(dropArea) {
+							dropArea.classList.add('drophandle');
+						}
 					},
 					unhighlight = function(e) {
-						dropArea.classList.remove('active');
+						if(dropArea) {
+							dropArea.classList.remove('drophandle');
+						}
 					};
 
 				['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-					dropArea.addEventListener(eventName, preventDefaults, false)
+					if(dropArea) {
+						dropArea.addEventListener(eventName, preventDefaults, false);
+					}
 					document.body.addEventListener(eventName, preventDefaults, false)
 				});
 
 				['dragenter', 'dragover'].forEach(eventName => {
-					dropArea.addEventListener(eventName, highlight, false);
+					if(dropArea) {
+						dropArea.addEventListener(eventName, highlight, false);
+					}
 				});
 
 				['dragleave', 'drop'].forEach(eventName => {
-					dropArea.addEventListener(eventName, unhighlight, false);
+					if(dropArea) {
+						dropArea.addEventListener(eventName, unhighlight, false);
+					}
 				});
 
 				// Handle dropped files
-				dropArea.addEventListener('drop', handleDrop, false);
+				if(dropArea) {
+					dropArea.addEventListener('drop', handleDrop, false);
+				}
 			}, 1000);
-			/*setTimeout(() => {
-				[...document.querySelectorAll('.alert .icon-close')].forEach((el) => {
-					el.click();
-				})
-			}, 5000);*/
-			//window.DT_table = table;
 		}
 	}
 	$(document).on('click', '.alert .icon-close', function(e) {

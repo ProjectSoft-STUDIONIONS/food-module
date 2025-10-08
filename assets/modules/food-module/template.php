@@ -26,130 +26,127 @@ $lcss_time = filemtime($css);
 	const FOOD_FILE_PATH = "<?= checkedPath($startpath, $access_path) ? $title_path : ""; ?>";
 	const FOOD_MOD_PATH = "/<?= $modPath;?>";
 </script>
-<div class="container">
-	<h1 class="text-left"><i class="fa fa-folder-open"></i><?= $_lang['sch_title']; ?></h1>
-	<h2 class="text-left" style="font-weight: 700;"><?= $title;?></h2>
-	<div id="actions" style="display: none;"><div class="btn-group"></div></div>
-	<div id="ManageFiles">
-		<div class="container breadcrumbs">
-			<i class="food-icon food-icon-folder-open-o FilesTopFolder"></i>
-			<a href="?a=112&id=<?= $module["id"];?>"><?= $_lang["sch_food_top"];?></a>
-<?php
-	if(checkedPath($startpath, $access_path)):
-?>
-			<span class="link-dir"><a href="?a=112&id=<?= $module["id"];?>&mode=dir&path=<?= $title_path; ?>"><?= $title_path; ?></a></span>
-<?php
-	endif;
-		$style_error = $all['error'] ? '' : ' style="display: none;"';
-		$style_success = $all['success'] ?  '' : ' style="display: none;"';
-?>
-		</div>
-		<div class="alert alert-danger alert-icon-close" role="alert"<?= $style_error;?>><?= $all['error'];?><i class="icon-close">×</i></div>
-		<div class="alert alert-success alert-icon-close" role="alert"<?= $style_success;?>><?= $all['success'];?><i class="icon-close">×</i></div>
-<?php
-	// Форма загрузки
-	if (((@ini_get("file_uploads") == true) || get_cfg_var("file_uploads") == 1) && is_writable($startpath) && checkedPath($startpath, $access_path)):
-?>
-		<p id="p_uploads" class="alert alert-info"></p>
-		<form class="text-right" name="upload" method="post" action="?a=112&id=<?= $module['id']; ?>&mode=dir&path=<?= $title_path; ?>" enctype="multipart/form-data" style="display: none;">
-			<input type="hidden" name="MAX_FILE_SIZE" value="<?= isset($upload_maxsize) ? $upload_maxsize : 3145728 ?>">
-			<input type="hidden" name="mode" value="upload">
-			<div id="uploader" class="text-right" style="display: none !important;">
-				<input type="file" name="userfiles[]" onchange="uploadFiles(this);" multiple accept=".xlsx,.pdf">
-			</div>
-		</form>
-<?php
-	endif;
-	if(checkedPath($startpath, $access_path)):
-?>
-		<form name="modifed" method="post" action="?a=112&id=<?= $module['id']; ?>&mode=dir&path=<?= $title_path; ?>" enctype="multipart/form-data">
-			<input type="hidden" name="mode" value="">
-			<input type="hidden" name="path" value="<?= $title_path; ?>/">
-			<input type="hidden" name="file" value="">
-			<input type="hidden" name="newfile" value="">
-		</form>
-<?php
-	endif;
-?>
-		<div class="table-wrapper">
-			<table id="table" class="table data table-bordered">
-				<thead>
-					<tr>
-<?php
-					// Для файлов
-					if(checkedPath($startpath, $access_path)):
-?>
-						<th><?= $_lang['files_filename']; ?></th>
-						<th style="width: 1%;" class="text-nowrap"><?= $_lang['sch_permission'] ?></th>
-						<th style="width: 1%;" class="text-nowrap"><?= $_lang['files_modified']; ?></th>
-						<th style="width: 1%;" class="text-nowrap"><?= $_lang['files_filesize']; ?></th>
-						<th style="width: 1%;" class="text-nowrap"><?= $_lang['sch_actions'] ?></th>
-<?php
-					endif;
-?>
-<?php
-					if(!checkedPath($startpath, $access_path)):
-?>
-							<th width="100%"><?= $_lang["sch_directorys"]; ?></th>
-							<th width="auto"></th>
-<?php
-					endif;
-?>
-					</tr>
-				</thead>
-				<tbody>
-<?php
-if(!checkedPath($startpath, $access_path)):
-foreach($directorys as $dir):
-?>
-					<tr>
-						<td>
-							<i class="food-icon food-icon-folder-open-o"></i> <a href="?a=112&id=<?= $module["id"];?>&mode=dir&path=<?= $dir;?>"><?= $dir;?></a>
-						</td>
-						<td class="text-right text-nowrap"><a href="/<?= $dir;?>/" target="_blank" class="food-icon food-icon-new-window"></a></td>
-					</tr>
-<?php
-endforeach;
-endif;
-if(checkedPath($startpath, $access_path)):
-if($files):
-	foreach($files as $file):
-		$tmp_file = $startpath . "/" . $file;
-		$stat = 0;
-		$ltime = 0;
-		if(is_file($tmp_file)):
-			$ltime = filemtime($tmp_file);
-			$stat = filesize($tmp_file);
-			$perms = substr(sprintf('%o', fileperms($tmp_file)), -4);
-?>
-					<tr>
-						<td class="text-nowrap"><i class="food-icon food-icon-file"></i><?php if(is_file(MODX_BASE_PATH . "viewer/jquery.min.js") && is_file(MODX_BASE_PATH . 'viewer/fancybox.min.js')):
-?><a data-file="<?= $file_path . "/" . $file;?>" href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['files_viewfile'];?>:
-<?= $file;?>"><?= $file;?></a><?php else: ?><a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['file_download_file'];?>:
-<?= $file;?>" download><?= $file;?></a><?php endif; ?></td>
-						<td class="text-right text-nowrap"><?= $perms;?></td>
-						<td class="text-right text-nowrap"><?= $modx->toDateFormat($ltime);?></td>
-						<td class="text-right text-nowrap"><?= $modx->nicesize($stat);?></td>
-						<td class="actions text-center">
-							<button class="food-icon food-icon-edit btn" title="<?= $_lang['rename'];?>:
-<?= $file;?>" data-mod="<?= $file;?>" data-mode="rename" data-newfile="<?= $file;?>"></button>
-							<button class="food-icon food-icon-trash btn btn-danger" title="<?= $_lang['file_delete_file'];?>:
-<?= $file;?>" data-mod="<?= $file;?>" data-mode="delete"></button>
-							<!--
-							<a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['rename'];?>:
-<?= $file;?>" data-mod="<?= $file;?>" data-mode="rename" data-newfile="<?= $file;?>"><i class="<?= $_style['files_rename'];?>"></i></a><a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['file_delete_file'];?>:
-<?= $file;?>" data-mod="<?= $file;?>" data-mode="delete"><i class="<?= $_style['files_delete'];?>"></i></a>
-							-->
-						</td>
-					</tr>
-<?php
+<div id="food-module-evo">
+	<div class="container">
+		<h1 class="text-left"><i class="fa fa-folder-open"></i><?= $_lang['sch_title']; ?></h1>
+		<h2 class="text-left" style="font-weight: 700;"><?= $title;?></h2>
+		<div id="actions" style="display: none;"><div class="btn-group"></div></div>
+		<div id="ManageFiles">
+			<div class="container breadcrumbs">
+				<i class="food-icon food-icon-folder-open-o FilesTopFolder"></i>
+				<a href="?a=112&id=<?= $module["id"];?>"><?= $_lang["sch_food_top"];?></a>
+	<?php
+		if(checkedPath($startpath, $access_path)):
+	?>
+				<span class="link-dir"><a href="?a=112&id=<?= $module["id"];?>&mode=dir&path=<?= $title_path; ?>"><?= $title_path; ?></a></span>
+	<?php
 		endif;
+			$style_error = $all['error'] ? '' : ' style="display: none;"';
+			$style_success = $all['success'] ?  '' : ' style="display: none;"';
+	?>
+			</div>
+			<div class="alert alert-danger alert-icon-close" role="alert"<?= $style_error;?>><?= $all['error'];?><i class="icon-close">×</i></div>
+			<div class="alert alert-success alert-icon-close" role="alert"<?= $style_success;?>><?= $all['success'];?><i class="icon-close">×</i></div>
+	<?php
+		// Форма загрузки
+		if (((@ini_get("file_uploads") == true) || get_cfg_var("file_uploads") == 1) && is_writable($startpath) && checkedPath($startpath, $access_path)):
+	?>
+			<p id="p_uploads" class="alert alert-info"></p>
+			<form class="text-right" name="upload" method="post" action="?a=112&id=<?= $module['id']; ?>&mode=dir&path=<?= $title_path; ?>" enctype="multipart/form-data" style="display: none;">
+				<input type="hidden" name="MAX_FILE_SIZE" value="<?= isset($upload_maxsize) ? $upload_maxsize : 3145728 ?>">
+				<input type="hidden" name="mode" value="upload">
+				<div id="uploader" class="text-right" style="display: none !important;">
+					<input type="file" name="userfiles[]" onchange="uploadFiles(this);" multiple accept=".xlsx,.pdf" max="20">
+				</div>
+			</form>
+	<?php
+		endif;
+		if(checkedPath($startpath, $access_path)):
+	?>
+			<form name="modifed" method="post" action="?a=112&id=<?= $module['id']; ?>&mode=dir&path=<?= $title_path; ?>" enctype="multipart/form-data">
+				<input type="hidden" name="mode" value="">
+				<input type="hidden" name="path" value="<?= $title_path; ?>/">
+				<input type="hidden" name="file" value="">
+				<input type="hidden" name="newfile" value="">
+			</form>
+	<?php
+		endif;
+	?>
+			<div class="table-wrapper">
+				<table id="table" class="table data table-bordered">
+					<thead>
+						<tr>
+	<?php
+						// Для файлов
+						if(checkedPath($startpath, $access_path)):
+	?>
+							<th><?= $_lang['files_filename']; ?></th>
+							<th style="width: 1%;" class="text-nowrap"><?= $_lang['sch_permission'] ?></th>
+							<th style="width: 1%;" class="text-nowrap"><?= $_lang['files_modified']; ?></th>
+							<th style="width: 1%;" class="text-nowrap"><?= $_lang['files_filesize']; ?></th>
+							<th style="width: 1%;" class="text-nowrap"><?= $_lang['sch_actions'] ?></th>
+	<?php
+						endif;
+	?>
+	<?php
+						if(!checkedPath($startpath, $access_path)):
+	?>
+								<th width="100%"><?= $_lang["sch_directorys"]; ?></th>
+								<th width="auto"></th>
+	<?php
+						endif;
+	?>
+						</tr>
+					</thead>
+					<tbody>
+	<?php
+	if(!checkedPath($startpath, $access_path)):
+	foreach($directorys as $dir):
+	?>
+						<tr>
+							<td>
+								<i class="food-icon food-icon-folder-open-o"></i> <a href="?a=112&id=<?= $module["id"];?>&mode=dir&path=<?= $dir;?>"><?= $dir;?></a>
+							</td>
+							<td class="text-right text-nowrap"><a href="/<?= $dir;?>/" target="_blank" class="food-icon food-icon-new-window"></a></td>
+						</tr>
+	<?php
 	endforeach;
-endif;
-endif;
-?>
-				</tbody>
-			</table>
+	endif;
+	if(checkedPath($startpath, $access_path)):
+	if($files):
+		foreach($files as $file):
+			$tmp_file = $startpath . "/" . $file;
+			$stat = 0;
+			$ltime = 0;
+			if(is_file($tmp_file)):
+				$ltime = filemtime($tmp_file);
+				$stat = filesize($tmp_file);
+				$perms = substr(sprintf('%o', fileperms($tmp_file)), -4);
+	?>
+						<tr>
+							<td class="text-nowrap"><i class="food-icon food-icon-file"></i><?php if(is_file(MODX_BASE_PATH . "viewer/jquery.min.js") && is_file(MODX_BASE_PATH . 'viewer/fancybox.min.js')):
+	?><a data-file="<?= $file_path . "/" . $file;?>" href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['files_viewfile'];?>:
+	<?= $file;?>"><?= $file;?></a><?php else: ?><a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['file_download_file'];?>:
+	<?= $file;?>" download><?= $file;?></a><?php endif; ?></td>
+							<td class="text-right text-nowrap"><?= $perms;?></td>
+							<td class="text-right text-nowrap"><?= $modx->toDateFormat($ltime);?></td>
+							<td class="text-right text-nowrap"><?= $modx->nicesize($stat);?></td>
+							<td class="actions text-center">
+								<button class="food-icon food-icon-edit btn" title="<?= $_lang['rename'];?>:
+	<?= $file;?>" data-mod="<?= $file;?>" data-mode="rename" data-newfile="<?= $file;?>"></button>
+								<button class="food-icon food-icon-trash btn btn-danger" title="<?= $_lang['file_delete_file'];?>:
+	<?= $file;?>" data-mod="<?= $file;?>" data-mode="delete"></button>
+							</td>
+						</tr>
+	<?php
+			endif;
+		endforeach;
+	endif;
+	endif;
+	?>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 	<p class="developer_food text-right"><?= $_lang["sch_git_help"];?> <a href="https://github.com/ProjectSoft-STUDIONIONS/food-module/issues" target="_blank">https://github.com/ProjectSoft-STUDIONIONS/food-module/issues</a><br>Telegram: <a href="https://t.me/ProjectSoft" target="_blank">https://t.me/ProjectSoft</a></p>

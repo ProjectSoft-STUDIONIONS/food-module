@@ -511,8 +511,6 @@ div.dt-button-collection .dt-button-active:after {
 	margin-top: 0;
 	margin-bottom: 0;
 	border-top: 1px solid #c4c4c4;
-	margin-left: -20px;
-	margin-right: -20px;
 	padding: 10px 30px 0px;
 	font-family: 'JetBrains Mono', monospace, 'Consolas', sans-serif;
 	font-style: italic;
@@ -673,6 +671,37 @@ table {
 			&:first-child {
 				display: block;
 			}
+		}
+	}
+}
+
+#food-module-evo {
+	position: relative;
+	&::before {
+		background-color: rgba(0, 0, 0, .3);
+		border-radius: 15px;
+		content: "Drag and Drop files";
+		color: rgba(255, 255, 255, .4);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		opacity: 0;
+		outline: rgba(255, 255, 255, .5) dashed 2px;
+		outline-offset: -10px;
+		position: absolute;
+		transition: all .3s ease;
+		z-index: -200;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		top: 0;
+		font-size: 6em;
+	}
+	&.drophandle {
+		&::before {
+			opacity: 1;
+			z-index: 1000;
 		}
 	}
 }
