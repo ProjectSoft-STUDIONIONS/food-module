@@ -394,7 +394,6 @@ window.DT_table = false;
 			});
 
 			let table = new DataTable(`#table`, {
-				select: 'single',
 				// Колонки
 				columns: [
 					{ name: 'file' },
