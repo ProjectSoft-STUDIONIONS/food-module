@@ -122,9 +122,10 @@ $lcss_time = filemtime($css);
 				$ltime = filemtime($tmp_file);
 				$stat = filesize($tmp_file);
 				$perms = substr(sprintf('%o', fileperms($tmp_file)), -4);
+				$ext = strtolower(pathinfo($tmp_file, PATHINFO_EXTENSION));
 	?>
 						<tr>
-							<td class="text-nowrap"><i class="food-icon food-icon-file"></i><?php if(is_file(MODX_BASE_PATH . "viewer/jquery.min.js") && is_file(MODX_BASE_PATH . 'viewer/fancybox.min.js')):
+							<td class="text-nowrap"><i class="food-icon-export-<?= $ext;?>"></i><?php if(is_file(MODX_BASE_PATH . "viewer/jquery.min.js") && is_file(MODX_BASE_PATH . 'viewer/fancybox.min.js')):
 	?><a data-file="<?= $file_path . "/" . $file;?>" href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['files_viewfile'];?>:
 	<?= $file;?>"><?= $file;?></a><?php else: ?><a href="<?= $file_path . '/' . $file;?>" title="<?= $_lang['file_download_file'];?>:
 	<?= $file;?>" download><?= $file;?></a><?php endif; ?></td>
@@ -132,9 +133,9 @@ $lcss_time = filemtime($css);
 							<td class="text-right text-nowrap"><?= $modx->toDateFormat($ltime);?></td>
 							<td class="text-right text-nowrap"><?= $modx->nicesize($stat);?></td>
 							<td class="actions text-center">
-								<button class="food-icon food-icon-edit btn" title="<?= $_lang['rename'];?>:
+								<button class="food-icon-edit btn" title="<?= $_lang['rename'];?>:
 	<?= $file;?>" data-mod="<?= $file;?>" data-mode="rename" data-newfile="<?= $file;?>"></button>
-								<button class="food-icon food-icon-trash btn btn-danger" title="<?= $_lang['file_delete_file'];?>:
+								<button class="food-icon-trash btn btn-danger" title="<?= $_lang['file_delete_file'];?>:
 	<?= $file;?>" data-mod="<?= $file;?>" data-mode="delete"></button>
 							</td>
 						</tr>

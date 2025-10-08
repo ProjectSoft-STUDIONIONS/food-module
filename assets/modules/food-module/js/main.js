@@ -1,10 +1,10 @@
 /**
- * Скрипт модуля FoodModuleMenu v1.4.3 для Evolution CMS
+ * Скрипт модуля FoodModuleMenu v1.4.4 для Evolution CMS
  * Модуль загрузки файлов меню ежедневного питания
  * Актуально для сайтов школ России
  * Автор: Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
  * GitHub: https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
- * Last Update: 2025-10-08 15:31:59 GMT+0400
+ * Last Update: 2025-10-08 17:35:39 GMT+0400
  */
 window.DT_table = false;
 (function (factory) {

@@ -4,7 +4,7 @@
  * Модуль для загрузки файлов ежедневного питания школы.
  *
  * @category     module
- * @version      1.4.3
+ * @version      1.4.4
  * @internal     @properties &folders=Директории для загрузки;text;food,food-individual &autodelete=Автоудаление;list;true,false;true &autodelete_year=Удалять файлы старше лет;list;1,2,3,4,5;2
  * @internal     @modx_category Manager and Admin
  * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
@@ -20,7 +20,7 @@
  * Модуль для загрузки файлов ежедневного питания школы.
  *
  * @category     module
- * @version      1.4.3
+ * @version      1.4.4
  * @internal     @properties &folders=Директории для загрузки;text;food,food-individual &autodelete=Автоудаление;list;true,false;true &autodelete_year=Удалять файлы старше лет;list;1,2,3,4,5;2
  * @internal     @modx_category Manager and Admin
  * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
