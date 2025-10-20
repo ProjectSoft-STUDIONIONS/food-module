@@ -4,7 +4,7 @@
  * Актуально для сайтов школ России
  * Автор: Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
  * GitHub: https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
- * Last Update: 2025-10-20 20:14:23 GMT+0400
+ * Last Update: 2025-10-20 20:27:12 GMT+0400
  */
 window.DT_table = false;
 (function (factory) {
