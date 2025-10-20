@@ -4,9 +4,9 @@
 	"description": "Модуль загрузки файлов меню ежедневного питания",
 	"main": "Grunfile.js",
 	"scripts": {
-		"inst": "npm i && npm i -g bower && bower install",
+		"inst": "npm i",
 		"build": "grunt -v",
-		"preinstall": "npm i -g less grunt-cli"
+		"preinstall": "npm i -g less bower grunt-cli && bower install"
 	},
 	"repository": {
 		"type": "git",
