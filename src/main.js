@@ -374,13 +374,13 @@ window.DT_table = false;
 			},
 			tag: "button",
 			action: function (e, dt, node, config) {
-					let uploader, input;
-					if( uploader = document.querySelector('[name="upload"]')){
-						if(input = uploader.querySelector('[type=file]')) {
-							input.click();
-						}
+				let uploader, input;
+				if( uploader = document.querySelector('[name="upload"]')){
+					if(input = uploader.querySelector('[type=file]')) {
+						input.click();
 					}
 				}
+			}
 		};
 		// Если есть dir, значит список файлов
 		if(FOOD_FILE_PATH) {
@@ -565,6 +565,10 @@ window.DT_table = false;
 
 													xlsx["[Content_Types].xml"] = contentType;
 												},
+												action: function (e, dt, button, config, cb) {
+													$.fn.dataTable.ext.buttons.excelHtml5.action(e, dt, button, config, cb);
+													$(document.body).trigger('click');
+												},
 											},
 											// Кнопка экспорта PDF
 											{
@@ -626,6 +630,10 @@ window.DT_table = false;
 													// Текст контента.
 													doc.content[0].text = title.join('\r\n');
 												},
+												action: function (e, dt, button, config, cb) {
+													$.fn.dataTable.ext.buttons.pdfHtml5.action(e, dt, button, config, cb);
+													$(document.body).trigger('click');
+												},
 											},
 										],
 									},
@@ -686,6 +694,9 @@ window.DT_table = false;
 				}
 			});
 			table.on( 'buttons-processing', proceeingButton);
+			$(document).on('click', '.dt-button.buttons-columnVisibility, .dt-button.buttons-print.button-print', function(){
+				$(document.body).trigger('click');
+			});
 			setTimeout(() => {
 				const dropArea = document.querySelector('#food-module-evo'),
 					inputFile = document.querySelector('input[type="file"]'),

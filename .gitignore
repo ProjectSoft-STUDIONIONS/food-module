@@ -17,3 +17,5 @@ src/temp
 *.sublime-workspace
 
 /*.zip
+
+docs/index.html

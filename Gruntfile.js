@@ -14,7 +14,8 @@ module.exports = function(grunt) {
 			"uglify",
 			"lineending",
 			"copy",
-			"compress"
+			"compress",
+			"pug",
 		],
 		src: [
 			'bower_components/js-cookie/src/js.cookie.js',
@@ -50,6 +51,9 @@ module.exports = function(grunt) {
 						'bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.css',
 						'bower_components/webfont-food/dest/css/foodIcon.css',
 						'src/main.less'
+					],
+					'src/css/main.css': [
+						'src/css/main.less'
 					]
 				}
 			},
@@ -65,6 +69,9 @@ module.exports = function(grunt) {
 				files: {
 					'assets/modules/food-module/css/main.css' : [
 						'assets/modules/food-module/css/main.css'
+					],
+					'src/css/main.css': [
+						'src/css/main.css'
 					]
 				}
 			},
@@ -91,6 +98,15 @@ module.exports = function(grunt) {
 							'assets/modules/food-module/css/main.css'
 						],
 						dest: 'assets/modules/food-module/css/',
+						filter: 'isFile'
+					},
+					{
+						expand: true,
+						flatten : true,
+						src: [
+							'src/css/main.css'
+						],
+						dest: 'src/css/',
 						filter: 'isFile'
 					},
 				]
@@ -214,6 +230,7 @@ module.exports = function(grunt) {
 			minify: {
 				files: {
 					'assets/modules/food-module/css/main.min.css' : ['assets/modules/food-module/css/main.css'],
+					'src/css/main.css': ['src/css/main.css'],
 				}
 			},
 		},
@@ -377,6 +394,28 @@ module.exports = function(grunt) {
 					}
 				],
 			},
+		},
+		pug: {
+			docs: {
+				options: {
+					doctype: 'html',
+					client: false,
+					pretty: '',
+					separator:  '',
+					data: function(dest, src) {
+						return {};
+					}
+				},
+				files: [
+					{
+						expand: true,
+						cwd: __dirname + '/src/pug/',
+						src: [ 'index.pug' ],
+						dest: __dirname + '/docs/',
+						ext: '.html'
+					},
+				]
+			}
 		},
 	});
 	grunt.registerTask('default',	gc.default);

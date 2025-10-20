@@ -1,0 +1,135 @@
+doctype html
+- var versions = [ "2.1.7", "2.1.5", "2.1.4", "2.1.3", "2.1.1", "2.1.0", "2.0.0", "1.0.2", "1.0.0" ];
+html(lang="en")
+	head
+		title
+			|Модуль «FoodModuleMenu» для Evolution CMS
+		meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+		meta(http-equiv="X-UA-Compatible" content="IE=EmulateIE9")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		meta(name="cmsmagazine" content="d8e7426ec72ad3e4ea38b09ebf01284")
+		meta(name="SKYPE_TOOLBAR" content ="SKYPE_TOOLBAR_PARSER_COMPATIBLE")
+		meta(name="color-scheme" content="only light")
+		meta(name="theme-color" content="#ffffff")
+		meta(name="title" content="Модуль «FoodModuleMenu» для Evolution CMS")
+		meta(name="description" content="Модуль «FoodModuleMenu» для Evolution CMS. Обслуживания директории `food` сайта школы. Актуально для сайтов школ РФ.")
+		meta(name="keywords" content="food, FoodModuleMenu, component, Evolution CMS")
+		meta(name="author" content="ProjectSoft")
+		meta(name="og:url" content="")
+		meta(property="og:type" content="website")
+		meta(name="og:title" content="Модуль «FoodModuleMenu» для Evolution")
+		meta(name="og:description" content="Модуль «FoodModuleMenu» для Evolution CMS. Обслуживания директории `food` сайта школы. Актуально для сайтов школ РФ.")
+		meta(name="twitter:card" content="summary_large_image")
+		link(rel="icon" type="image/png" href="/favicon.png" sizes="256x256")
+		link(rel="shortcut icon" href="/favicon.ico")
+		meta(name="apple-mobile-web-app-title" content="Модуль «FoodModuleMenu» для Evolution")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-Black.woff" as="font" type="application/font-woff" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-Black.ttf" as="font" type="font/truetype" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-BlackItalic.woff" as="font" type="application/font-woff" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-BlackItalic.ttf" as="font" type="font/truetype" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-Bold.woff" as="font" type="application/font-woff" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-BoldItalic.ttf" as="font" type="font/truetype" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-ExtraBold.woff" as="font" type="application/font-woff" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-ExtraBoldItalic.ttf" as="font" type="font/truetype" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-ExtraLight.woff" as="font" type="application/font-woff" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-ExtraLightItalic.ttf" as="font" type="font/truetype" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-Italic.woff" as="font" type="application/font-woff" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-Light.woff" as="font" type="application/font-woff" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-LightItalic.ttf" as="font" type="font/truetype" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-Medium.woff" as="font" type="application/font-woff" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-MediumItalic.ttf" as="font" type="font/truetype" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-Regular.woff" as="font" type="application/font-woff" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-SemiBold.woff" as="font" type="application/font-woff" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-SemiBoldItalic.ttf" as="font" type="font/truetype" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-Thin.woff" as="font" type="application/font-woff" crossorigin="anonymous")
+		link(rel="preload" href="https://projectsoft-studionions.github.io/food-module/assets/fonts/Lato-ThinItalic.ttf" as="font" type="font/truetype" crossorigin="anonymous")
+		style
+			include ../css/main.css
+	body
+		header
+			div
+				a(href="https://projectsoft-studionions.github.io/")
+			div
+				h1
+					|Модуль «FoodModuleMenu» для Evolution CMS
+				p
+					|Модуль <code>FoodModuleMenu</code> для Evolution CMS. Обслуживание директории <code>food</code> сайта школы. Актуально для сайтов школ РФ.
+			div
+				a(href="https://github.com/ProjectSoft-STUDIONIONS/food-module" target="_blank")
+					include ../image/github.svg
+		main
+			include ../image/evolution.svg
+			h2
+				|Описание
+			div.description
+				p
+					|Модуль <code>FoodModuleMenu</code> для Evolution CMS разработан для обслуживание директории <code>food</code> на сайтах школ Российской Федерации.
+				p
+					|Установку модуля нужно провести через административную панель <strong>Evolution CMS</strong>.
+				p
+					|Скачать <a href="#last-version">последнюю версию</a> модуля для своей версии <strong>Evolution CMS</strong>.
+				h3
+					|Установка
+				ul
+					li
+						|Войдите в административную панель Evolution.
+					li
+						|Перейдите в модули и запустите модуль Extras.
+					li
+						|Загрузите скачанный файл модуля и установите его.
+					li
+						|Дождитесь завершения установки.
+				h3
+					|Настройка
+				p
+					//|Кнопка настройки модуля присутствует на странице модуля <strong>Меню ежедневного питания</strong> вправом верхнем углу.
+				ul
+					li
+						|Директория <code>food</code> создаётся автоматически и присутствует всегда.
+					li
+						|Для дополнительных директорий (например, индивидуального питания) нужно перечислить директории, которые нужно создать.
+					li
+						|Так же вы можете настроить автоудаление старых файлов, при этом вы можете выбрать временной интервал от одного года до пяти лет. Т. е. если выбран один год, то вы сохраните файлы за текущей год и за прошлый включительно.
+				p
+					|Данная опция позволяет вам сэкономить объем используемого пространства выделенного системой вашего хост провайдера.
+				p.text-center
+					|<strong>Удачного использования модуля!</strong>
+				h3.text-center
+					|Постскриптум
+				p
+					|Если у вас возникли проблемы с плагином, то, по вашему желанию, вы можете обратиться ко мне для последующего обсуждения действий - <a href="https://t.me/ProjectSoft" target="_blank"><em>@ProjectSoft</em></a>
+			h2
+				|Версии
+			div.articles
+				article#last-version
+					head
+						h3
+							|Последняя версия
+					div
+						ul
+							li
+								div
+									span
+										|Для Evolution CMS
+									span.text-right
+										a.btn(href="https://github.com/ProjectSoft-STUDIONIONS/food-module/releases/latest/download/food-module.zip" download="food-module.zip")
+											|Скачать
+				each version in versions
+					article
+						head
+							h3= version
+						div
+							ul
+								li
+									div
+										span
+											|Для Evolution CMS
+										span.text-right
+											a.btn(href="https://github.com/ProjectSoft-STUDIONIONS/food-module/releases/download/" + version + "/food-module.zip" download="food-module.zip")
+												|Скачать
+		footer
+			p.text-center
+				|©&nbsp;Copyright 2008&nbsp;–&nbsp;All
+			p.text-center
+				a(href="https://github.com/ProjectSoft-STUDIONIONS" target="_blank")
+					|ProjectSoft
