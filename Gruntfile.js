@@ -175,7 +175,7 @@ module.exports = function(grunt) {
  * @category     plugin
  * @version      ${gc.versions}
  * @package      evo
- * @internal     @events OnManagerMenuPrerender
+ * @internal     @events OnManagerMenuPrerender,OnManagerMainFrameHeaderHTMLBlock
  * @internal     @modx_category Manager and Admin
  * @internal     @properties &id_module=ID модуля FoodModule;int;0;0 &title=Заголовок пункта меню;text;;; &sort=Позиция пункта;int;0;0;0
  * @internal     @installset base
@@ -195,7 +195,7 @@ module.exports = function(grunt) {
  * @category     plugin
  * @version      ${gc.versions}
  * @package      evo
- * @internal     @events OnManagerMenuPrerender
+ * @internal     @events OnManagerMenuPrerender,OnManagerMainFrameHeaderHTMLBlock
  * @internal     @modx_category Manager and Admin
  * @internal     @properties &id_module=ID модуля FoodModule;int;0;0 &title=Заголовок пункта меню;text;;; &sort=Позиция пункта;int;0;0;0
  * @internal     @installset base

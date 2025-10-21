@@ -1813,3 +1813,9 @@ table.table.dataTable > tbody > tr > td a[data-mode] {
   opacity: 1;
   z-index: 1000;
 }
+.evo-popup-close.close {
+  cursor: pointer;
+}
+.alert:empty {
+  display: none;
+}

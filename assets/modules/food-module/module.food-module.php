@@ -426,7 +426,7 @@ rsort($files);
 $title_path = pathinfo($startpath, PATHINFO_BASENAME);
 // Заголовок
 $title = checkedPath($startpath, $access_path) ? $_lang["sch_directory"] . ': <code>/' . $title_path . '/</code>&nbsp;<a href="/' . $title_path . '/" target="_blank" class="food-icon food-icon-new-window" title="' . $_lang["sch_new_window"] . '"></a>' : $_lang["sch_directorys"];
-
+// $onManagerMainFrameHeaderHTMLBlock
 // Подключение файлов
 include_once MODX_MANAGER_PATH . 'includes/header.inc.php';
 include_once SCHOOL_FOLDERS_BASE_PATH . 'template.php';

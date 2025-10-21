@@ -1,6 +1,6 @@
 {
 	"name": "food-module",
-	"version": "1.4.4",
+	"version": "1.4.5",
 	"description": "Модуль загрузки файлов меню ежедневного питания",
 	"main": "Grunfile.js",
 	"scripts": {

@@ -7,21 +7,6 @@ if( ! defined('IN_MANAGER_MODE') || IN_MANAGER_MODE !== true) {
 $modPath = str_replace(MODX_BASE_PATH, '', $base_path);
 $upload_maxsize = $modx->config['upload_maxsize'];
 ?>
-<?php
-// Подключаем main.css
-$css = MODX_BASE_PATH . $modPath . 'css/main.min.css';
-$lcss_time = filemtime($css);
-?>
-<link type="text/css" rel="stylesheet" href="/<?= $modPath;?>css/main.min.css?<?= $lcss_time;?>">
-
-<style type="text/css">
-	.evo-popup-close.close {
-		cursor: pointer;
-	}
-	.alert:empty {
-		display: none;
-	}
-</style>
 <script>
 	const FOOD_FILE_PATH = "<?= checkedPath($startpath, $access_path) ? $title_path : ""; ?>";
 	const FOOD_MOD_PATH = "/<?= $modPath;?>";
@@ -153,31 +138,18 @@ $lcss_time = filemtime($css);
 	<p class="developer_food text-right"><?= $_lang["sch_git_help"];?> <a href="https://github.com/ProjectSoft-STUDIONIONS/food-module/issues" target="_blank">https://github.com/ProjectSoft-STUDIONIONS/food-module/issues</a><br>Telegram: <a href="https://t.me/ProjectSoft" target="_blank">https://t.me/ProjectSoft</a></p>
 </div>
 <?php
-// Данных файлов может и не быть
-if(is_file(MODX_BASE_PATH . "viewer/app.min.css")):
-?>
-<link type="text/css" rel="stylesheet" href="/viewer/app.min.css"></link>
-<?php
-endif;
-// Данных файлов может и не быть
-if(is_file(MODX_BASE_PATH . "viewer/jquery.min.js")):
+// Эти файлы должны быть обязательно.
+// Реализовано при установке модуля.
 ?>
 <script src="/viewer/jquery.min.js"></script>
-<?php
-endif;
-// Данных файлов может и не быть
-if(is_file(MODX_BASE_PATH . 'viewer/fancybox.min.js')):
-?>
 <script src="/viewer/fancybox.min.js"></script>
 <?php
-endif;
-
 // Подключаем DataTables только внутри директории
 if(checkedPath($startpath, $access_path)):
 	$jsDT = MODX_BASE_PATH . $modPath . 'js/app.min.js';
 	$jsDT_time = filemtime($jsDT);
 ?>
-	<script src="/<?= $modPath;?>js/app.min.js?<?= $jsDT_time;?>"></script>
+<script src="/<?= $modPath;?>js/app.min.js?<?= $jsDT_time;?>"></script>
 <?php
 endif;
 
@@ -186,7 +158,9 @@ $js = MODX_BASE_PATH . $modPath . 'js/main.min.js';
 $ljs_time = filemtime($js);
 ?>
 <script src="/<?= $modPath;?>js/main.min.js?<?= $ljs_time;?>"></script>
-<!--
+<?php
+/**
+
 <h3>Convert fonts to SVG</h3>
 <div class="svgcontainer" id="svgcontainer"></div>
 <script src="https://unpkg.com/wawoff2@2.0.1/build/decompress_binding.js"></script>
@@ -266,13 +240,13 @@ function showGlyphs(font, params) {
 }
 
 
-/**
+
  * load font via opentype.js
  * decompress woff2 to truetype using
  * https://github.com/fontello/wawoff2
  * Based on yne's comment:
  * https://github.com/opentypejs/opentype.js/issues/183#issuecomment-1147228025
- */
+
 function loadFont(src, callback) {
   let buffer = {};
   let font = {};
@@ -301,4 +275,5 @@ function loadFont(src, callback) {
   });
 }
 </script>
--->
+
+*/
