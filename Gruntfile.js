@@ -375,11 +375,9 @@ module.exports = function(grunt) {
 							'icons-full/**',
 							'viewer/**',
 							'food/**',
-							'food-individual/**',
 							'icons-full/.*',
 							'viewer/.*',
 							'food/.*',
-							'food-individual/.*'
 						],
 						dest: 'food-module/'
 					},
@@ -388,6 +386,7 @@ module.exports = function(grunt) {
 						cwd: '.',
 						src: [
 							'assets/**',
+							'assets/**/.*',
 							'install/**',
 						],
 						dest: 'food-module/'

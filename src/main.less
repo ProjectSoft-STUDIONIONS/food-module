@@ -83,20 +83,8 @@ table.table.data > tbody > tr > td {
 }
 
 .alert {
-	> *:first-child {
-		margin-top: unset;
-	}
-	> *:last-child {
-		margin-bottom: unset;
-	}
-	dl,
-	div {
-		margin-bottom: .5em;
-	}
-	dl {
-		dd {
-			margin-bottom: 0;
-		}
+	> * {
+		margin: unset;
 	}
 }
 
@@ -677,6 +665,12 @@ table {
 
 #food-module-evo {
 	position: relative;
+	h1 {
+		padding: 1em 0;
+	}
+	h2 {
+		margin-bottom: 1em;
+	}
 	&::before {
 		background-color: rgba(0, 0, 0, .3);
 		border-radius: 15px;

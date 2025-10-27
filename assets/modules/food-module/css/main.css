@@ -1098,7 +1098,7 @@ div.dt-button-background {
 }
 @font-face {
   font-family: "FoodIcon";
-  src: url("../fonts/FoodIcon.woff2?6f6866d1b4c769ca8c1ff2a06128e17d") format("woff2"), url("../fonts/FoodIcon.ttf?6f6866d1b4c769ca8c1ff2a06128e17d") format("truetype");
+  src: url("../fonts/FoodIcon.woff2?340a8f974ce37df777c24872b2560ad0") format("woff2"), url("../fonts/FoodIcon.ttf?340a8f974ce37df777c24872b2560ad0") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -1131,47 +1131,56 @@ div.dt-button-background {
 .food-icon-export:before {
   content: "\e904";
 }
-.food-icon-file:before {
+.food-icon-file-:before {
   content: "\e905";
 }
-.food-icon-first:before {
+.food-icon-file-pdf:before {
   content: "\e906";
 }
-.food-icon-flopy-save:before {
+.food-icon-file-xlsx:before {
   content: "\e907";
 }
-.food-icon-folder-open-o:before {
+.food-icon-file:before {
   content: "\e908";
 }
-.food-icon-folder-open:before {
+.food-icon-first:before {
   content: "\e909";
 }
-.food-icon-last:before {
+.food-icon-flopy-save:before {
   content: "\e90a";
 }
-.food-icon-lists:before {
+.food-icon-folder-open-o:before {
   content: "\e90b";
 }
-.food-icon-new-window:before {
+.food-icon-folder-open:before {
   content: "\e90c";
 }
-.food-icon-next:before {
+.food-icon-last:before {
   content: "\e90d";
 }
-.food-icon-prev:before {
+.food-icon-lists:before {
   content: "\e90e";
 }
-.food-icon-print:before {
+.food-icon-new-window:before {
   content: "\e90f";
 }
-.food-icon-tasks:before {
+.food-icon-next:before {
   content: "\e910";
 }
-.food-icon-tools:before {
+.food-icon-prev:before {
   content: "\e911";
 }
-.food-icon-trash:before {
+.food-icon-print:before {
   content: "\e912";
+}
+.food-icon-tasks:before {
+  content: "\e913";
+}
+.food-icon-tools:before {
+  content: "\e914";
+}
+.food-icon-trash:before {
+  content: "\e915";
 }
 @font-face {
   font-family: 'JetBrains Mono';
@@ -1235,18 +1244,8 @@ table.table.data > tbody > tr > td {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
-.alert > *:first-child {
-  margin-top: unset;
-}
-.alert > *:last-child {
-  margin-bottom: unset;
-}
-.alert dl,
-.alert div {
-  margin-bottom: 0.5em;
-}
-.alert dl dd {
-  margin-bottom: 0;
+.alert > * {
+  margin: unset;
 }
 .fancybox-button {
   background: rgba(30, 30, 30, 0.6) !important;
@@ -1783,6 +1782,12 @@ table.table.dataTable > tbody > tr > td a[data-mode] {
 }
 #food-module-evo {
   position: relative;
+}
+#food-module-evo h1 {
+  padding: 1em 0;
+}
+#food-module-evo h2 {
+  margin-bottom: 1em;
 }
 #food-module-evo::before {
   background-color: rgba(0, 0, 0, 0.3);

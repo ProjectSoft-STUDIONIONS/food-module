@@ -1,10 +1,10 @@
 /**
- * Скрипт модуля FoodModuleMenu v1.4.5 для Evolution CMS
+ * Скрипт модуля FoodModuleMenu v1.4.6 для Evolution CMS
  * Модуль загрузки файлов меню ежедневного питания
  * Актуально для сайтов школ России
  * Автор: Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
  * GitHub: https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
- * Last Update: 2025-10-22 09:50:26 GMT+0400
+ * Last Update: 2025-10-28 00:21:12 GMT+0400
  */
 window.DT_table = false;
 (function (factory) {
@@ -273,7 +273,7 @@ window.DT_table = false;
 					form_mode.value = mode;
 					form_file.value = file;
 					form_newfile.value = "";
-					if(confirm(`Удалить файл?\n\n${file}`)) {
+					if(confirm(`${LANG["sch_tool_issue_delete"]}?\n\n${file}`)) {
 						document.modifed.submit();
 					}else{
 						form_mode.value = "";
@@ -289,7 +289,7 @@ window.DT_table = false;
 					const segments = file.split('.');
 					const fileExtension = segments.pop();
 					let fileName = segments.join('.');
-					nwfile = prompt("Укажите новое имя для файла:", fileName);
+					nwfile = prompt(`${LANG["sch_tool_new_filename"]}:`, fileName);
 					if(!nwfile) {
 						return !1
 					}
@@ -342,7 +342,7 @@ window.DT_table = false;
 				}else{
 					p.html("");
 					dragdrop && dragdrop.removeAttribute('data-title-after');
-					alert("Нельзя загрузить данный тип файла!\nИмя: " + a.name + "\nТип файла: " + a.type);
+					alert(`${LANG["sch_tool_not_upload_file_type"]}!\n${LANG["sch_tool_name"]}: ` + a.name + `\n${LANG["sch_tool_type"]}: ` + a.type);
 					document.upload.reset();
 					return !1;
 				}
@@ -350,13 +350,13 @@ window.DT_table = false;
 		}
 		let btn = document.querySelector('.button-upload');
 		if(out.length){
-			let prefix = `Выбрано:`,
-				sufix = out.length == 1 ? `файл` : (out.length < 5 ? `файла` : `файлов`),
+			let prefix = `${LANG["sch_tool_select"]}:`,
+				sufix = out.length == 1 ? `${LANG["sch_tool_one"]}` : (out.length < 5 ? `${LANG["sch_tool_two"]}` : `${LANG["sch_tool_three"]}`),
 				drops = `${prefix} ${out.length} ${sufix}`;
-			btn.innerHTML = 'Загрузить';
+			btn.innerHTML = `${LANG["sch_tool_uploads"]}`;
 			dragdrop && dragdrop.setAttribute('data-title-after', drops);
 		}else{
-			btn.innerHTML = 'Выберите файлы для загрузки';
+			btn.innerHTML = `${LANG["sch_tool_select_uploads"]}`;
 			dragdrop && dragdrop.removeAttribute('data-title-after');
 		}
 		p.html(out.join("<br>"));
@@ -377,8 +377,8 @@ window.DT_table = false;
 			className: 'dt-dragdrop-block',
 			text: '',
 			attr: {
-				'title': "Перетащите сюда файлы *.xlsx или *.pdf для загрузки\nИли выберите их с помощю диалога",
-				'data-title-before': "Перетащите сюда файлы (*.xlsx или *.pdf)\nИли выберите их с помощю диалога"
+				'title': `${LANG["sch_tool_dragdrop_title"]}`,
+				'data-title-before': `${LANG["sch_tool_dragdrop_before"]}`
 			},
 			tag: "button",
 			action: function (e, dt, node, config) {
@@ -446,22 +446,28 @@ window.DT_table = false;
 				},
 				lengthMenu: [
 					[10, 25, 50, 100, -1],
-					['по 10', 'по 25', 'по 50', 'по 100', 'Все']
+					[
+						`${LANG["sch_tool_by"]} 10`,
+						`${LANG["sch_tool_by"]} 25`,
+						`${LANG["sch_tool_by"]} 50`,
+						`${LANG["sch_tool_by"]} 100`,
+						`${LANG["sch_tool_all"]}`
+					]
 				],
 				layout: {
 					topStart: {
 						buttons: [
 							{
 								extend: 'collection',
-								text: 'Инструменты',
+								text: `${LANG["sch_tool_tools"]}`,
 								className: 'button-collection-tools food-icon-tools',
 								buttons: [
 									{
 										extend: 'colvis',
 										className: 'button-colvis dt-button-page-colvis food-icon-tasks',// fa-layer-group <i class="fas fa-layer-group"></i>
-										text: `Видимость столбцов`,
+										text: `${LANG["sch_tool_column_visibility"]}`,
 										attr: {
-											title: `Видимость столбцов`
+											title: `${LANG["sch_tool_column_visibility"]}`
 										},
 										columns: [1,2,3,4],
 										select: true,
@@ -478,13 +484,13 @@ window.DT_table = false;
 									},
 									{
 										extend: 'collection',
-										text: 'Экспорт',
+										text: `${LANG["sch_tool_export"]}`,
 										className: 'button-collection-export food-icon-export',
 										buttons: [
 											// Кнопка экспорта XLSX
 											{
 												extend: 'excel',
-												text: 'Экспорт в XLSX',
+												text: `${LANG["sch_tool_export_xlsx"]}`,
 												className: 'btn text-uppercase food-icon-export-xlsx',
 												download: '',
 												filename: `Экспорт ${FOOD_FILE_PATH} в XLSX`,
@@ -581,7 +587,7 @@ window.DT_table = false;
 											// Кнопка экспорта PDF
 											{
 												extend: 'pdf',
-												text: 'Экспорт в PDF',
+												text: `${LANG["sch_tool_export_pdf"]}`,
 												className: 'btn text-uppercase food-icon-export-pdf',
 												download: '',
 												filename: `Экспорт ${FOOD_FILE_PATH} в PDF`,
@@ -648,9 +654,9 @@ window.DT_table = false;
 									{
 										extend: 'print',
 										className: 'button-print btn food-icon-print',
-										text: `Печать`,
+										text: `${LANG["sch_tool_print"]}`,
 										attr: {
-											title: `Печать`
+											title: `${LANG["sch_tool_print"]}`
 										},
 										exportOptions: {
 											columns: ':visible'
@@ -673,7 +679,7 @@ window.DT_table = false;
 								extend: 'dragdrop',
 							},
 							{
-								text: 'Выберите файлы для загрузки',
+								text: `${LANG["sch_tool_select_uploads"]}`,
 								className: 'button-upload btn btn-success food-icon-flopy-save text-uppercase',
 								action: function (e, dt, node, config) {
 									let uploader, input;
@@ -698,7 +704,7 @@ window.DT_table = false;
 					],
 				},
 				language: {
-					url: `${FOOD_MOD_PATH}js/ru_RU.json`,
+					url: `${FOOD_LANG_FILE}`,
 				}
 			});
 			table.on( 'buttons-processing', proceeingButton);
