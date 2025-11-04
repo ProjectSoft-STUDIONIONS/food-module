@@ -1780,6 +1780,24 @@ table.table.dataTable > tbody > tr > td a[data-mode] {
 .dt-info .select-info .select-item:first-child {
   display: block;
 }
+.food-title-flex {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: self-start;
+      align-items: self-start;
+}
+.food-title-flex h1 {
+  -ms-flex: 1 0 auto;
+      flex: 1 0 auto;
+}
+.food-title-flex .food-settings {
+  padding: 1.3em 0;
+  line-height: 1.5;
+}
 #food-module-evo {
   position: relative;
 }

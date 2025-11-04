@@ -1,5 +1,6 @@
 <?php
 $_lang["sch_title"]                              = "Меню ежедневного питания";
+$_lang["sch_settings"]                           = "Настройки модуля\n«Меню ежедневного питания»";
 $_lang["sch_food_top"]                           = "Корневой уровень";
 $_lang["sch_file"]                               = "Файл";
 $_lang["sch_permission"]                         = "Права";

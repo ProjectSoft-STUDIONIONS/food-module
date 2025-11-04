@@ -6,6 +6,7 @@ if( ! defined('IN_MANAGER_MODE') || IN_MANAGER_MODE !== true) {
 
 $modPath = str_replace(MODX_BASE_PATH, '', $base_path);
 $upload_maxsize = $modx->config['upload_maxsize'];
+$mod = getModule();
 ?>
 <script>
 	const FOOD_FILE_PATH = "<?= $data["path"]; ?>";
@@ -15,7 +16,18 @@ $upload_maxsize = $modx->config['upload_maxsize'];
 </script>
 <div id="food-module-evo">
 	<div class="container">
-		<h1 class="text-left"><i class="fa fa-folder-open"></i><?= $_lang['sch_title']; ?></h1>
+		<div class="food-title-flex">
+			<h1 class="text-left"><i class="fa fa-folder-open"></i><?= $_lang['sch_title']; ?></h1>
+<?php
+		if($mod && $modx->hasPermission('edit_module')):
+?>
+			<div class="food-settings">
+				<a class="btn btn-primary food-icon food-icon-tools" href="index.php?a=108&id=<?= $mod["id"];?>" title="<?= $_lang["sch_settings"]; ?>" target="main"></a>
+			</div>
+<?php
+		endif;
+?>
+		</div>
 <?php
 		if($data["path"]):
 ?>

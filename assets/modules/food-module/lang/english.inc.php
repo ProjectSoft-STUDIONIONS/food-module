@@ -1,5 +1,6 @@
 <?php
 $_lang["sch_title"]                              = "Daily Food Menu";
+$_lang["sch_settings"]                           = "Module settings\n«Daily Food Menu»";
 $_lang["sch_food_top"]                           = "Root level";
 $_lang["sch_file"]                               = "File";
 $_lang["sch_permission"]                         = "Rights";
