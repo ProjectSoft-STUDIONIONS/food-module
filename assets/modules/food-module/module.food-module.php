@@ -81,7 +81,7 @@ $file = $_REQUEST['file'] ?? '';
 $newfile = $_REQUEST['newfile'] ?? '';
 
 // Директория по умолчанию ()
-$dir = (string) $_REQUEST['path'];
+$dir = $_REQUEST['path'] ?? '';
 
 // Корневая директория
 $startpath = MODX_BASE_PATH;

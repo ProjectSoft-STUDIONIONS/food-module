@@ -123,7 +123,7 @@ module.exports = function(grunt) {
  *
  * @category     module
  * @version      ${gc.versions}
- * @internal     @properties &folders=Директории для загрузки;text;food,food-individual &autodelete=Автоудаление;list;true,false;true &autodelete_year=Удалять файлы старше лет;list;1,2,3,4,5;2
+ * @internal     @properties &folders=Директории для загрузки;text;food &autodelete=Автоудаление;list;true,false;true &autodelete_year=Удалять файлы старше лет;list;1,2,3,4,5;2
  * @internal     @modx_category Manager and Admin
  * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
  * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
@@ -139,7 +139,7 @@ module.exports = function(grunt) {
  *
  * @category     module
  * @version      ${gc.versions}
- * @internal     @properties &folders=Директории для загрузки;text;food,food-individual &autodelete=Автоудаление;list;true,false;true &autodelete_year=Удалять файлы старше лет;list;1,2,3,4,5;2
+ * @internal     @properties &folders=Директории для загрузки;text;food &autodelete=Автоудаление;list;true,false;true &autodelete_year=Удалять файлы старше лет;list;1,2,3,4,5;2
  * @internal     @modx_category Manager and Admin
  * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
  * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
