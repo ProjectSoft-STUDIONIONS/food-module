@@ -32,5 +32,9 @@
 		"grunt-replace": "^2.0.1",
 		"load-grunt-tasks": "^5.1.0",
 		"time-grunt": "git+https://github.com/ProjectSoft-STUDIONIONS/time-grunt.git"
+	},
+	"dependencies": {
+		"@videojs/themes": "^1.0.1",
+		"video.js": "^8.23.4"
 	}
 }

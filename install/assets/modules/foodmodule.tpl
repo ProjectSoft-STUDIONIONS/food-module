@@ -11,7 +11,7 @@
  * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
  * @reportissues https://github.com/ProjectSoft-STUDIONIONS/food-module/issues
  * @author       Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
- * @lastupdate   2025-12-04
+ * @lastupdate   2025-12-12
  */
 
 /**
@@ -27,7 +27,7 @@
  * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
  * @reportissues https://github.com/ProjectSoft-STUDIONIONS/food-module/issues
  * @author       Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
- * @lastupdate   2025-12-04
+ * @lastupdate   2025-12-12
  */
 
 require_once MODX_BASE_PATH . 'assets/modules/food-module/module.food-module.php';

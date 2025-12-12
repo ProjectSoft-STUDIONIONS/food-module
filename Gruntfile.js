@@ -53,6 +53,8 @@ module.exports = function(grunt) {
 						'src/main.less'
 					],
 					'src/css/main.css': [
+						'node_modules/video.js/dist/video-js.css',
+						'node_modules/@videojs/themes/dist/sea/index.css',
 						'src/css/main.less'
 					]
 				}
@@ -285,6 +287,17 @@ module.exports = function(grunt) {
 				//src: ['src/main.js'],
 				//dest: 'assets/modules/food-module/js/main.js'
 			},
+			src: {
+				options: {
+					separator: "\n"
+				},
+				files: {
+					'src/js/index.js': [
+						'node_modules/video.js/dist/video.js',
+						'src/js/main.js'
+					]
+				}
+			}
 		},
 		uglify: {
 			app: {
@@ -348,7 +361,32 @@ module.exports = function(grunt) {
 						}
 					},
 				]
-			}
+			},
+			/*src: {
+				options: {
+					sourceMap: false,
+					compress: {
+						drop_console: false
+					},
+					output: {
+						ascii_only: true,
+					}
+				},
+				files: [
+					{
+						expand: true,
+						flatten : true,
+						src: [
+							'src/js/index.js',
+						],
+						dest: 'src/js',
+						filter: 'isFile',
+						rename: function (dst, src) {
+							return dst + '/' + src.replace('.js', '.min.js');
+						}
+					}
+				]
+			}*/
 		},
 		copy: {
 			main: {

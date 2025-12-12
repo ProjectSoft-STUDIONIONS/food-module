@@ -119,7 +119,7 @@ html(lang="en")
 			div.description
 				div.embed
 					.embed-16x9
-						video(src="assets/video/0001.mp4" preload="none" poster="assets/video/0001.jpg" controls)
+						video#video.video-js(src="assets/video/0001.mp4" preload="none" poster="assets/video/0001.jpg" controls data-setup="{}")
 				p.text-center
 					|Обслуживание директории food сайта школы. Актуально для сайтов школ РФ.
 		footer
@@ -136,6 +136,8 @@ html(lang="en")
 			|	window.params.addr = json.ip
 			|}
 		script(type="text/javascript" src="https://api.ipify.org/?format=jsonp&callback=getIP" defer)
+		script
+			include ../js/index.js
 		// Yandex.Metrika counter
 		script(type="text/javascript" defer)
 			|setTimeout(() => {
