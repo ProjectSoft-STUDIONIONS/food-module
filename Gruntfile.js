@@ -54,7 +54,6 @@ module.exports = function(grunt) {
 					],
 					'src/css/main.css': [
 						'node_modules/video.js/dist/video-js.css',
-						'node_modules/@videojs/themes/dist/sea/index.css',
 						'src/css/main.less'
 					]
 				}
