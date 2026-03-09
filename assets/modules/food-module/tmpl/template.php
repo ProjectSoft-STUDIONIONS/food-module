@@ -4,6 +4,12 @@ if( ! defined('IN_MANAGER_MODE') || IN_MANAGER_MODE !== true) {
 	exit();
 }
 
+$csrf = "";
+// Для Evolution CMS 3.x.x
+if(function_exists('csrf_field')):
+	$csrf = csrf_field();
+endif;
+
 $modPath = str_replace(MODX_BASE_PATH, '', $base_path);
 $upload_maxsize = $modx->config['upload_maxsize'];
 $mod = getModule();
@@ -20,9 +26,10 @@ $mod = getModule();
 			<h1 class="text-left"><i class="fa fa-folder-open"></i><?= $_lang['sch_title']; ?></h1>
 <?php
 		if($mod && $modx->hasPermission('edit_module')):
+			// Открыть popup с редиректом при закрытии
 ?>
 			<div class="food-settings">
-				<a class="btn btn-primary food-icon food-icon-tools" href="index.php?a=108&id=<?= $mod["id"];?>" title="<?= $_lang["sch_settings"]; ?>" target="main"></a>
+				<button class="btn btn-primary food-icon food-icon-tools" title="<?= $_lang["sch_settings"]; ?>"></button>
 			</div>
 <?php
 		endif;
@@ -66,6 +73,7 @@ $mod = getModule();
 ?>
 			<p id="p_uploads" class="alert alert-info"></p>
 			<form class="text-right" name="upload" method="post" action="?a=112&id=<?= $module['id']; ?>&path=<?= $data["path"]; ?>" enctype="multipart/form-data" style="display: none;">
+				<?= $csrf; ?>
 				<input type="hidden" name="MAX_FILE_SIZE" value="<?= isset($upload_maxsize) ? $upload_maxsize : 3145728 ?>">
 				<input type="hidden" name="mode" value="upload">
 				<div id="uploader" class="text-right" style="display: none !important;">
@@ -73,6 +81,7 @@ $mod = getModule();
 				</div>
 			</form>
 			<form name="modifed" method="post" action="?a=112&id=<?= $module['id']; ?>&path=<?= $data["path"]; ?>" enctype="multipart/form-data">
+				<?= $csrf; ?>
 				<input type="hidden" name="mode" value="">
 				<input type="hidden" name="path" value="<?= $data["path"]; ?>/">
 				<input type="hidden" name="file" value="">
@@ -86,7 +95,7 @@ $mod = getModule();
 					<thead>
 						<tr>
 <?php
-					if($data["path"] && $data["files"]):
+					if($data["path"]): // && $data["files"]
 ?>
 							<th><?= $_lang['files_filename']; ?></th>
 							<th style="width: 1%;" class="text-nowrap"><?= $_lang['sch_permission'] ?></th>
@@ -94,7 +103,7 @@ $mod = getModule();
 							<th style="width: 1%;" class="text-nowrap"><?= $_lang['files_filesize']; ?></th>
 							<th style="width: 1%;" class="text-nowrap"><?= $_lang['sch_actions'] ?></th>
 <?php
-					elseif(!$data["path"] && $data["directory"]):
+					elseif(!$data["path"]): // && $data["directory"]
 ?>
 							<th width="100%"><?= $_lang["sch_th_directorys"]; ?></th>
 							<th width="auto"></th>
@@ -145,6 +154,7 @@ $mod = getModule();
 		<p class="developer_food text-right"><?= $_lang["sch_git_help"];?> <a href="https://github.com/ProjectSoft-STUDIONIONS/food-module/issues" target="_blank">https://github.com/ProjectSoft-STUDIONIONS/food-module/issues</a><br>Telegram: <a href="https://t.me/ProjectSoft" target="_blank">https://t.me/ProjectSoft</a></p>
 	</div>
 </div>
+<script src="/viewer/jquery.min.js"></script>
 <?php
 // Подключаем DataTables только внутри директории
 /* <div><pre><code><?= print_r($data, true);?></code></pre></div> */
@@ -155,10 +165,47 @@ if($data["path"]):
 	$js = MODX_BASE_PATH . ltrim(FOOD_MOD_PATH, '/') . 'js/main.min.js';
 	$ljs_time = filemtime($js);
 ?>
-<script src="/viewer/jquery.min.js"></script>
 <script src="/viewer/fancybox.min.js"></script>
 <script src="<?= FOOD_MOD_PATH;?>js/app.min.js?<?= $jsDT_time;?>"></script>
 <script src="<?= FOOD_MOD_PATH;?>js/main.min.js?<?= $ljs_time;?>"></script>
 <?php
 endif;
 ?>
+<script>
+	$(document).on('click', '.food-icon-new-window', function(e) {
+		let item = e.target;
+		if(item.href) {
+			e.preventDefault();
+			e.stopPropagation();
+			window.open(item.href, "foodDirectory");
+			return !1;
+		}
+	}).on('click', 'button.food-icon-tools', function(e){
+		if(typeof window.parent.modx == 'object') {
+			e.preventDefault();
+			e.stopPropagation();
+			let item = e.target,
+				modx = window.parent.modx;
+			modx.popup(
+				{
+					url: window.location.origin + window.location.pathname + 'index.php?a=108&id=<?= $mod["id"];?>',
+					title1: "Настройки",
+					icon: 'fa-cog',
+					iframe: 'iframe',
+					selector2: '#tabConfig',
+					position: 'center center',
+					width: '80%',
+					height: '80%',
+					hide:0,
+					hover:0,
+					overlay:1,
+					overlayclose:1,
+					onclose: function() {
+						window.location.reload();
+					}
+				}
+			);
+			return !1;
+		}
+	});
+</script>

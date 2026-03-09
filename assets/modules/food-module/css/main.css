@@ -1388,7 +1388,6 @@ div.dt-container div.dt-layout-row.dt-layout-table {
 .dt-dragdrop-block {
   width: 100%;
   min-height: 5.2em;
-  box-shadow: 0 0 1px #000;
   border-radius: 0.5em;
   display: -ms-flexbox;
   display: flex;
@@ -1421,9 +1420,15 @@ div.dt-container div.dt-layout-row.dt-layout-table {
   content: attr(data-title-after);
   line-height: 1;
 }
+.dt-buttons .dt-button:hover {
+  border-color: #bbb;
+}
 .dt-button {
   text-transform: uppercase;
   line-height: 1;
+}
+.dt-button:hover {
+  border-color: #d4d4d4;
 }
 .dt-button.processing {
   position: relative;
@@ -1450,8 +1455,9 @@ div.dt-container div.dt-layout-row.dt-layout-table {
   outline-offset: 0 !important;
   text-transform: none;
 }
-.dt-button-collection [role="menu"] .dt-button:hover {
-  background-color: #e6e6e6;
+.dt-button-collection [role="menu"] .dt-button:hover,
+.dt-button-collection [role="menu"] .dt-button-active {
+  background-color: #d4d4d4;
 }
 .dt-container {
   margin-top: 1em;
@@ -1580,6 +1586,9 @@ div.dt-container div.dt-layout-row.dt-layout-table {
   display: -ms-flexbox;
   display: flex;
 }
+.dt-paging-button {
+  border: 1px solid #d4d4d4;
+}
 .dt-paging-button,
 .dt-paging-button * {
   font-weight: 700;
@@ -1664,6 +1673,12 @@ div.dt-button-collection .dt-button-active:after {
 span.link-dir::before {
   content: "/";
   margin-left: -0.5em;
+}
+table.table-bordered td,
+table.table.table-bordered td,
+table.table-bordered th,
+table.table.table-bordered th {
+  border: 1px solid #d4d4d4;
 }
 table.dataTable thead > tr > td,
 table.dataTable thead > tr > th {
@@ -1844,4 +1859,11 @@ table.table.dataTable > tbody > tr > td a[data-mode] {
 }
 .alert:empty {
   display: none;
+}
+.btn-primary.focus,
+.btn-primary:focus {
+  color: #fff;
+  background-color: #0069d9;
+  border-color: #0062cc;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
 }

@@ -52,11 +52,15 @@ $access_path = preg_split('/[\s,;]+/', $params["folders"]);
 $access_path = array_map('SchoolFood::TranslitFile', $access_path);
 
 global $_lang, $content, $_style, $modx_lang_attribute, $lastInstallTime, $manager_language;
-
 // Языковые пакеты
 include_once SCHOOL_FOLDERS_BASE_PATH . "lang/english.inc.php";
-if(!isset($manager_language) || !file_exists(SCHOOL_FOLDERS_BASE_PATH . "lang/".$manager_language.".inc.php")) {
-	$manager_language = "english"; // if not set, get the english language file.
+
+if(!isset($manager_language)) {
+	// Для Evo 3.x.x и выше нужно переопределить языковой пакет
+	$manager_language = $modx->getLocale();
+	if(!file_exists(SCHOOL_FOLDERS_BASE_PATH . "lang/".$manager_language.".inc.php")) {
+		$manager_language = "english";
+	}
 }
 
 if($manager_language!="english" && file_exists(SCHOOL_FOLDERS_BASE_PATH . "lang/".$manager_language.".inc.php")) {

@@ -171,14 +171,14 @@ module.exports = function(grunt) {
 							replacement: `/**
  * FoodModuleMenu
  *
- * Плагин встраивания пункта меню для FoodModule.
+ * Плагин встраивания пункта меню для FoodModuleMenu.
  *
  * @category     plugin
  * @version      ${gc.versions}
  * @package      evo
  * @internal     @events OnManagerMenuPrerender,OnManagerMainFrameHeaderHTMLBlock
  * @internal     @modx_category Manager and Admin
- * @internal     @properties &id_module=ID модуля FoodModule;int;0;0 &title=Заголовок пункта меню;text;;; &sort=Позиция пункта;int;0;0;0
+ * @internal     @properties &id_module=ID модуля FoodModuleMenu;int;0;0 &title=Заголовок пункта меню;text;;; &sort=Позиция пункта;int;0;0;0 &show=Показывать пункт меню;list;0,1;1;1
  * @internal     @installset base
  * @internal     @disabled 0
  * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
@@ -191,14 +191,14 @@ module.exports = function(grunt) {
 /**
  * FoodModuleMenu
  *
- * Плагин встраивания пункта меню для FoodModule.
+ * Плагин встраивания пункта меню для FoodModuleMenu.
  *
  * @category     plugin
  * @version      ${gc.versions}
  * @package      evo
  * @internal     @events OnManagerMenuPrerender,OnManagerMainFrameHeaderHTMLBlock
  * @internal     @modx_category Manager and Admin
- * @internal     @properties &id_module=ID модуля FoodModule;int;0;0 &title=Заголовок пункта меню;text;;; &sort=Позиция пункта;int;0;0;0
+ * @internal     @properties &id_module=ID модуля FoodModuleMenu;int;0;0 &title=Заголовок пункта меню;text;;; &sort=Позиция пункта;int;0;0;0 &show=Показывать пункт меню;list;0,1;1;1
  * @internal     @installset base
  * @internal     @disabled 0
  * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
