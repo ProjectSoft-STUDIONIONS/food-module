@@ -1,4 +1,20 @@
 <?php
+/**
+ * FoodModuleMenu
+ *
+ * Модуль для загрузки файлов ежедневного питания школы.
+ *
+ * @category     module
+ * @version      1.5.5
+ * @internal     @properties &folders=Директории для загрузки;text;food &autodelete=Автоудаление;list;true,false;true &autodelete_year=Удалять файлы старше лет;list;1,2,3,4,5;2
+ * @internal     @modx_category Manager and Admin
+ * @internal     @icon fa fa-folder-open
+ * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
+ * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
+ * @reportissues https://github.com/ProjectSoft-STUDIONIONS/food-module/issues
+ * @author       Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
+ * @lastupdate   2026-03-17
+ */
 if (!defined('MODX_BASE_PATH')) {
 	http_response_code(403);
 	exit();

@@ -1867,3 +1867,12 @@ table.table.dataTable > tbody > tr > td a[data-mode] {
   border-color: #0062cc;
   box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
 }
+.evo-popup.evo-popup-iframe .evo-popup-header {
+  box-shadow: 0px 0px 16px 2px #bbbbbb;
+  z-index: 2;
+  font-weight: 900;
+}
+.evo-popup.evo-popup-iframe.is-drag {
+  cursor: move !important;
+  opacity: 1 !important;
+}

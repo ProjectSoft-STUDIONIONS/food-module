@@ -43,75 +43,77 @@ module.exports = function(grunt) {
 				options : {
 					compress: false,
 					ieCompat: false,
-					plugins: []
+					plugins: [],
 				},
 				files : {
 					'assets/modules/food-module/css/main.css' : [
 						'bower_components/datatables.net-bs/css/dataTables.bootstrap.css',
 						'bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.css',
 						'bower_components/webfont-food/dest/css/foodIcon.css',
-						'src/main.less'
+						'src/main.less',
 					],
 					'src/css/main.css': [
 						'node_modules/video.js/dist/video-js.css',
-						'src/css/main.less'
-					]
-				}
+						'src/css/main.less',
+					],
+				},
 			},
 		},
 		autoprefixer:{
 			options: {
 				browsers: [
-					"last 4 version"
+					"last 4 version",
 				],
-				cascade: true
+				cascade: true,
 			},
 			css: {
 				files: {
 					'assets/modules/food-module/css/main.css' : [
-						'assets/modules/food-module/css/main.css'
+						'assets/modules/food-module/css/main.css',
 					],
 					'src/css/main.css': [
-						'src/css/main.css'
-					]
-				}
+						'src/css/main.css',
+					],
+				},
 			},
 		},
 		replace: {
+			// В CSS удаляем все комментарии
 			css: {
 				options: {
 					patterns: [
 						{
 							match: /\/\*.+?\*\//gs,
-							replacement: ''
+							replacement: '',
 						},
 						{
 							match: /\r?\n\s+\r?\n/g,
-							replacement: '\n'
-						}
-					]
+							replacement: '\n',
+						},
+					],
 				},
 				files: [
 					{
 						expand: true,
 						flatten : true,
 						src: [
-							'assets/modules/food-module/css/main.css'
+							'assets/modules/food-module/css/main.css',
 						],
 						dest: 'assets/modules/food-module/css/',
-						filter: 'isFile'
+						filter: 'isFile',
 					},
 					{
 						expand: true,
 						flatten : true,
 						src: [
-							'src/css/main.css'
+							'src/css/main.css',
 						],
 						dest: 'src/css/',
-						filter: 'isFile'
+						filter: 'isFile',
 					},
-				]
+				],
 			},
+			// В инсталяционном файле модуля перезапишем комментарий
 			module: {
 				options: {
 					patterns: [
@@ -126,6 +128,7 @@ module.exports = function(grunt) {
  * @version      ${gc.versions}
  * @internal     @properties &folders=Директории для загрузки;text;food &autodelete=Автоудаление;list;true,false;true &autodelete_year=Удалять файлы старше лет;list;1,2,3,4,5;2
  * @internal     @modx_category Manager and Admin
+ * @internal     @icon fa fa-folder-open
  * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
  * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
  * @reportissues https://github.com/ProjectSoft-STUDIONIONS/food-module/issues
@@ -142,27 +145,29 @@ module.exports = function(grunt) {
  * @version      ${gc.versions}
  * @internal     @properties &folders=Директории для загрузки;text;food &autodelete=Автоудаление;list;true,false;true &autodelete_year=Удалять файлы старше лет;list;1,2,3,4,5;2
  * @internal     @modx_category Manager and Admin
+ * @internal     @icon fa fa-folder-open
  * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
  * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
  * @reportissues https://github.com/ProjectSoft-STUDIONIONS/food-module/issues
  * @author       Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
  * @lastupdate   ${grunt.template.today('yyyy-mm-dd')}
- */`
-						}
-					]
+ */`,
+						},
+					],
 				},
 				files: [
 					{
 						expand: true,
 						flatten : true,
 						src: [
-							'install/assets/modules/foodmodule.tpl'
+							'install/assets/modules/foodmodule.tpl',
 						],
 						dest: 'install/assets/modules/',
-						filter: 'isFile'
+						filter: 'isFile',
 					},
-				]
+				],
 			},
+			// В инсталяционном файле плагина перезапишем комментарий
 			plugin: {
 				options: {
 					patterns: [
@@ -206,9 +211,9 @@ module.exports = function(grunt) {
  * @reportissues https://github.com/ProjectSoft-STUDIONIONS/food-module/issues
  * @author       Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
  * @lastupdate   ${grunt.template.today('yyyy-mm-dd')}
- */`
-						}
-					]
+ */`,
+						},
+					],
 				},
 				files: [
 					{
@@ -218,37 +223,127 @@ module.exports = function(grunt) {
 							'install/assets/plugins/foodplugin.tpl'
 						],
 						dest: 'install/assets/plugins/',
-						filter: 'isFile'
+						filter: 'isFile',
 					},
-				]
-			}
+				],
+			},
+			// В файле модуля добавим/перезапишем комментарий
+			"php-module": {
+				options: {
+					patterns: [
+						{
+							match: /^<\?php\s+(?:\/\*.*\*\/\s+)/s,
+							replacement: `<?php
+/**
+ * FoodModuleMenu
+ *
+ * Модуль для загрузки файлов ежедневного питания школы.
+ *
+ * @category     module
+ * @version      ${gc.versions}
+ * @internal     @properties &folders=Директории для загрузки;text;food &autodelete=Автоудаление;list;true,false;true &autodelete_year=Удалять файлы старше лет;list;1,2,3,4,5;2
+ * @internal     @modx_category Manager and Admin
+ * @internal     @icon fa fa-folder-open
+ * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
+ * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
+ * @reportissues https://github.com/ProjectSoft-STUDIONIONS/food-module/issues
+ * @author       Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
+ * @lastupdate   ${grunt.template.today('yyyy-mm-dd')}
+ */
+`,
+						},
+					],
+				},
+				files: [
+					{
+						expand: true,
+						flatten : true,
+						src: [
+							'assets/modules/food-module/module.food-module.php',
+						],
+						dest: 'assets/modules/food-module/',
+						filter: 'isFile',
+					},
+					{
+						expand: true,
+						flatten : true,
+						src: [
+							'assets/modules/food-module/tmpl/template.php',
+						],
+						dest: 'assets/modules/food-module/tmpl/',
+						filter: 'isFile',
+					},
+				],
+			},
+			// В файле плагина добавим/перезапишем комментарий
+			"php-plugin": {
+				options: {
+					patterns: [
+						{
+							match: /^<\?php\s+(?:\/\*.*\*\/\s+)/s,
+							replacement: `<?php
+/**
+ * FoodModuleMenu
+ *
+ * Плагин встраивания пункта меню для FoodModuleMenu.
+ *
+ * @category     plugin
+ * @version      ${gc.versions}
+ * @package      evo
+ * @internal     @events OnManagerMenuPrerender,OnManagerMainFrameHeaderHTMLBlock
+ * @internal     @modx_category Manager and Admin
+ * @internal     @properties &id_module=ID модуля FoodModuleMenu;int;0;0 &title=Заголовок пункта меню;text;;; &sort=Позиция пункта;int;0;0;0 &show=Показывать пункт меню;list;0,1;1;1
+ * @internal     @installset base
+ * @internal     @disabled 0
+ * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
+ * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
+ * @reportissues https://github.com/ProjectSoft-STUDIONIONS/food-module/issues
+ * @author       Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
+ * @lastupdate   ${grunt.template.today('yyyy-mm-dd')}
+ */
+`,
+						},
+					],
+				},
+				files: [
+					{
+						expand: true,
+						flatten : true,
+						src: [
+							'assets/modules/food-module/plugin.food-module.php',
+						],
+						dest: 'assets/modules/food-module/',
+						filter: 'isFile',
+					},
+				],
+			},
 		},
 		cssmin: {
 			options: {
 				mergeIntoShorthands: false,
-				roundingPrecision: -1
+				roundingPrecision: -1,
 			},
 			minify: {
 				files: {
 					'assets/modules/food-module/css/main.min.css' : ['assets/modules/food-module/css/main.css'],
 					'src/css/main.css': ['src/css/main.css'],
-				}
+				},
 			},
 		},
 		lineending: {
 			dist: {
 				options: {
-					eol: 'lf'
+					eol: 'lf',
 				},
 				files: [
 					{
 						expand: true,
 						cwd: 'assets',
 						src: ['**/*.{css,js,php,json,html}'],
-						dest: 'assets'
-					}
-				]
-			}
+						dest: 'assets',
+					},
+				],
+			},
 		},
 		concat: {
 			appjs: {
@@ -264,8 +359,6 @@ module.exports = function(grunt) {
 				files: {
 					'assets/modules/food-module/js/app.js': gc.src,
 				},
-				//src: gc.src,
-				//dest: 'assets/modules/food-module/js/app.js'
 			},
 			main: {
 				options: {
@@ -283,27 +376,25 @@ module.exports = function(grunt) {
 				files: {
 					'assets/modules/food-module/js/main.js': ['src/main.js'],
 				},
-				//src: ['src/main.js'],
-				//dest: 'assets/modules/food-module/js/main.js'
 			},
 			src: {
 				options: {
-					separator: "\n"
+					separator: "\n",
 				},
 				files: {
 					'src/js/index.js': [
 						'node_modules/video.js/dist/video.js',
-						'src/js/main.js'
-					]
-				}
-			}
+						'src/js/main.js',
+					],
+				},
+			},
 		},
 		uglify: {
 			app: {
 				options: {
 					sourceMap: false,
 					compress: {
-						drop_console: false
+						drop_console: false,
 					},
 					output: {
 						ascii_only: true,
@@ -311,7 +402,7 @@ module.exports = function(grunt) {
  * ` + gc.src.join(`\r\n * `) + `
  *
  * Last Update: ${grunt.template.today('yyyy-mm-dd HH:MM:ss Z')}
- */`
+ */`,
 					},
 				},
 				files: [
@@ -325,15 +416,15 @@ module.exports = function(grunt) {
 						filter: 'isFile',
 						rename: function (dst, src) {
 							return dst + '/' + src.replace('.js', '.min.js');
-						}
+						},
 					},
-				]
+				],
 			},
 			main: {
 				options: {
 					sourceMap: false,
 					compress: {
-						drop_console: false
+						drop_console: false,
 					},
 					output: {
 						ascii_only: true,
@@ -343,7 +434,7 @@ module.exports = function(grunt) {
  * Автор: Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
  * GitHub: ${PACK.homepage}
  * Last Update: ${grunt.template.today('yyyy-mm-dd HH:MM:ss Z')}
- */`
+ */`,
 					},
 				},
 				files: [
@@ -357,9 +448,9 @@ module.exports = function(grunt) {
 						filter: 'isFile',
 						rename: function (dst, src) {
 							return dst + '/' + src.replace('.js', '.min.js');
-						}
+						},
 					},
-				]
+				],
 			},
 			/*src: {
 				options: {
@@ -402,7 +493,7 @@ module.exports = function(grunt) {
 		compress: {
 			main: {
 				options: {
-					archive: 'food-module.zip'
+					archive: 'food-module.zip',
 				},
 				files: [
 					{
@@ -416,7 +507,7 @@ module.exports = function(grunt) {
 							'viewer/.*',
 							'food/.*',
 						],
-						dest: 'food-module/'
+						dest: 'food-module/',
 					},
 					{
 						expand: true,
@@ -426,8 +517,8 @@ module.exports = function(grunt) {
 							'assets/**/.*',
 							'install/**',
 						],
-						dest: 'food-module/'
-					}
+						dest: 'food-module/',
+					},
 				],
 			},
 		},
@@ -440,7 +531,7 @@ module.exports = function(grunt) {
 					separator:  '',
 					data: function(dest, src) {
 						return {};
-					}
+					},
 				},
 				files: [
 					{
@@ -448,10 +539,10 @@ module.exports = function(grunt) {
 						cwd: __dirname + '/src/pug/',
 						src: [ 'index.pug' ],
 						dest: __dirname + '/docs/',
-						ext: '.html'
+						ext: '.html',
 					},
-				]
-			}
+				],
+			},
 		},
 	});
 	grunt.registerTask('default',	gc.default);

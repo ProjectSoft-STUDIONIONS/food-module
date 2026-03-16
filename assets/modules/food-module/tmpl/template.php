@@ -1,4 +1,20 @@
 <?php
+/**
+ * FoodModuleMenu
+ *
+ * Модуль для загрузки файлов ежедневного питания школы.
+ *
+ * @category     module
+ * @version      1.5.5
+ * @internal     @properties &folders=Директории для загрузки;text;food &autodelete=Автоудаление;list;true,false;true &autodelete_year=Удалять файлы старше лет;list;1,2,3,4,5;2
+ * @internal     @modx_category Manager and Admin
+ * @internal     @icon fa fa-folder-open
+ * @homepage     https://github.com/ProjectSoft-STUDIONIONS/food-module#readme
+ * @license      https://github.com/ProjectSoft-STUDIONIONS/food-module/blob/master/LICENSE MIT License (MIT)
+ * @reportissues https://github.com/ProjectSoft-STUDIONIONS/food-module/issues
+ * @author       Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
+ * @lastupdate   2026-03-17
+ */
 if( ! defined('IN_MANAGER_MODE') || IN_MANAGER_MODE !== true) {
 	http_response_code(403);
 	exit();
@@ -157,7 +173,6 @@ $mod = getModule();
 <script src="/viewer/jquery.min.js"></script>
 <?php
 // Подключаем DataTables только внутри директории
-/* <div><pre><code><?= print_r($data, true);?></code></pre></div> */
 if($data["path"]):
 	$jsDT = MODX_BASE_PATH . ltrim(FOOD_MOD_PATH, '/') . 'js/app.min.js';
 	$jsDT_time = filemtime($jsDT);
@@ -180,7 +195,7 @@ endif;
 			window.open(item.href, "foodDirectory");
 			return !1;
 		}
-	}).on('click', 'button.food-icon-tools', function(e){
+	}).on('click', '.food-settings button.food-icon-tools', function(e){
 		if(typeof window.parent.modx == 'object') {
 			e.preventDefault();
 			e.stopPropagation();
@@ -188,21 +203,23 @@ endif;
 				modx = window.parent.modx;
 			modx.popup(
 				{
-					url: window.location.origin + window.location.pathname + 'index.php?a=108&id=<?= $mod["id"];?>',
-					title1: "Настройки",
-					icon: 'fa-cog',
+					url: window.location.origin + window.location.pathname + '?a=108&id=<?= $mod["id"];?>',
+					title: "FoodModuleMenu",
+					icon: 'fa fa-folder-open',
 					iframe: 'iframe',
 					selector2: '#tabConfig',
 					position: 'center center',
 					width: '80%',
 					height: '80%',
-					hide:0,
-					hover:0,
-					overlay:1,
+					hide: 0,
+					hover: 0,
+					resize: !0,
+					overlay: 1,
 					overlayclose:1,
 					onclose: function() {
 						window.location.reload();
-					}
+					},
+					wrap: document.body
 				}
 			);
 			return !1;
